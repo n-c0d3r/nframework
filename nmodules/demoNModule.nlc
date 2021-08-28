@@ -15,7 +15,9 @@
     <N:method Start>
 
         function(){
-            
+
+
+
         }
 
     </N:method>
@@ -24,7 +26,6 @@
     <N:server-method demoCrossSideMethod>
 
         function(){
-            
         }
 
     </N:server-method>
