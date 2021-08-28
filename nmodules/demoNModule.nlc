@@ -1,0 +1,32 @@
+<N:module demoNModule>
+
+    <N:side both/>
+
+    <N:property demoProp/>
+
+    <N:method Setup>
+
+        function(){
+            
+        }
+
+    </N:method>
+
+    <N:method Start>
+
+        function(){
+            
+        }
+
+    </N:method>
+
+
+    <N:server-method demoCrossSideMethod>
+
+        function(){
+            
+        }
+
+    </N:server-method>
+
+</N:module>

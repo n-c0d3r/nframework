@@ -1,0 +1,9 @@
+{
+    "nmodules_src_dir":"./nmodules",
+    "debug":{
+        "show_nlc_compiled_js":false
+    },
+    "server":{
+        "PORT":7070
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "files.exclude": {
+        "**/*.nlc.client.js": true,
+        "**/*.nlc.server.js": true
+    },
+    "typescript.validate.enable": false,
+    "javascript.validate.enable": false,
+    "files.associations": {
+        "*.nlc": "javascript"
+    }
+}
