@@ -25,6 +25,10 @@ tag.Compile=function(element,childsCode,code){
     }
     `;
 
+    if(element.forSV){
+        compiledCode='';
+    }
+
     return compiledCode;
 }
 
