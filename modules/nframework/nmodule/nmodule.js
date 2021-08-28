@@ -8,6 +8,8 @@ var NModule = class{
 
         this.serverMethods=new Object();
 
+        this.serverMethodRouters=new Object();
+
         this.clientMethods=new Object();
 
         this.baseModules=[];
@@ -139,8 +141,30 @@ var NModule = class{
         this.methods[name]=method;
     }
 
+    SetupServerMethod(name){
+        var serverMethodRouter=new Object();
+
+        serverMethodRouter.name=name;
+
+        serverMethodRouter.nmoduleName=this.name;
+
+        serverMethodRouter.path=`nframework/execute-server-method/${serverMethodRouter.nmoduleName}/${serverMethodRouter.name}`;
+
+        var nmodule=this;
+
+        serverMethodRouter.callback=(client,data)=>{
+            nmodule.Get(name)(client,...data);
+        };
+
+        var ioManager=this.manager.NFramework.ioRouterManager;
+
+        ioManager.AddRouter(serverMethodRouter);
+    }
+
     AddServerMethod(name,method){
         this.serverMethods[name]=method;
+
+
     }
 
     AddClientMethod(name,method){
@@ -166,6 +190,16 @@ var NModule = class{
     AfterImported(){
         this.isImported=true;
         this.RoutingRouters();
+        this.SetupServerMethods();
+    }
+
+    SetupServerMethods(){
+        var keys=Object.keys(this.serverMethods);
+
+        for(var key of keys){
+            this.SetupServerMethod(key);
+        }
+
     }
 
     RoutingRouters(){

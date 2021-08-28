@@ -51,25 +51,21 @@ var JSCLPath = "D:\\nframework_git_repo/nmodules/demoNModule.nlc.client.js";
 
         var This=nmodule;
 
+        nmodule.side='server';
+
         nmodule.name='demoNModule';
     
     
-
-    nmodule.side='both';
-
-    
-    
-    nmodule.AddProperty('demoProp');
     
     
 
-    
-        nmodule.AddMethod('Setup',(...args)=>{
+    {
+        nmodule.AddServerMethod('demoCrossSideMethod',(clientSocket,...args)=>{
             var f=
     
 
-        function(){
-            
+        function(a,b){
+            console.log(a,b);
         }
 
     
@@ -79,27 +75,7 @@ var JSCLPath = "D:\\nframework_git_repo/nmodules/demoNModule.nlc.client.js";
 }
     
     );
-    
-    
-
-    
-        nmodule.AddMethod('Start',(...args)=>{
-            var f=
-    
-
-        function(){
-
-
-
-        }
-
-    
-        
-    f.call(nmodule,...args); 
-
 }
-    
-    );
     
     
 
@@ -130,6 +106,9 @@ var JSCLPath = "D:\\nframework_git_repo/nmodules/demoNModule.nlc.client.js";
                 var module=modules[i];
                 miejs+=' <script  src="/nmodules/'+module+'"></script>';
             }
+            
+
+            miejs+="<script src='/appcl'></script>";
 
             res.render( page_demoPage.ejs_src,{
                 NFramework:miejs
@@ -144,44 +123,6 @@ var JSCLPath = "D:\\nframework_git_repo/nmodules/demoNModule.nlc.client.js";
             nmodule.Routing(path,callback);
         }
     
-    
-    
-
-    
-        nmodule.AddServerMethod('demoCrossSideMethod',(...args)=>{
-            var f=
-    
-
-        function(){
-            console.log();
-        }
-
-    
-        
-    f.call(nmodule,...args); 
-
-}
-    
-    );
-    
-    
-
-    
-        nmodule.AddClientMethod('demoCrossSideMethod2',(...args)=>{
-            var f=
-    
-
-        function(){
-            
-        }
-
-    
-        
-    f.call(nmodule,...args); 
-
-}
-    
-    );
     
     
 

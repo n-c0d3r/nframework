@@ -8,28 +8,49 @@
 
 
 <N:module demoNModule>
+    
+    <N:client-only>
 
-    <N:side both/>
+        <N:side both/>
 
-    <N:property demoProp/>
+        <N:property demoProp/>
+    
+        <N:method Setup>
 
-    <N:method Setup>
+            function(){
+                                
+            }
 
-        function(){
-            
+        </N:method>
+
+        <N:method Start>
+
+            function(){
+
+
+
+            }
+
+        </N:method>
+
+        <N:client-method demoCrossSideMethod2>
+
+            function(){
+                
+            }
+
+        </N:client-method>
+
+    </N:client-only>
+
+    <N:server-method demoCrossSideMethod>
+
+        function(a,b){
+            console.log(a,b);
         }
 
-    </N:method>
-
-    <N:method Start>
-
-        function(){
-
-
-
-        }
-
-    </N:method>
+    </N:server-method>
+    
 
     <N:routing>
 
@@ -42,21 +63,5 @@
         }
 
     </N:routing>
-
-    <N:server-method demoCrossSideMethod>
-
-        function(){
-            console.log();
-        }
-
-    </N:server-method>
-
-    <N:client-method demoCrossSideMethod2>
-
-        function(){
-            
-        }
-
-    </N:client-method>
 
 </N:module>

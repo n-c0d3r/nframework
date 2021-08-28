@@ -23,28 +23,32 @@
 
         var This=nmodule;
 
+        nmodule.side='client';
+
         nmodule.name='demoNModule';
     
     
-
-    nmodule.side='both';
-
     
+    
+
+        nmodule.side='both';
+
+        
     
     nmodule.AddProperty('demoProp');
     
     
-
     
+        
         nmodule.AddMethod('Setup',(...args)=>{
             var f=
     
 
-        function(){
-            
-        }
+            function(){
+                                
+            }
 
-    
+        
         
     f.call(nmodule,...args); 
 
@@ -54,15 +58,55 @@
     
     
 
-    
+        
         nmodule.AddMethod('Start',(...args)=>{
             var f=
     
 
-        function(){
+            function(){
 
+                this.Get('demoCrossSideMethod')(1,5);
 
+            }
 
+        
+        
+    f.call(nmodule,...args); 
+
+}
+    
+    );
+    
+    
+
+        
+        nmodule.AddClientMethod('demoCrossSideMethod2',(...args)=>{
+            var f=
+    
+
+            function(){
+                
+            }
+
+        
+        
+    f.call(nmodule,...args); 
+
+}
+    
+    );
+    
+    
+
+    
+
+    {
+        nmodule.AddServerMethod('demoCrossSideMethod',(clientSocket,...args)=>{
+            var f=
+    
+
+        function(a,b){
+            console.log(a,b);
         }
 
     
@@ -72,6 +116,7 @@
 }
     
     );
+}
     
     
 
@@ -98,6 +143,9 @@
                 var module=modules[i];
                 miejs+=' <script  src="/nmodules/'+module+'"></script>';
             }
+            
+
+            miejs+="<script src='/appcl'></script>";
 
             res.render( page_demoPage.ejs_src,{
                 NFramework:miejs
@@ -111,44 +159,10 @@
     
     
 
-    
-        nmodule.AddServerMethod('demoCrossSideMethod',(...args)=>{
-            var f=
-    
 
-        function(){
-            console.log();
-        }
-
-    
         
-    f.call(nmodule,...args); 
-
-}
-    
-    );
-    
-    
-
-    
-        nmodule.AddClientMethod('demoCrossSideMethod2',(...args)=>{
-            var f=
-    
-
-        function(){
-            
-        }
-
-    
+            var nmoduleManager=window.NFramework.nmoduleManager;
+            nmoduleManager.ImportModule(nmodule);
         
-    f.call(nmodule,...args); 
-
-}
-    
-    );
-    
-    
-
-
                 
                 

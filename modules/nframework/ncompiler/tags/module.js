@@ -42,6 +42,12 @@ tag.Compile=function(element,childsCode,code){
         `;
     }
 
+    var side='server';
+
+    if(!element.forSV){
+        side='client';
+    }
+
     var compiledCode=`
 
         var NModule=${nmoduleImportCode};
@@ -49,6 +55,8 @@ tag.Compile=function(element,childsCode,code){
         var nmodule=new NModule();
 
         var This=nmodule;
+
+        nmodule.side='${side}';
 
         nmodule.name='${inputs[0]}';
     
@@ -72,6 +80,13 @@ tag.Compile=function(element,childsCode,code){
             res.send(code);
         });
 
+        `;
+    }
+    else{
+        compiledCode+=`
+        
+            var nmoduleManager=window.NFramework.nmoduleManager;
+            nmoduleManager.ImportModule(nmodule);
         `;
     }
 

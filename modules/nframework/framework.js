@@ -6,6 +6,8 @@ var NModuleManager = require('./nmoduleManager/nmoduleManager');
 
 var NModule=require('./nmodule/nmodule');
 
+var IORouterManager=require('./ioroutermanager/ioRouterManager');
+
 var NFramework=class{
 
     constructor(){
@@ -14,6 +16,8 @@ var NFramework=class{
 
         this.nmoduleManager=new NModuleManager();
         this.nmoduleManager.NFramework=this;
+
+        this.ioRouterManager=new IORouterManager();
 
         this.framework_nmodules_src_dir=__dirname+'/nmodules';
 
@@ -47,9 +51,10 @@ var NFramework=class{
     GetCLEJS(){
         return `
 
+            <script src="/socket.io/socket.io.js"></script>
             <script src='/nframework'></script>
+            <script src='/nmodule-manager'></script>
             <script src='/nmodule'></script>
-
 
         `;
     }
@@ -65,12 +70,34 @@ var NFramework=class{
             res.send(frameworkCLJSCode);
         });
 
+
+
         var nmoduleCLJSFilePath=__dirname+'/cl/nmodule.js';
 
         var nmoduleCLJSCode=fs.readFileSync(nmoduleCLJSFilePath).toString();
 
         this.express_server.get('/nmodule',(req,res)=>{
             res.send(nmoduleCLJSCode);
+        });
+
+
+
+        var nmoduleMCLJSFilePath=__dirname+'/cl/nmoduleManager.js';
+
+        var nmoduleMCLJSCode=fs.readFileSync(nmoduleMCLJSFilePath).toString();
+
+        this.express_server.get('/nmodule-manager',(req,res)=>{
+            res.send(nmoduleMCLJSCode);
+        });
+
+
+
+        var appCLJSFilePath=__dirname+'/cl/app.js';
+
+        var appCLJSCode=fs.readFileSync(appCLJSFilePath).toString();
+
+        this.express_server.get('/appcl',(req,res)=>{
+            res.send(appCLJSCode);
         });
 
 
@@ -106,6 +133,12 @@ var NFramework=class{
         var socket_io=require('socket.io');
         var socket=socket_io(server);
         this.socket=socket;
+
+        var framework=this;
+        
+        socket.on('connection', (csocket) => {
+            framework.ioRouterManager.SetupFor(csocket);
+        });
 
     }
 

@@ -163,9 +163,29 @@ var NModule = class{
         return this.manager.GetModule(name);
     }
 
+    SetupServerMethod(name){
+        this.methods[name]=(...args)=>{
+
+            var path=`nframework/execute-server-method/${this.name}/${name}`;
+
+            this.manager.NFramework.socket.emit(path,args);
+        }      
+
+    }
+
+    SetupServerMethods(){
+        var keys=Object.keys(this.serverMethods);
+
+        for(var key of keys){
+            this.SetupServerMethod(key);
+        }
+
+    }
+
     AfterImported(){
         this.isImported=true;
-        this.RoutingRouters();
+        
+        this.SetupServerMethods();
     }
 }
 

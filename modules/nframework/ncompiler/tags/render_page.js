@@ -25,6 +25,9 @@ tag.Compile=function(element,childsCode,code){
                 var module=modules[i];
                 miejs+=' <script  src="/nmodules/'+module+'"></script>';
             }
+            
+
+            miejs+="<script src='/appcl'></script>";
 
             res.render( page_${pageName}.ejs_src,{
                 NFramework:miejs

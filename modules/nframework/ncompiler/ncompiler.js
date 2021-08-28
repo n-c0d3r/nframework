@@ -73,7 +73,13 @@ var NCompiler = class{
     }
 
     GetTag(name){
-        var result=require('./tags/'+name+'.js');
+        var result=null;
+        if(name!=''){
+            result = require('./tags/'+name+'.js');
+        }
+        else{
+            result = require('./tags/region.js');
+        }
         result.name=name;
         return result;
     }
