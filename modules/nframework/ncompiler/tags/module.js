@@ -58,11 +58,30 @@ tag.Compile=function(element,childsCode,code){
         compiledCode+=contents[i].code;
     }
 
-    compiledCode+=`
+    if(element.forSV){
+        compiledCode+=`
+        
     
-        module.exports = nmodule;
-    
-    `;
+        var fs=require('fs');
+
+        var clientVersion=JSCLPath;
+
+        var code=fs.readFileSync(clientVersion);
+
+        nmodule.Routing('/nmodules/${inputs[0]}',(req,res)=>{
+            res.send(code);
+        });
+
+        `;
+    }
+
+    if(element.forSV){
+        compiledCode+=`
+
+            module.exports = nmodule;
+        
+        `;
+    }
 
     return compiledCode;
 }

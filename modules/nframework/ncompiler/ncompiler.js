@@ -40,6 +40,17 @@ var NCompiler = class{
 
         fileJSCPath=dirNLCPath+'/'+fileJSNameC;
 
+        var prs_fileJSCPath='';
+
+        for(var i=0;i<fileJSCPath.length;i++){
+            if(fileJSCPath[i]=='\\'){
+                prs_fileJSCPath+='\\';
+            }
+            prs_fileJSCPath+=fileJSCPath[i];
+        }
+
+        codeSV='var JSCLPath = "' + prs_fileJSCPath +'";' + codeSV;
+
         fs.writeFileSync(fileJSSVPath,codeSV);
 
         fs.writeFileSync(fileJSCPath,codeCL);
@@ -156,6 +167,7 @@ var NCompiler = class{
                     level++;
                     openTags[tagsOrder[i].name]=tagsOrder[i];
                     var element=new Element();
+                    element.NFramework=this.NFramework;
                     element.tag=tagsOrder[i];
                     element.startContentIndex=tagsOrder[i].start;
                     currentElement.AppendChild(element);
@@ -170,6 +182,7 @@ var NCompiler = class{
             }
             else{
                 var element=new Element();
+                element.NFramework=this.NFramework;
                 element.tag=tagsOrder[i];
                 element.startContentIndex=tagsOrder[i].start;
                 for(var j=element.startContentIndex;j<code.length;j++){

@@ -1,3 +1,12 @@
+<N:page demoPage>
+
+    <N:ejs-src demo.ejs /> 
+
+    <N:modules demoNModule/>
+
+</N:page>
+
+
 <N:module demoNModule>
 
     <N:side both/>
@@ -22,9 +31,22 @@
 
     </N:method>
 
+    <N:routing>
+
+        path='/page/:name'
+
+        callback=(req,res)=>{
+            
+            <N:render-page demoPage/>
+
+        }
+
+    </N:routing>
+
     <N:server-method demoCrossSideMethod>
 
         function(){
+            console.log();
         }
 
     </N:server-method>

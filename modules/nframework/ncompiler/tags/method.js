@@ -10,7 +10,8 @@ tag.Compile=function(element,childsCode,code){
     var inputs=tag.GetInputs(element,childsCode,code);
 
     var compiledCode=`
-        nmodule.AddMethod('${inputs[0]}',
+        nmodule.AddMethod('${inputs[0]}',(...args)=>{
+            var f=
     `;
     
     for(var i=0;i<contents.length;i++){
@@ -18,7 +19,12 @@ tag.Compile=function(element,childsCode,code){
     }
 
     compiledCode+=`
-        );
+        
+    f.call(nmodule,...args); 
+
+}
+    
+    );
     
     `;
 

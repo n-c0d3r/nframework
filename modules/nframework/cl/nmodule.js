@@ -167,38 +167,6 @@ var NModule = class{
         this.isImported=true;
         this.RoutingRouters();
     }
-
-    RoutingRouters(){
-        for(var i=0;i<this.routers.length;i++){
-            var router = this.routers[i];
-            this.NoSafe__Routing(router.path,router.callback);
-        }
-    }
-
-    NoSafe__Routing(path,callback){
-        var express_server=this.manager.NFramework.express_server;
-        var module=this;
-        express_server.get(path,(req,res)=>{
-            callback.call(this,req,res);
-        });
-    }
-
-    Routing(path,callback){
-        if(!this.isImported){
-            this.routers.push(
-                {
-                    'path':path,
-                    'callback':callback
-                }
-            );
-        }
-        else{
-            this.NoSafe__Routing(path,callback);
-        }
-    }
-
 }
 
-
-
-module.exports = NModule;
+window.NFramework.NModule=NModule;

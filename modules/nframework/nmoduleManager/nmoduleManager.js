@@ -105,6 +105,7 @@ var NModuleManager=class{
             var moduleName=module.name;
             this.modules[moduleName]=module;
             this.modules[moduleName].manager=this;
+            this.modules[moduleName].AfterImported();
         }
     }
 
