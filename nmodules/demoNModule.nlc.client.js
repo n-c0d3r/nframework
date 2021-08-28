@@ -46,14 +46,7 @@
 
         function(){
 
-            nmodule.Set('demoProp',
-                7
-            )
-            
 
-            console.log(
-                nmodule.Get('demoProp')
-            );
 
         }
 
@@ -62,13 +55,26 @@
     
     
 
-
     
         nmodule.AddServerMethod('demoCrossSideMethod',
 
     
 
         function(){
+        }
+
+    
+        );
+    
+    
+
+    
+        nmodule.AddClientMethod('demoCrossSideMethod2',
+
+    
+
+        function(){
+            
         }
 
     

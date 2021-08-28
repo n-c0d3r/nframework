@@ -22,12 +22,19 @@
 
     </N:method>
 
-
     <N:server-method demoCrossSideMethod>
 
         function(){
         }
 
     </N:server-method>
+
+    <N:client-method demoCrossSideMethod2>
+
+        function(){
+            
+        }
+
+    </N:client-method>
 
 </N:module>

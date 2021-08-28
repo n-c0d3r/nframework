@@ -8,6 +8,8 @@ var NModule = class{
 
         this.serverMethods=new Object();
 
+        this.clientMethods=new Object();
+
         this.baseModules=[];
     }
     
@@ -26,6 +28,11 @@ var NModule = class{
         else
         if(name in this.serverMethods){
             result=this.serverMethods[name];
+            isExist=true;
+        }
+        else
+        if(name in this.clientMethods){
+            result=this.clientMethods[name];
             isExist=true;
         }
         else
@@ -57,6 +64,11 @@ var NModule = class{
         else
         if(name in this.serverMethods){
             result=this.serverMethods[name];
+            r=true;
+        }
+        else
+        if(name in this.clientMethods){
+            result=this.clientMethods[name];
             r=true;
         }
         else{
@@ -91,6 +103,11 @@ var NModule = class{
             result=this.serverMethods[name];
             r=true;
         }
+        else
+        if(name in this.clientMethods){
+            result=this.clientMethods[name];
+            r=true;
+        }
         else{
             for(var i=0;i<this.baseModules.length;i++){
                 var baseModule=this.GetModule(this.baseModules[i]);
@@ -120,6 +137,10 @@ var NModule = class{
 
     AddServerMethod(name,method){
         this.serverMethods[name]=method;
+    }
+
+    AddClientMethod(name,method){
+        this.clientMethods[name]=method;
     }
 
     Setup(){
