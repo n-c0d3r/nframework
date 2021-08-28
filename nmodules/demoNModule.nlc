@@ -41,6 +41,14 @@
 
         </N:client-method>
 
+        <N:style>
+
+            h1{
+                color: blue;
+            }
+
+        </N:style>
+
     </N:client-only>
 
     <N:server-method demoCrossSideMethod>

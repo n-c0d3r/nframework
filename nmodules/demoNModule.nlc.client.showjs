@@ -65,7 +65,7 @@
 
             function(){
 
-                this.Get('demoCrossSideMethod')(1,5);
+
 
             }
 
@@ -96,6 +96,22 @@
     
     );
     
+    
+
+        
+    {
+        var styleE = document.createElement('style');
+
+        styleE.textContent = `
+
+            h1{
+                color: blue;
+            }
+
+        `;
+
+        document.body.appendChild(styleE);
+    }
     
 
     
