@@ -16,7 +16,7 @@ var JSCLPath = "D:\\nframework_git_repo/nmodules/demoPageModule.nlc.client.js";
     
         this.ejs_src='demo.ejs';
     
-    
+     
 
     
     

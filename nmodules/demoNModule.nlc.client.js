@@ -42,9 +42,9 @@
                             'b':2
                         }
                     }
-                )
+                ) 
 
-                this.Get('LogSyncProp')();
+                nmodule.Get('LogSyncProp')();
 
                 var prop = await nmodule.AsyncGet('syncProp')
 

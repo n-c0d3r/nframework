@@ -122,7 +122,7 @@ var Tag=class{
 
                     currentContentPart=new Object();
                     currentContentPart.code='';
-                    i=celementEnd+1;
+                    i=celementEnd;
                     break;
                 }
             }

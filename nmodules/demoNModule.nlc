@@ -19,7 +19,7 @@
                     }
                 </N:await-set> 
 
-                this.Get('LogSyncProp')();
+                <N:get LogSyncProp/>();
 
                 var prop = <N:await-get syncProp/>
 
