@@ -1,18 +1,27 @@
 <N:module demoClientModule>
 
-    <N:client-only>
+    <N:sync-property syncProp/>
 
-        <N:property demoProp/>
+    <N:client-only>
     
-        //client side call Setup method 
-        <N:method Setup>
+        <N:async-method Setup>
 
             function(){
-                //client side call SM method
-                this.Get('SM')();
+                //SetProp
+                await this.AsyncSet('syncProp',{
+                    'a':5,
+                    'b':6,
+                    'c':{
+                        'a':1,
+                        'b':2
+                    }
+                });
+
+                //GetProp
+                var prop=await this.AsyncGet('syncProp');
             }
 
-        </N:method>
+        </N:async-method>
 
         <N:method Start>
 
@@ -27,13 +36,10 @@
     </N:client-only>
     
     <N:server-only>
-
-        <N:property demoProp/>
     
         <N:method Setup>
 
             function(){
-
             }
 
         </N:method>
@@ -50,20 +56,9 @@
 
     </N:server-only>
 
-    //CM method
-    <N:client-method CM>
-        function(a,b){
-            //CM method log a,b in client side
-            console.log(a,b);
-        }
-    </N:client-method>
-
-    //SM method
-    <N:server-method SM>
-        function(){
-            console.log('Server Side');
-            //SM Method (Server Side) Call CM method
-            this.Get('CM')(clientSocket,5,2);
+    <N:server-method LogSyncProp>
+        function() {
+            console.log(this.Get('syncProp'));
         }
     </N:server-method>
 

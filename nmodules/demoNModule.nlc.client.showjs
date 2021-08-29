@@ -22,31 +22,35 @@
     
 
     
+    
+    nmodule.AddSyncProperty('syncProp');
+    
+    
 
-        
-    
-    nmodule.AddProperty('demoProp');
     
     
-    
-        
         
         nmodule.AddMethod('Setup',(...args)=>{
-            var f=
-    
-
-            function(){
+                var f=async function(){
                 
-                this.Get('SM')();
+                await this.AsyncSet('syncProp',{
+                    'a':5,
+                    'b':6,
+                    'c':{
+                        'a':1,
+                        'b':2
+                    }
+                });
+
+                
+                var prop=await this.AsyncGet('syncProp');
             }
 
         
-        
-    f.call(nmodule,...args); 
-
-}
+                f.call(nmodule);
+            }
     
-    );
+        );
     
     
 
@@ -75,34 +79,12 @@
     
     
 
-    
-    
-        nmodule.AddClientMethod('CM',(...args)=>{
-            var f=
-    
-        function(a,b){
-            
-            console.log(a,b);
-        }
-    
-        
-    f.call(nmodule,...args); 
-
-}
-    
-    );
-    
-    
-
-    
     {
-        nmodule.AddServerMethod('SM',(clientSocket,...args)=>{
+        nmodule.AddServerMethod('LogSyncProp',(clientSocket,...args)=>{
             var f=
     
-        function(){
-            console.log('Server Side');
-            
-            this.Get('CM')(clientSocket,5,2);
+        function() {
+            console.log(this.Get('syncProp'));
         }
     
         

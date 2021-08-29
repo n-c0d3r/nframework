@@ -4,6 +4,8 @@ var NModule = class{
 
         this.properties=new Object();
 
+        this.syncProperties=new Object();
+
         this.methods=new Object();
 
         this.serverMethods=new Object();
@@ -42,6 +44,11 @@ var NModule = class{
             isExist=true;
         }
         else
+        if(name in this.syncProperties){
+            result=this.syncProperties[name];
+            isExist=true;
+        }
+        else
         for(var i=0;i<this.baseModules.length;i++){
             var baseModule=this.GetModule(this.baseModules[i]);
             var fBM=baseModule.GetWithIsExist(name);
@@ -77,6 +84,11 @@ var NModule = class{
             result=this.clientMethods[name];
             r=true;
         }
+        else
+        if(name in this.syncProperties){
+            result=this.syncProperties[name];
+            r=true;
+        }
         else{
             for(var i=0;i<this.baseModules.length;i++){
                 var baseModule=this.GetModule(this.baseModules[i]);
@@ -106,12 +118,17 @@ var NModule = class{
         }
         else
         if(name in this.serverMethods){
-            result=this.serverMethods[name];
+            this.serverMethods[name]=data;
             r=true;
         }
         else
         if(name in this.clientMethods){
-            result=this.clientMethods[name];
+            this.clientMethods[name]=data;
+            r=true;
+        }
+        else
+        if(name in this.syncProperties){
+            this.syncProperties[name]=data;
             r=true;
         }
         else{
@@ -135,6 +152,10 @@ var NModule = class{
 
     AddProperty(name){
         this.properties[name]=null;
+    }
+
+    AddSyncProperty(name){
+        this.syncProperties[name]=null;
     }
 
     AddMethod(name,method){

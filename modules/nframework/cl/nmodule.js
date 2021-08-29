@@ -4,6 +4,8 @@ var NModule = class{
 
         this.properties=new Object();
 
+        this.syncProperties=new Object();
+
         this.methods=new Object();
 
         this.serverMethods=new Object();
@@ -15,6 +17,18 @@ var NModule = class{
         this.routers=[];
 
         this.isImported=false;
+    }
+
+    async GetSyncProperty(name){
+        var response  = await fetch(window.origin+`/getSyncProp/${this.name}/${name}`)
+        var data = await response.json();
+        return data.value;
+    }
+
+    async SetSyncProperty(name,data){
+        var dataJSON=JSON.stringify(data);
+        var parsedData=encodeURIComponent(dataJSON);
+        await fetch(window.origin+`/setSyncProp/${this.name}/${name}/${parsedData}`);
     }
     
     GetWithIsExist(name){
@@ -40,6 +54,11 @@ var NModule = class{
             isExist=true;
         }
         else
+        if(name in this.syncProperties){
+            result=this.GetSyncProperty(name);
+            isExist=true;
+        }
+        else
         for(var i=0;i<this.baseModules.length;i++){
             var baseModule=this.GetModule(this.baseModules[i]);
             var fBM=baseModule.GetWithIsExist(name);
@@ -50,6 +69,91 @@ var NModule = class{
             }
         }
         return {'data':result,'isExist':isExist};
+    }
+
+    
+    async AsyncGetWithIsExist(name){
+        var result=null;
+        var isExist=false;
+        if(name in this.properties){
+            result=this.properties[name];
+            isExist=true;
+        }
+        else
+        if(name in this.methods){
+            result=this.methods[name];
+            isExist=true;
+        }
+        else
+        if(name in this.serverMethods){
+            result=this.serverMethods[name];
+            isExist=true;
+        }
+        else
+        if(name in this.clientMethods){
+            result=this.clientMethods[name];
+            isExist=true;
+        }
+        else
+        if(name in this.syncProperties){
+            result=await this.GetSyncProperty(name);
+            isExist=true;
+        }
+        else
+        for(var i=0;i<this.baseModules.length;i++){
+            var baseModule=this.GetModule(this.baseModules[i]);
+            var fBM=await baseModule.AsyncGetWithIsExist(name);
+            if(fBM.isExist){
+                result=fBM.data;
+                isExist=true;
+                break;
+            }
+        }
+        return {'data':result,'isExist':isExist};
+    }
+
+
+    async AsyncGet(name){
+        var result=null;
+        var r=false;
+        if(name in this.properties){
+            result=this.properties[name];
+            r=true;
+        }
+        else
+        if(name in this.methods){
+            result=this.methods[name];
+            r=true;
+        }
+        else
+        if(name in this.serverMethods){
+            result=this.serverMethods[name];
+            r=true;
+        }
+        else
+        if(name in this.clientMethods){
+            result=this.clientMethods[name];
+            r=true;
+        }
+        else
+        if(name in this.syncProperties){
+            result=await this.GetSyncProperty(name);
+            r=true;
+        }
+        else{
+            for(var i=0;i<this.baseModules.length;i++){
+                var baseModule=this.GetModule(this.baseModules[i]);
+                var fBM=await baseModule.GetWithIsExist(name);
+                if(fBM.isExist){
+                    result=fBM.data;
+                    r=true;
+                    break;
+                }
+            }
+        }
+        if(!r)
+            throw new Error(`Module ${this.name}: Not Found ${name} `);
+        return result;
     }
 
 
@@ -75,6 +179,11 @@ var NModule = class{
             result=this.clientMethods[name];
             r=true;
         }
+        else
+        if(name in this.syncProperties){
+            result=this.GetSyncProperty(name);
+            r=true;
+        }
         else{
             for(var i=0;i<this.baseModules.length;i++){
                 var baseModule=this.GetModule(this.baseModules[i]);
@@ -90,6 +199,47 @@ var NModule = class{
             throw new Error(`Module ${this.name}: Not Found ${name} `);
         return result;
     }
+    
+    async AsyncSet(name,data){
+        var r=false;
+        if(name in this.properties){
+            this.properties[name]=data;
+            r=true;
+        }
+        else
+        if(name in this.methods){
+            this.methods[name]=data;
+            r=true;
+        }
+        else
+        if(name in this.serverMethods){
+            this.serverMethods[name]=data;
+            r=true;
+        }
+        else
+        if(name in this.clientMethods){
+            this.clientMethods[name]=data;
+            r=true;
+        }
+        else
+        if(name in this.syncProperties){
+            await this.SetSyncProperty(name,data);;
+            r=true;
+        }
+        else{
+            for(var i=0;i<this.baseModules.length;i++){
+                var baseModule=this.GetModule(this.baseModules[i]);
+                var fBM=await baseModule.GetWithIsExist(name);
+                if(fBM.isExist){
+                    baseModule.Set(name,data);
+                    r=true;
+                    break;
+                }
+            }
+        }
+        if(!r)
+            throw new Error(`Module ${this.name}: Not Found ${name} `);
+    }
 
     Set(name,data){
         var r=false;
@@ -104,12 +254,17 @@ var NModule = class{
         }
         else
         if(name in this.serverMethods){
-            result=this.serverMethods[name];
+            this.serverMethods[name]=data;
             r=true;
         }
         else
         if(name in this.clientMethods){
-            result=this.clientMethods[name];
+            this.clientMethods[name]=data;
+            r=true;
+        }
+        else
+        if(name in this.syncProperties){
+            this.SetSyncProperty(name,data);;
             r=true;
         }
         else{
@@ -133,6 +288,10 @@ var NModule = class{
 
     AddProperty(name){
         this.properties[name]=null;
+    }
+    
+    AddSyncProperty(name){
+        this.syncProperties[name]=null;
     }
 
     AddMethod(name,method){

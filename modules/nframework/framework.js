@@ -35,6 +35,7 @@ var NFramework=class{
     Init(){
         this.StartServer();
         this.SetupCLEJSRouters();
+        this.nmoduleManager.SetupGetterAndSetterForSyncProps();
     }
 
     Build(){

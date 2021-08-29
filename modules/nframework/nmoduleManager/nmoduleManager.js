@@ -10,6 +10,35 @@ var NModuleManager=class{
         this.modules=new Object();
     }
 
+    SetupGetterAndSetterForSyncProps(){
+        var express_server=this.NFramework.express_server;
+        var manager=this;
+        express_server.get('/getSyncProp/:module/:name',(req,res)=>{
+            var moduleName=req.params.module;
+            var syncPropName=req.params.name;
+
+            var property=manager.GetModule(moduleName).Get(syncPropName);
+
+            var data={
+                value:property
+            };
+
+            var jsonText=JSON.stringify(data);
+
+            res.send(jsonText);
+
+        })
+        express_server.get('/setSyncProp/:module/:name/:data',(req,res)=>{
+            var moduleName=req.params.module;
+            var syncPropName=req.params.name;
+            var data=JSON.parse(req.params.data);
+
+            manager.GetModule(moduleName).Set(syncPropName,data);
+
+            res.send('DONE');
+        })
+    }
+
     BuildModulePathsArray(){
         var src_path=this.NFramework.nmodules_src_dir;
         var framework_src_path=this.NFramework.framework_nmodules_src_dir;

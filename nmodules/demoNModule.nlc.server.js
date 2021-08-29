@@ -23,11 +23,11 @@ var JSCLPath = "D:\\nframework_git_repo/nmodules/demoNModule.nlc.client.js";
 
     
     
+    nmodule.AddSyncProperty('syncProp');
+    
     
 
-        
     
-    nmodule.AddProperty('demoProp');
     
     
     
@@ -37,7 +37,6 @@ var JSCLPath = "D:\\nframework_git_repo/nmodules/demoNModule.nlc.client.js";
     
 
             function(){
-
             }
 
         
@@ -73,34 +72,12 @@ var JSCLPath = "D:\\nframework_git_repo/nmodules/demoNModule.nlc.client.js";
 
     
 
-    
-    
-        nmodule.AddClientMethod('CM',(...args)=>{
-            var f=
-    
-        function(a,b){
-            
-            console.log(a,b);
-        }
-    
-        
-    f.call(nmodule,...args); 
-
-}
-    
-    );
-    
-    
-
-    
     {
-        nmodule.AddServerMethod('SM',(clientSocket,...args)=>{
+        nmodule.AddServerMethod('LogSyncProp',(clientSocket,...args)=>{
             var f=
     
-        function(){
-            console.log('Server Side');
-            
-            this.Get('CM')(clientSocket,5,2);
+        function() {
+            console.log(this.Get('syncProp'));
         }
     
         
