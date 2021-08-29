@@ -33,17 +33,22 @@
         nmodule.AddMethod('Setup',(...args)=>{
                 var f=async function(){
                 
-                await this.AsyncSet('syncProp',{
-                    'a':5,
-                    'b':6,
-                    'c':{
-                        'a':1,
-                        'b':2
+                await nmodule.AsyncSet('syncProp',
+                    {
+                        'a':5,
+                        'b':6,
+                        'c':{
+                            'a':1,
+                            'b':2
+                        }
                     }
-                });
+                )
 
-                
-                var prop=await this.AsyncGet('syncProp');
+                this.Get('LogSyncProp')();
+
+                var prop = await nmodule.AsyncGet('syncProp')
+
+                console.log(prop);
             }
 
         

@@ -7,18 +7,23 @@
         <N:async-method Setup>
 
             function(){
-                //SetProp
-                await this.AsyncSet('syncProp',{
-                    'a':5,
-                    'b':6,
-                    'c':{
-                        'a':1,
-                        'b':2
+                
+                <N:await-set syncProp>
+                    {
+                        'a':5,
+                        'b':6,
+                        'c':{
+                            'a':1,
+                            'b':2
+                        }
                     }
-                });
+                </N:await-set> 
 
-                //GetProp
-                var prop=await this.AsyncGet('syncProp');
+                this.Get('LogSyncProp')();
+
+                var prop = <N:await-get syncProp/>
+
+                console.log(prop);
             }
 
         </N:async-method>
