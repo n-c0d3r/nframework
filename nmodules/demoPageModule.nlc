@@ -1,0 +1,33 @@
+<N:page demoPage>
+
+    <N:ejs-src demo.ejs /> 
+
+    <N:modules demoClientModule/>
+
+</N:page>
+
+
+<N:module demoPageModule>
+
+    <N:server-method demoCrossSideMethod>
+
+        function(){
+            
+        }
+
+    </N:server-method>
+    
+
+    <N:routing>
+
+        path='/page/:name'
+
+        callback=(req,res)=>{
+            
+            <N:render-page demoPage/>
+
+        }
+
+    </N:routing>
+
+</N:module>

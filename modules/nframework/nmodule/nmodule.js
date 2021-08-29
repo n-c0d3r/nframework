@@ -161,6 +161,20 @@ var NModule = class{
         ioManager.AddRouter(serverMethodRouter);
     }
 
+    SetupClientMethod(name){
+        var ioManager=this.manager.NFramework.ioRouterManager;
+
+        var moduleName=this.name;
+
+        this.clientMethods[name]=(clientSocket,...args)=>{
+            var data=args;
+            var path=`nframework/execute-client-method/${moduleName}/${name}`;
+            ioManager.Emit(clientSocket,path,data);
+        };
+
+        
+    }
+
     AddServerMethod(name,method){
         this.serverMethods[name]=method;
 
@@ -191,6 +205,16 @@ var NModule = class{
         this.isImported=true;
         this.RoutingRouters();
         this.SetupServerMethods();
+        this.SetupClientMethods();
+    }
+
+    SetupClientMethods(){
+        var keys=Object.keys(this.clientMethods);
+
+        for(var key of keys){
+            this.SetupClientMethod(key);
+        }
+
     }
 
     SetupServerMethods(){

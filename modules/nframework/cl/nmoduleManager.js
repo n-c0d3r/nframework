@@ -29,6 +29,13 @@ var NModuleManager = class{
         return this.modules[name];
     }
 
+    AfterConnected(){
+        var keys=Object.keys(this.modules);
+        for(var i=0;i<keys.length;i++){
+            this.modules[keys[i]].AfterConnected();
+        }
+    }
+
 }
 
 

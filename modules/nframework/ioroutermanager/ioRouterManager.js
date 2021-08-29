@@ -13,6 +13,10 @@ var IORouterManager=class{
         });
     }
 
+    Emit(clientSocket,path,data){
+        clientSocket.emit(path,data);
+    }
+
     SetupFor(clientSocket){
         for(var i=0;i<this.routers.length;i++){
             this.IORouting(clientSocket,this.routers[i]);

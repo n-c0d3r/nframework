@@ -172,6 +172,31 @@ var NModule = class{
         }      
 
     }
+    
+    SetupClientMethod(name){
+        var moduleName=this.name;
+
+        var socket=this.manager.NFramework.socket;
+
+        var path=`nframework/execute-client-method/${moduleName}/${name}`;
+
+        var module=this;
+
+        socket.on(path,(data)=>{
+            module.Get(name)(...data);
+        });
+
+        
+    }
+
+    SetupClientMethods(){
+        var keys=Object.keys(this.clientMethods);
+
+        for(var key of keys){
+            this.SetupClientMethod(key);
+        }
+
+    }
 
     SetupServerMethods(){
         var keys=Object.keys(this.serverMethods);
@@ -186,6 +211,10 @@ var NModule = class{
         this.isImported=true;
         
         this.SetupServerMethods();
+    }
+
+    AfterConnected(){
+        this.SetupClientMethods();
     }
 }
 

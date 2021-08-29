@@ -112,6 +112,17 @@ var NCompiler = class{
                         for(var j=startN+2;j<code.length;j++){
                             var chj=code[j];
 
+                            /*
+                            if(chj=='"' || chj=="'" || chj=='`'){
+                                var strChr=chj;
+                                j++;
+                                for(;j<code.length;j++){
+                                    if(j+1!=strChr){
+                                        break;
+                                    }
+                                }
+                            }*/
+
                             if(chj==' '||chj=='>'||chj=='/'){
                                 endTagName=j-1;
                                 break;

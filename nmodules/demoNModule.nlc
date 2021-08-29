@@ -1,24 +1,15 @@
-<N:page demoPage>
+<N:module demoClientModule>
 
-    <N:ejs-src demo.ejs /> 
-
-    <N:modules demoNModule/>
-
-</N:page>
-
-
-<N:module demoNModule>
-    
     <N:client-only>
-
-        <N:side both/>
 
         <N:property demoProp/>
     
+        //client side call Setup method 
         <N:method Setup>
 
             function(){
-                                
+                //client side call SM method
+                this.Get('SM')();
             }
 
         </N:method>
@@ -33,43 +24,47 @@
 
         </N:method>
 
-        <N:client-method demoCrossSideMethod2>
+    </N:client-only>
+    
+    <N:server-only>
+
+        <N:property demoProp/>
+    
+        <N:method Setup>
 
             function(){
+
+            }
+
+        </N:method>
+
+        <N:method Start>
+
+            function(){
+
                 
+
             }
 
-        </N:client-method>
+        </N:method>
 
-        <N:style>
+    </N:server-only>
 
-            h1{
-                color: blue;
-            }
-
-        </N:style>
-
-    </N:client-only>
-
-    <N:server-method demoCrossSideMethod>
-
+    //CM method
+    <N:client-method CM>
         function(a,b){
+            //CM method log a,b in client side
             console.log(a,b);
         }
+    </N:client-method>
 
-    </N:server-method>
-    
-
-    <N:routing>
-
-        path='/page/:name'
-
-        callback=(req,res)=>{
-            
-            <N:render-page demoPage/>
-
+    //SM method
+    <N:server-method SM>
+        function(){
+            console.log('Server Side');
+            //SM Method (Server Side) Call CM method
+            this.Get('CM')(clientSocket,5,2);
         }
-
-    </N:routing>
+    </N:server-method>
 
 </N:module>

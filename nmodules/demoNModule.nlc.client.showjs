@@ -2,14 +2,6 @@
                 
                     
 
-    
-    
-    
-                
-                
-                
-                    
-
         var NModule=
             function(){
 
@@ -25,13 +17,11 @@
 
         nmodule.side='client';
 
-        nmodule.name='demoNModule';
-    
-    
+        nmodule.name='demoClientModule';
     
     
 
-        nmodule.side='both';
+    
 
         
     
@@ -40,12 +30,14 @@
     
     
         
+        
         nmodule.AddMethod('Setup',(...args)=>{
             var f=
     
 
             function(){
-                                
+                
+                this.Get('SM')();
             }
 
         
@@ -79,52 +71,39 @@
     
     
 
-        
-        nmodule.AddClientMethod('demoCrossSideMethod2',(...args)=>{
+    
+    
+    
+
+    
+    
+        nmodule.AddClientMethod('CM',(...args)=>{
             var f=
     
-
-            function(){
-                
-            }
-
-        
-        
-    f.call(nmodule,...args); 
-
-}
-    
-    );
-    
-    
-
-        
-    {
-        var styleE = document.createElement('style');
-
-        styleE.textContent = `
-
-            h1{
-                color: blue;
-            }
-
-        `;
-
-        document.body.appendChild(styleE);
-    }
-    
-
-    
-
-    {
-        nmodule.AddServerMethod('demoCrossSideMethod',(clientSocket,...args)=>{
-            var f=
-    
-
         function(a,b){
+            
             console.log(a,b);
         }
+    
+        
+    f.call(nmodule,...args); 
 
+}
+    
+    );
+    
+    
+
+    
+    {
+        nmodule.AddServerMethod('SM',(clientSocket,...args)=>{
+            var f=
+    
+        function(){
+            console.log('Server Side');
+            
+            this.Get('CM')(clientSocket,5,2);
+        }
     
         
     f.call(nmodule,...args); 
@@ -133,46 +112,6 @@
     
     );
 }
-    
-    
-
-    
-        
-
-        path='/page/:name'
-
-        callback=(req,res)=>{
-            
-            
-
-        ((req,res)=>{
-            var framework=nmodule.manager.NFramework;
-            var modules=page_demoPage.modules;
-
-            var miejs='';
-
-            var frameworkCLEJS=framework.clejs;
-
-            miejs+=frameworkCLEJS;
-
-            for(var i=0;i<modules.length;i++){
-                var module=modules[i];
-                miejs+=' <script  src="/nmodules/'+module+'"></script>';
-            }
-            
-
-            miejs+="<script src='/appcl'></script>";
-
-            res.render( page_demoPage.ejs_src,{
-                NFramework:miejs
-            });
-        })(req,res);
-    
-    
-
-        }
-
-    
     
 
 
