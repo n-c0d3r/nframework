@@ -1,4 +1,4 @@
-var nframework=require('./modules/nframework/framework');
+var nframework=require('./nframework/framework');
 
 var app=nframework();
 

@@ -1,4 +1,4 @@
-var JSCLPath = "D:\\nframework_gr/nlc/client/pages/home.nlc.client.js";
+var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.router.nlc.client.js";
                     var nmodules=[];
                     var pages=[];
                     
@@ -7,7 +7,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/client/pages/home.nlc.client.js";
 
     
     
-    var Page=require('D:\\nframework_gr\\modules\\nframework\\ncompiler\\tags/../../page/page');
+    var Page=require('D:\\nframework_gr\\nframework\\ncompiler\\tags/../../page/page');
     
     var page_homePage=new Page();
 
@@ -47,7 +47,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/client/pages/home.nlc.client.js";
         var NModule=
         function(){
 
-            return require("D:\\nframework_gr\\modules\\nframework\\ncompiler\\tags/../../nmodule/nmodule");
+            return require("D:\\nframework_gr\\nframework\\ncompiler\\tags/../../nmodule/nmodule");
 
         }()
     
@@ -59,26 +59,64 @@ var JSCLPath = "D:\\nframework_gr/nlc/client/pages/home.nlc.client.js";
 
         nmodule.side='both';
 
-        nmodule.name='home';
+        nmodule.name='homeRouter';
     
     
-
-    
-        nmodule.AddMethod('Setup',(...args)=>{
-            var f=
-    
-
-        function() {
-            
-        }
 
     
         
-    f.call(nmodule,...args); 
+        {
+            path='';
+            callback=()=>{};
+            
 
-}
+        
+        path=
     
-    );
+            '/home'
+        
+    
+    
+
+        
+        callback=
+    
+            (req,res)=>{
+                
+
+        ((req,res)=>{
+            var framework=nmodule.manager.NFramework;
+            var modules=nmodule.manager.pages['homePage'].modules;
+
+            var miejs='';
+
+            var frameworkCLEJS=framework.clejs;
+
+            miejs+=frameworkCLEJS;
+
+            for(var i=0;i<modules.length;i++){
+                var module=modules[i];
+                miejs+=' <script  src="/nmodules/'+module+'"></script>';
+            }
+            
+
+            miejs+="<script src='/appcl'></script>";
+
+            res.render( nmodule.manager.pages['homePage'].ejs_src,{
+                NFramework:miejs
+            });
+        })(req,res);
+    
+    
+            }
+        
+    
+    
+
+    
+            nmodule.Routing(path,callback);
+        }
+    
     
     
 
@@ -92,7 +130,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/client/pages/home.nlc.client.js";
         var code=fs.readFileSync(clientVersion);
         
         if(nmodule.side!='server'){
-            nmodule.Routing('/nmodules/home',(req,res)=>{
+            nmodule.Routing('/nmodules/homeRouter',(req,res)=>{
                 res.send(code);
             });
         }

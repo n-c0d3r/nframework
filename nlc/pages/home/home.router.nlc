@@ -1,0 +1,25 @@
+<page homePage>
+
+    <ejs-src home.ejs />
+
+    <modules home/>
+
+</page>
+
+<module homeRouter>
+
+    <routing>
+
+        <var path>
+            '/home'
+        </var>
+
+        <var callback>
+            (req,res)=>{
+                <render-page homePage/>
+            }
+        </var>
+
+    </routing>
+
+</module>

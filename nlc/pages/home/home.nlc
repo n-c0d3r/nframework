@@ -1,11 +1,3 @@
-<page homePage>
-
-    <ejs-src home.ejs />
-
-    <modules home/>
-
-</page>
-
 <module home>
 
     <method Setup>

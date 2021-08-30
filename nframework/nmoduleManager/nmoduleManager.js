@@ -164,6 +164,10 @@ var NModuleManager=class{
         return this.modules[name];
     }
 
+    GetPage(name){
+        return this.pages[name];
+    }
+
 }
 
 module.exports=NModuleManager;

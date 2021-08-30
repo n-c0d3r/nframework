@@ -1,6 +1,14 @@
 
                 
                     
+
+    
+    
+    
+                
+                
+                
+                    
             (()=>{
                 
 
@@ -26,10 +34,19 @@
     
         
 
-        path='/home'
+        
+        path=
+    
+            '/home'
+        
+    
+    
 
-        callback=(req,res)=>{
-            
+        
+        callback=
+    
+            (req,res)=>{
+                
 
         ((req,res)=>{
             var framework=nmodule.manager.NFramework;
@@ -55,7 +72,10 @@
         })(req,res);
     
     
-        }
+            }
+        
+    
+    
 
     
     
