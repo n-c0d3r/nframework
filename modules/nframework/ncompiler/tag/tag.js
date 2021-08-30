@@ -36,13 +36,13 @@ var Tag=class{
                     }
 
                 }
-                if(code.data[startN]=='N'){
+                if(true){//code.data[startN]=='N'){
                     
-                    if(code.data[startN+1]==':' && code.data[startN+2]!=':'){
+                    if(true){//code.data[startN+1]==':' && code.data[startN+2]!=':'){
                         
                         var endTagName=startN+1;
                         
-                        for(var j=startN+2;j<code.data.length;j++){
+                        for(var j=startN+1;j<code.data.length;j++){
                             var chj=code.data[j];
 
                             if(chj==' '||chj=='>'||chj=='/'){

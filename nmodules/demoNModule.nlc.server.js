@@ -1,11 +1,47 @@
-var JSCLPath = "D:\\nframework_git_repo/nmodules/demoNModule.nlc.client.js";
+var JSCLPath = "D:\\nframework_gr/nmodules/demoNModule.nlc.client.js";
+                
+                    
+
+    
+    
+    var Page=require('D:\\nframework_gr\\modules\\nframework\\ncompiler\\tags/../../page/page');
+    
+    var page_demoPage=new Page();
+
+    page_demoPage.Setup=function(){
+
+    
+
+    
+    
+        this.ejs_src='demo.ejs';
+    
+    
+
+    
+    
+        this.modules=[];
+    this.modules.push('demoClientModule');
+        
+    
+    
+
+
+    }
+        page_demoPage.Setup.call(page_demoPage);
+
+    
+    
+    
+                
+                
                 
                     
 
         var NModule=
         function(){
 
-            return require("D:\\nframework_git_repo\\modules\\nframework\\ncompiler\\tags/../../nmodule/nmodule");
+            return require("D:\\nframework_gr\\modules\\nframework\\ncompiler\\tags/../../nmodule/nmodule");
 
         }()
     
@@ -15,78 +51,57 @@ var JSCLPath = "D:\\nframework_git_repo/nmodules/demoNModule.nlc.client.js";
 
         var This=nmodule;
 
-        nmodule.side='server';
+        nmodule.side='both';
 
         nmodule.name='demoClientModule';
     
     
 
     
-    
-    nmodule.AddSyncProperty('syncProp');
-    
-    
-
-    
-    
-    
-    
         
-        nmodule.AddMethod('Setup',(...args)=>{
-            var f=
-    
+        {
+            path='';
+            callback=()=>{};
+            
 
-            function(){
+        path='/page/:name'
+
+        callback=(req,res)=>{
+            
+            
+
+        ((req,res)=>{
+            var framework=nmodule.manager.NFramework;
+            var modules=page_demoPage.modules;
+
+            var miejs='';
+
+            var frameworkCLEJS=framework.clejs;
+
+            miejs+=frameworkCLEJS;
+
+            for(var i=0;i<modules.length;i++){
+                var module=modules[i];
+                miejs+=' <script  src="/nmodules/'+module+'"></script>';
             }
+            
 
-        
-        
-    f.call(nmodule,...args); 
+            miejs+="<script src='/appcl'></script>";
 
-}
-    
-    );
-    
-    
-
-        
-        nmodule.AddMethod('Start',(...args)=>{
-            var f=
-    
-
-            function(){
-
-                
-
-            }
-
-        
-        
-    f.call(nmodule,...args); 
-
-}
-    
-    );
+            res.render( page_demoPage.ejs_src,{
+                NFramework:miejs
+            });
+        })(req,res);
     
     
 
-    
+        }
 
-    {
-        nmodule.AddServerMethod('LogSyncProp',(clientSocket,...args)=>{
-            var f=
     
-        function() {
-            console.log(this.Get('syncProp'));
+            nmodule.Routing(path,callback);
         }
     
-        
-    f.call(nmodule,...args); 
-
-}
     
-    );
-}
     
 
 
@@ -97,10 +112,12 @@ var JSCLPath = "D:\\nframework_git_repo/nmodules/demoNModule.nlc.client.js";
         var clientVersion=JSCLPath;
 
         var code=fs.readFileSync(clientVersion);
-
-        nmodule.Routing('/nmodules/demoClientModule',(req,res)=>{
-            res.send(code);
-        });
+        
+        if(nmodule.side!='server'){
+            nmodule.Routing('/nmodules/demoClientModule',(req,res)=>{
+                res.send(code);
+            });
+        }
 
         
 

@@ -90,25 +90,6 @@ var NCompiler = class{
         for(var i=0;i<code.length;i++){
             var ch=code[i];
 
-            var strch='';
-
-            if(code[i]=='"' || code[i]=="'" || code[i]=='`'){
-                strch=code[i];
-
-                i++;
-
-                for(;i<code.length;i++){
-                    if(code[i]=='"' || code[i]=="'" || code[i]=='`'){
-                        break;
-                    }
-                }
-
-                if(i>=code.length){
-                    break;
-                }
-    
-            }
-
             if(ch=='<'){
                 var tagStart=i;
                 var tagEnd=i;
@@ -122,13 +103,13 @@ var NCompiler = class{
                     }
 
                 }
-                if(true){//code[startN]=='N'){
+                if(code[startN]=='N'){
                     
-                    if(true){//code[startN+1]==':' && code[startN+2]!=':'){
+                    if(code[startN+1]==':' && code[startN+2]!=':'){
                         
                         var endTagName=startN+1;
                         
-                        for(var j=startN+1;j<code.length;j++){
+                        for(var j=startN+2;j<code.length;j++){
                             var chj=code[j];
 
                             /*
@@ -149,8 +130,7 @@ var NCompiler = class{
 
                         }
 
-                        var tagName=code.substring(startN,endTagName+1);
-
+                        var tagName=code.substring(startN+2,endTagName+1);
 
                         var tagNameCache='';
 
@@ -246,7 +226,7 @@ var NCompiler = class{
             var isSpecialChr=false;
 
             var compiledChr='';
-/*
+
             if(code[i]=='N' && code[i+1]==':' && code[i+2]==':'){
                 compiledChr='N:';
                 isSpecialChr=true;
@@ -254,12 +234,11 @@ var NCompiler = class{
             }
 
             if(!isSpecialChr){
-            */    
-           result+=code[i];
-            /*}
+                result+=code[i];
+            }
             else{
                 result+=compiledChr;
-            }*/
+            }
         }
 
         return result;

@@ -19,6 +19,8 @@ var NModule = class{
         this.routers=[];
 
         this.isImported=false;
+
+        this.size='both';
     }
     
     GetWithIsExist(name){

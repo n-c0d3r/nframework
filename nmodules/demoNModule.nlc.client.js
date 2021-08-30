@@ -2,6 +2,14 @@
                 
                     
 
+    
+    
+    
+                
+                
+                
+                    
+
         var NModule=
             function(){
 
@@ -15,90 +23,49 @@
 
         var This=nmodule;
 
-        nmodule.side='client';
+        nmodule.side='both';
 
         nmodule.name='demoClientModule';
     
     
 
     
-    
-    nmodule.AddSyncProperty('syncProp');
-    
-    
-
-    
-    
         
-        nmodule.AddMethod('Setup',(...args)=>{
-                var f=async function(){
-                
-                await nmodule.AsyncSet('syncProp',
-                    {
-                        'a':5,
-                        'b':6,
-                        'c':{
-                            'a':1,
-                            'b':2
-                        }
-                    }
-                ) 
 
-                nmodule.Get('LogSyncProp')();
+        path='/page/:name'
 
-                var prop = await nmodule.AsyncGet('syncProp')
+        callback=(req,res)=>{
+            
+            
 
-                console.log(prop);
+        ((req,res)=>{
+            var framework=nmodule.manager.NFramework;
+            var modules=page_demoPage.modules;
+
+            var miejs='';
+
+            var frameworkCLEJS=framework.clejs;
+
+            miejs+=frameworkCLEJS;
+
+            for(var i=0;i<modules.length;i++){
+                var module=modules[i];
+                miejs+=' <script  src="/nmodules/'+module+'"></script>';
             }
+            
 
-        
-                f.call(nmodule);
-            }
-    
-        );
-    
-    
+            miejs+="<script src='/appcl'></script>";
 
-        
-        nmodule.AddMethod('Start',(...args)=>{
-            var f=
-    
-
-            function(){
-
-
-
-            }
-
-        
-        
-    f.call(nmodule,...args); 
-
-}
-    
-    );
+            res.render( page_demoPage.ejs_src,{
+                NFramework:miejs
+            });
+        })(req,res);
     
     
 
-    
-    
-    
-
-    {
-        nmodule.AddServerMethod('LogSyncProp',(clientSocket,...args)=>{
-            var f=
-    
-        function() {
-            console.log(this.Get('syncProp'));
         }
-    
-        
-    f.call(nmodule,...args); 
 
-}
     
-    );
-}
     
 
 

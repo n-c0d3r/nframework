@@ -1,70 +1,25 @@
-<N:module demoClientModule>
 
-    <N:sync-property syncProp/>
+<page demoPage>
 
-    <N:client-only>
-    
-        <N:async-method Setup>
+    <ejs-src demo.ejs />
 
-            function(){
-                
-                <N:await-set syncProp>
-                    {
-                        'a':5,
-                        'b':6,
-                        'c':{
-                            'a':1,
-                            'b':2
-                        }
-                    }
-                </N:await-set> 
+    <modules demoClientModule/>
 
-                <N:get LogSyncProp/>();
-
-                var prop = <N:await-get syncProp/>
-
-                console.log(prop);
-            }
-
-        </N:async-method>
-
-        <N:method Start>
-
-            function(){
+</page>
 
 
+<module demoClientModule>
 
-            }
+    <routing>
 
-        </N:method>
+        path='/page/:name'
 
-    </N:client-only>
-    
-    <N:server-only>
-    
-        <N:method Setup>
+        callback=(req,res)=>{
+            
+            <render-page demoPage/>
 
-            function(){
-            }
-
-        </N:method>
-
-        <N:method Start>
-
-            function(){
-
-                
-
-            }
-
-        </N:method>
-
-    </N:server-only>
-
-    <N:server-method LogSyncProp>
-        function() {
-            console.log(this.Get('syncProp'));
         }
-    </N:server-method>
 
-</N:module>
+    </routing>
+
+</module>

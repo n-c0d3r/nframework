@@ -42,10 +42,10 @@ tag.Compile=function(element,childsCode,code){
         `;
     }
 
-    var side='server';
+    var side='both';
 
     if(!element.forSV){
-        side='client';
+        
     }
 
     var compiledCode=`
@@ -75,10 +75,12 @@ tag.Compile=function(element,childsCode,code){
         var clientVersion=JSCLPath;
 
         var code=fs.readFileSync(clientVersion);
-
-        nmodule.Routing('/nmodules/${inputs[0]}',(req,res)=>{
-            res.send(code);
-        });
+        
+        if(nmodule.side!='server'){
+            nmodule.Routing('/nmodules/${inputs[0]}',(req,res)=>{
+                res.send(code);
+            });
+        }
 
         `;
     }
