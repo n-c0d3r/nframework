@@ -19,11 +19,40 @@
 
         nmodule.side='both';
 
-        nmodule.name='demoClientModuleServer';
+        nmodule.name='demoClientModuleBase';
     
     
 
-    nmodule.side='server';
+    
+    
+    nmodule.AddProperty('demoBaseProp');
+    
+    
+
+    
+    
+    nmodule.AddSyncProperty('syncProp');
+    
+    
+
+    
+        nmodule.AddMethod('Setup',(...args)=>{
+            var f=
+    
+
+        function() {
+            this.Set('demoBaseProp',5);
+        }
+
+    
+        
+    f.call(nmodule,...args); 
+
+}
+    
+    );
+    
+    
 
 
         

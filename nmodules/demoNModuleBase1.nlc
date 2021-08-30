@@ -1,0 +1,16 @@
+
+<module demoClientModuleBase>
+
+    <property demoBaseProp/>
+
+    <sync-property syncProp/>
+
+    <method Setup>
+
+        function() {
+            this.Set('demoBaseProp',5);
+        }
+
+    </method>
+
+</module>

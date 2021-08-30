@@ -100,6 +100,16 @@ tag.Compile=function(element,childsCode,code){
         `;
     }
 
+
+    
+    if(!element.forSV){
+        compiledCode=`
+            (()=>{
+                ${compiledCode}
+            })();
+        `;
+    }
+
     return compiledCode;
 }
 
