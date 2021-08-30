@@ -95,7 +95,7 @@ tag.Compile=function(element,childsCode,code){
     if(element.forSV){
         compiledCode+=`
 
-            module.exports = nmodule;
+            nmodules.push(nmodule);
         
         `;
     }

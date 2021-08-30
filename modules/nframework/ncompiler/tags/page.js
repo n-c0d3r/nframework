@@ -29,6 +29,8 @@ tag.Compile=function(element,childsCode,code){
     
     var page_${inputs[0]}=new Page();
 
+    page_${inputs[0]}.name='${inputs[0]}';
+
     page_${inputs[0]}.Setup=function(){
 
     `;
@@ -41,6 +43,7 @@ tag.Compile=function(element,childsCode,code){
     pageCode+=`
     }
         page_${inputs[0]}.Setup.call(page_${inputs[0]});
+        pages.push( page_${inputs[0]});
 
     `;
 

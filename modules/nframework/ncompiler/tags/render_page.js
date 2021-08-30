@@ -13,7 +13,7 @@ tag.Compile=function(element,childsCode,code){
 
         ((req,res)=>{
             var framework=nmodule.manager.NFramework;
-            var modules=page_${pageName}.modules;
+            var modules=nmodule.manager.pages['${pageName}'].modules;
 
             var miejs='';
 
@@ -29,7 +29,7 @@ tag.Compile=function(element,childsCode,code){
 
             miejs+="<script src='/appcl'></script>";
 
-            res.render( page_${pageName}.ejs_src,{
+            res.render( nmodule.manager.pages['${pageName}'].ejs_src,{
                 NFramework:miejs
             });
         })(req,res);

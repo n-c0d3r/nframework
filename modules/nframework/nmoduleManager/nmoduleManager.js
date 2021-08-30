@@ -7,6 +7,7 @@ var NModuleManager=class{
         this.modulePaths=[];
         this.svMJSPaths=[];
         this.clMJSPaths=[];
+        this.pages=new Object();
         this.modules=new Object();
     }
 
@@ -130,11 +131,18 @@ var NModuleManager=class{
     ImportModules(){
         for(var i=0;i<this.svMJSPaths.length;i++){
             var modulePath=this.svMJSPaths[i];
-            var module=require(modulePath);
-            var moduleName=module.name;
-            this.modules[moduleName]=module;
-            this.modules[moduleName].manager=this;
-            this.modules[moduleName].AfterImported();
+            var eps=require(modulePath);
+            var modules=eps.nmodules;
+            for(var module of modules){
+                var moduleName=module.name;
+                this.modules[moduleName]=module;
+                this.modules[moduleName].manager=this;
+                this.modules[moduleName].AfterImported();
+            }
+            var pages=eps.pages;
+            for(var page of pages){
+                this.pages[page.name]=page;
+            }
         }
     }
 

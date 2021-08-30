@@ -1,6 +1,14 @@
 
                 
                     
+
+    
+    
+    
+                
+                
+                
+                    
             (()=>{
                 
 
@@ -19,19 +27,7 @@
 
         nmodule.side='both';
 
-        nmodule.name='demoClientModuleBase';
-    
-    
-
-    
-    
-    nmodule.AddProperty('demoBaseProp');
-    
-    
-
-    
-    
-    nmodule.AddSyncProperty('syncProp');
+        nmodule.name='home';
     
     
 
@@ -41,7 +37,7 @@
     
 
         function() {
-            this.Set('demoBaseProp',5);
+            
         }
 
     

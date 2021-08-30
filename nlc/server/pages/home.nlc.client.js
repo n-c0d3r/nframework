@@ -1,14 +1,6 @@
 
                 
                     
-
-    
-    
-    
-                
-                
-                
-                    
             (()=>{
                 
 
@@ -27,66 +19,21 @@
 
         nmodule.side='both';
 
-        nmodule.name='demoClientModule';
+        nmodule.name='homeRouter';
     
-    
-
-    
-    
-        nmodule.baseModules = ['demoClientModuleBase'];
-    
-    
-
-    
-
-        
-        nmodule.AddMethod('Setup',(...args)=>{
-                var f=async function() {
-                await this.AsyncSet('syncProp',2);
-                this.Get('LogSyncMethodInServer')();
-            }
-
-        
-                f.call(nmodule);
-            }
-    
-        );
-    
-    
-
-    
-
-    {
-        nmodule.AddServerMethod('LogSyncMethodInServer',(clientSocket,...args)=>{
-            var f=
-    
-
-        function() {
-            console.log(this.Get('syncProp'));
-        }
-
-    
-        
-    f.call(nmodule,...args); 
-
-}
-    
-    );
-}
     
 
     
         
 
-        path='/'
+        path='/home'
 
         callback=(req,res)=>{
-            
             
 
         ((req,res)=>{
             var framework=nmodule.manager.NFramework;
-            var modules=page_demoPage.modules;
+            var modules=nmodule.manager.pages['homePage'].modules;
 
             var miejs='';
 
@@ -102,13 +49,12 @@
 
             miejs+="<script src='/appcl'></script>";
 
-            res.render( page_demoPage.ejs_src,{
+            res.render( nmodule.manager.pages['homePage'].ejs_src,{
                 NFramework:miejs
             });
         })(req,res);
     
     
-
         }
 
     

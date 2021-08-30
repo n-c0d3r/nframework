@@ -1,41 +1,7 @@
-var JSCLPath = "D:\\nframework_gr/nmodules/demoNModule.nlc.client.js";
-                
+var JSCLPath = "D:\\nframework_gr/nlc/server/pages/home.nlc.client.js";
+                    var nmodules=[];
+                    var pages=[];
                     
-
-    
-    
-    var Page=require('D:\\nframework_gr\\modules\\nframework\\ncompiler\\tags/../../page/page');
-    
-    var page_demoPage=new Page();
-
-    page_demoPage.Setup=function(){
-
-    
-
-    
-    
-        this.ejs_src='demo.ejs';
-    
-    
-
-    
-    
-        this.modules=[];
-    this.modules.push('demoClientModule');
-        this.modules.push('demoClientModuleBase');
-        
-    
-    
-
-
-    }
-        page_demoPage.Setup.call(page_demoPage);
-
-    
-    
-    
-                
-                
                 
                     
 
@@ -54,35 +20,8 @@ var JSCLPath = "D:\\nframework_gr/nmodules/demoNModule.nlc.client.js";
 
         nmodule.side='both';
 
-        nmodule.name='demoClientModule';
+        nmodule.name='homeRouter';
     
-    
-
-    
-    
-        nmodule.baseModules = ['demoClientModuleBase'];
-    
-    
-
-    
-
-    {
-        nmodule.AddServerMethod('LogSyncMethodInServer',(clientSocket,...args)=>{
-            var f=
-    
-
-        function() {
-            console.log(this.Get('syncProp'));
-        }
-
-    
-        
-    f.call(nmodule,...args); 
-
-}
-    
-    );
-}
     
 
     
@@ -92,15 +31,14 @@ var JSCLPath = "D:\\nframework_gr/nmodules/demoNModule.nlc.client.js";
             callback=()=>{};
             
 
-        path='/'
+        path='/home'
 
         callback=(req,res)=>{
-            
             
 
         ((req,res)=>{
             var framework=nmodule.manager.NFramework;
-            var modules=page_demoPage.modules;
+            var modules=nmodule.manager.pages['homePage'].modules;
 
             var miejs='';
 
@@ -116,13 +54,12 @@ var JSCLPath = "D:\\nframework_gr/nmodules/demoNModule.nlc.client.js";
 
             miejs+="<script src='/appcl'></script>";
 
-            res.render( page_demoPage.ejs_src,{
+            res.render( nmodule.manager.pages['homePage'].ejs_src,{
                 NFramework:miejs
             });
         })(req,res);
     
     
-
         }
 
     
@@ -142,15 +79,20 @@ var JSCLPath = "D:\\nframework_gr/nmodules/demoNModule.nlc.client.js";
         var code=fs.readFileSync(clientVersion);
         
         if(nmodule.side!='server'){
-            nmodule.Routing('/nmodules/demoClientModule',(req,res)=>{
+            nmodule.Routing('/nmodules/homeRouter',(req,res)=>{
                 res.send(code);
             });
         }
 
         
 
-            module.exports = nmodule;
+            nmodules.push(nmodule);
         
         
                 
+                
+                    var exports=new Object();
+                    exports.nmodules=nmodules;
+                    exports.pages=pages;
+                    module.exports=exports;
                 

@@ -292,6 +292,17 @@ var NCompiler = class{
                 
                 `;
             }
+            if(element.forSV){
+                code=`
+                    var nmodules=[];
+                    var pages=[];
+                    ${code}
+                    var exports=new Object();
+                    exports.nmodules=nmodules;
+                    exports.pages=pages;
+                    module.exports=exports;
+                `;
+            }
             element.code=code;
         }
         else{

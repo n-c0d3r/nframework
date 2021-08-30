@@ -1,0 +1,14 @@
+
+<module homeRouter>
+
+    <routing>
+
+        path='/home'
+
+        callback=(req,res)=>{
+            <render-page homePage/>
+        }
+
+    </routing>
+
+</module>
