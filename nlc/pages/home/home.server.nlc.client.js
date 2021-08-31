@@ -1,4 +1,5 @@
-
+manager=window.NFramework.nmoduleManager;
+                
                 
                     
             (()=>{
@@ -32,5 +33,6 @@
         
             })();
         
+                
                 
                 

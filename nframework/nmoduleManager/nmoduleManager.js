@@ -131,7 +131,8 @@ var NModuleManager=class{
     ImportModules(){
         for(var i=0;i<this.svMJSPaths.length;i++){
             var modulePath=this.svMJSPaths[i];
-            var eps=require(modulePath);
+            var eps=require(modulePath)(this);
+            eps.manager=this;
             var modules=eps.nmodules;
             for(var module of modules){
                 var moduleName=module.name;

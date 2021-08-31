@@ -1,4 +1,5 @@
-
+manager=window.NFramework.nmoduleManager;
+                
                 
                     
 
@@ -46,7 +47,6 @@
         callback=
     
             (req,res)=>{
-                console.log('someone visit home page');
                 
 
         ((req,res)=>{
@@ -88,5 +88,6 @@
         
             })();
         
+                
                 
                 

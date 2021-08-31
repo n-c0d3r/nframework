@@ -1,6 +1,8 @@
-var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.router.nlc.client.js";
+var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.router.nlc.client.js";module.exports=(manager)=>{
+                var exports=new Object();
                     var nmodules=[];
                     var pages=[];
+
                     
                 
                     
@@ -82,7 +84,6 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.router.nlc.client.js";
         callback=
     
             (req,res)=>{
-                console.log('someone visit home page');
                 
 
         ((req,res)=>{
@@ -143,8 +144,9 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.router.nlc.client.js";
         
                 
                 
-                    var exports=new Object();
+                    
                     exports.nmodules=nmodules;
                     exports.pages=pages;
-                    module.exports=exports;
+                    return exports;
+                }
                 

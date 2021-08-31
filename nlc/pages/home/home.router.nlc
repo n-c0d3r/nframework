@@ -16,7 +16,6 @@
 
         <var callback>
             (req,res)=>{
-                console.log('someone visit home page');
                 <render-page homePage/>
             }
         </var>

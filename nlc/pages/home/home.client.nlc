@@ -7,8 +7,8 @@
         <method Setup>
 
             function(){
-                this->syncProp=5;
-            }
+                this->syncProp=0;
+            }   
 
         </method>
 
@@ -19,6 +19,9 @@
         <async-method Setup>
 
             function() {
+
+                @home-client-->syncProp = (await this-->syncProp)+5;
+
                 console.log(await this-->syncProp);
             }
 

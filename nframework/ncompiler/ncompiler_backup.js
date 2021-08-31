@@ -84,13 +84,48 @@ var NCompiler = class{
         return result;
     }
 
+    IsStartTag(index,code){
+        var result=true;
+        for(var i=index+1;i<code.length;i++){
+            var ch=code[i];
+            if(ch=='\n' || ch=='' || ch=='|'){
+                result=false;
+                break;
+            }
+            else
+            if(ch=='>'||ch=='/'){
+                break;
+            }
+        }
+        return result;
+    }
+
     GetTagsOrder(code){
         var tagsOrder=[];
 
         for(var i=0;i<code.length;i++){
             var ch=code[i];
 
-            if(ch=='<'){
+            var strch='';
+
+            if(code[i]=='"' || code[i]=="'" || code[i]=='`'){
+                strch=code[i];
+
+                i++;
+
+                for(;i<code.length;i++){
+                    if(code[i]=='"' || code[i]=="'" || code[i]=='`'){
+                        break;
+                    }
+                }
+
+                if(i>=code.length){
+                    break;
+                }
+    
+            }
+
+            if(ch=='<' && this.IsStartTag(i,code)){
                 var tagStart=i;
                 var tagEnd=i;
                 var startN=i+1;
@@ -103,13 +138,13 @@ var NCompiler = class{
                     }
 
                 }
-                if(code[startN]=='N'){
+                if(true){//code[startN]=='N'){
                     
-                    if(code[startN+1]==':' && code[startN+2]!=':'){
+                    if(true){//code[startN+1]==':' && code[startN+2]!=':'){
                         
                         var endTagName=startN+1;
                         
-                        for(var j=startN+2;j<code.length;j++){
+                        for(var j=startN+1;j<code.length;j++){
                             var chj=code[j];
 
                             /*
@@ -130,7 +165,8 @@ var NCompiler = class{
 
                         }
 
-                        var tagName=code.substring(startN+2,endTagName+1);
+                        var tagName=code.substring(startN,endTagName+1);
+
 
                         var tagNameCache='';
 
@@ -226,7 +262,7 @@ var NCompiler = class{
             var isSpecialChr=false;
 
             var compiledChr='';
-
+/*
             if(code[i]=='N' && code[i+1]==':' && code[i+2]==':'){
                 compiledChr='N:';
                 isSpecialChr=true;
@@ -234,11 +270,12 @@ var NCompiler = class{
             }
 
             if(!isSpecialChr){
-                result+=code[i];
-            }
+            */    
+           result+=code[i];
+            /*}
             else{
                 result+=compiledChr;
-            }
+            }*/
         }
 
         return result;
@@ -269,6 +306,25 @@ var NCompiler = class{
                 
                     ${ei_code}
                 
+                `;
+            }
+            if(element.forSV){
+                code=`module.exports=(manager)=>{
+                var exports=new Object();
+                    var nmodules=[];
+                    var pages=[];
+
+                    ${code}
+                    
+                    exports.nmodules=nmodules;
+                    exports.pages=pages;
+                    return exports;
+                }
+                `;
+            }
+            else{
+                code=`manager=window.NFramework.nmoduleManager;
+                ${code}
                 `;
             }
             element.code=code;
@@ -305,6 +361,351 @@ var NCompiler = class{
         }
 
         return elements;
+    }
+
+    CompileFastGetNModule(code){
+        var result='';        
+        
+        var isInStr=false;
+
+        var strC='';
+
+        var isVarInTemplateLiterals=false;
+
+        for(var i=0;i<code.length;i++){
+
+            if(code[i]+code[i+1]=='////'){
+                for(;i<code.length;i++){
+                    if(code[i]=='\r' || code[i]=='\n'){
+                        break;
+                    }
+                }
+            }
+            else if(code[i]+code[i+1]=='//*'){
+                i+=2;
+                for(;i<code.length;i++){
+                    if(code[i]=='*' || code[i+1]=='//'){
+                        break;
+                    }
+                }
+            }
+            else{
+                if(!isInStr){
+                    if(code[i]=='"' || code[i]=="'"){
+                
+                        isInStr=true;
+                        strC=code[i];
+                        
+                    }
+                    else
+                    if(code[i]=='`'){
+        
+                        isInStr=true;    
+                        strC=code[i];                
+                        isVarInTemplateLiterals=false;
+    
+                    }
+                }else{
+                    if(code[i]=='"' || code[i]=="'"){
+                
+                        isInStr=false;
+                        
+                    }
+                    else
+                    if(code[i]=='`'){
+                        isInStr=false;
+                    }
+                }
+
+
+                if(!isInStr && code[i]=='@'){
+                    i++;
+                    var startName=i;
+                    var endName=i;
+                    var regex=/^[a-zA-Z]+$/;
+    
+                    for(;i<code.length;i++){ 
+                        if(!(code[i].match(regex) || code[i]=='_'  || code[i]=='-')){
+                            endName=i;
+                            break;
+                        }
+                    }
+
+                    var name=code.substring(startName,endName);
+                    
+                    result+=`manager.GetModule('${name}')`;
+
+                    i--;
+                }
+                else{
+                    result+=code[i];
+                }
+    
+            }
+        }
+
+        return result;
+    }
+
+    CompileNModuleFastGetterAndSetter(code){
+        var result='';
+        var top='';
+
+        var strC=code[i];
+
+        var isInStr=false;
+
+        var isVarInTemplateLiterals=false;
+
+        for(var i=0;i<code.length;i++){
+
+            if(code[i]+code[i+1]=='////'){
+                for(;i<code.length;i++){
+                    if(code[i]=='\r' || code[i]=='\n'){
+                        break;
+                    }
+                }
+            }
+            else if(code[i]+code[i+1]=='//*'){
+                i+=2;
+                for(;i<code.length;i++){
+                    if(code[i]=='*' || code[i+1]=='//'){
+                        break;
+                    }
+                }
+            }
+            else{
+                if(!isInStr){
+                    if(code[i]=='"' || code[i]=="'"){
+                
+                        isInStr=true;
+                        strC=code[i];
+                        
+                    }
+                    else
+                    if(code[i]=='`'){
+        
+                        isInStr=true;    
+                        strC=code[i];                
+                        isVarInTemplateLiterals=false;
+    
+                    }
+                }else{
+                    if(code[i]=='"' || code[i]=="'"){
+                
+                        isInStr=false;
+                        
+                    }
+                    else
+                    if(code[i]=='`'){
+                        isInStr=false;
+                    }
+                }
+    
+                if(code[i]+code[i+1]=='->' && (!isInStr || isVarInTemplateLiterals)){
+                    var name='';
+                    i+=2;
+                    for(;i<code.length;i++){ 
+                        if(code[i]!=' '){
+                            break;
+                        }
+                    }
+                    var startPropName=i;
+    
+                    if(i>=code.length){
+                        break;
+                    }
+    
+                    var regex=/^[a-zA-Z]+$/;
+    
+                    for(;i<code.length;i++){ 
+                        if(!(code[i].match(regex) || code[i]=='_')){
+                            break;
+                        }
+                    }
+                    
+                    var endPropName=i;
+    
+                    name=code.substring(startPropName,endPropName);
+    
+                    var forCheckIsSetterIndex=endPropName;
+    
+                    var isSetter=false;
+    
+                    var setterEqualChrIndex=forCheckIsSetterIndex;
+    
+                    var endSetterIndex=forCheckIsSetterIndex;
+    
+                    for(var j=forCheckIsSetterIndex;j<code.length;j++){
+    
+                        if(code[i]==';' || code[i]=='.' ||  code[i]=='}' || code[i]=='{' || code[i]=='(' || code[i]==')'  || code[i]=='+'  || code[i]=='-'  || code[i]=='>'  || code[i]=='<'  || code[i]=='\\'  || code[i]=='*' ){
+                            break;
+                        }
+    
+                        if(code[j]=='='){
+                            setterEqualChrIndex=j;
+                            isSetter=true;
+                            break;
+                        }
+    
+                    }
+                    if(!isSetter){
+                        result+=`.GetThisWithCallback((module)=>{
+                            return module.Get('${name}');
+                        })`;
+                        i--;
+                    }
+                    else{
+                        var nextCode = code.substring(setterEqualChrIndex+1,code.length);
+                        const { v4: uuidv4 } = require('uuid');
+                        var fid = uuidv4();
+    
+                        var fid2='';
+    
+                        for(var fi=0;fi<fid.length;fi++){
+                            if(fid[fi]=='-'){
+                                fid2+='_';
+                            }
+                            else{
+                                fid2+=fid[fi];
+                            }
+                        }
+    
+                        fid=fid2;
+    
+    //.Set('${name}',${value})
+                        top+=`
+                            var a${fid}_module;
+                        `;
+                        result+=`.GetThisWithCallback((module)=>{
+                            a${fid}_module=module;
+                        })
+                        var getterObj${fid}={
+                            set stter(value) {
+                                a${fid}_module.Set('${name}',value);
+                            }
+                        }
+                        getterObj${fid}.stter=`;
+                        result+=nextCode;
+                        var nextCompile=this.CompileNModuleFastGetterAndSetter(result);
+                        result=nextCompile.code;
+                        top+=nextCompile.top;
+                        break;
+                    }
+    
+                    
+                }
+                else if(code[i]+code[i+1]+code[i+2]=='-->' && (!isInStr || isVarInTemplateLiterals)){
+                    var name='';
+                    i+=3;
+                    for(;i<code.length;i++){ 
+                        if(code[i]!=' '){
+                            break;
+                        }
+                    }
+                    var startPropName=i;
+    
+                    if(i>=code.length){
+                        break;
+                    }
+    
+                    var regex=/^[a-zA-Z]+$/;
+    
+                    for(;i<code.length;i++){ 
+                        if(!(code[i].match(regex) || code[i]=='_')){
+                            break;
+                        }
+                    }
+                    
+                    var endPropName=i;
+    
+                    name=code.substring(startPropName,endPropName);
+    
+                    var forCheckIsSetterIndex=endPropName;
+    
+                    var isSetter=false;
+    
+                    var setterEqualChrIndex=forCheckIsSetterIndex;
+    
+                    var endSetterIndex=forCheckIsSetterIndex;
+    
+                    for(var j=forCheckIsSetterIndex;j<code.length;j++){
+    
+                        if(code[i]==';' || code[i]=='.' || code[i]=='}' || code[i]=='{' || code[i]=='(' || code[i]==')'  || code[i]=='+'  || code[i]=='-'  || code[i]=='>'  || code[i]=='<'  || code[i]=='\\'  || code[i]=='*' ){
+                            break;
+                        }
+    
+                        if(code[j]=='='){
+                            setterEqualChrIndex=j;
+                            isSetter=true;
+                            break;
+                        }
+    
+                    }
+    
+                    const { v4: uuidv4 } = require('uuid');
+                    var fid = uuidv4();
+    
+                    var fid2='';
+    
+                    for(var fi=0;fi<fid.length;fi++){
+                        if(fid[fi]=='-'){
+                            fid2+='_';
+                        }
+                        else{
+                            fid2+=fid[fi];
+                        }
+                    }
+    
+                    fid=fid2;
+    
+                    if(!isSetter){
+                        top+=`var a${fid}_module;
+                        `;
+                        result+=`.AsyncGetThisWithCallback(async (module)=>{
+                            a${fid}_module=module;
+                            return await a${fid}_module.AsyncGet('${name}');
+                        })
+                        `;
+                        i--;
+                    }
+                    else{
+                        var nextCode = code.substring(setterEqualChrIndex+1,code.length);
+                        
+    
+    //.Set('${name}',${value})
+                        top+=`
+                            var a${fid}_module;
+                        `;
+                        result+=`.AsyncGetThisWithCallback(async (module)=>{
+                            a${fid}_module=module;
+                        })
+                        var getterObj${fid}={
+                            set stter(value) {
+                                (async ()=>{
+                                    await a${fid}_module.AsyncSet('${name}',value);
+                                })();
+                            }
+                        }
+                        getterObj${fid}.stter=`;
+                        result+=nextCode;
+                        var nextCompile=this.CompileNModuleFastGetterAndSetter(result);
+                        result=nextCompile.code;
+                        top+=nextCompile.top;
+                        break;
+                    }
+    
+                    
+                }
+                else{
+                    result+=code[i];
+                }
+            }
+
+
+        }
+
+        return {'code':result,'top':top};
     }
 
     RemoveComments(code){
@@ -350,8 +751,11 @@ var NCompiler = class{
         
         var compiledSpecialCharactersCode=this.CompileSpecialCharaters(compiledElement);
 
+        var cmpiledNModuleFastGetterAndSetter=this.CompileNModuleFastGetterAndSetter(compiledSpecialCharactersCode);
 
-        result=compiledSpecialCharactersCode;
+        var cnmfgas=cmpiledNModuleFastGetterAndSetter.top+cmpiledNModuleFastGetterAndSetter.code;
+
+        result=this.CompileFastGetNModule(cnmfgas);
 
         return result;
     }

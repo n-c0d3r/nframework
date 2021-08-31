@@ -1,5 +1,9 @@
-var aa9ac7f88_2151_4ca1_a09d_2c157f3c32a8_module;
-                    
+
+                            var a16329fda_bc2b_44e9_a93d_a27262fb1237_module;
+                        var a3b51a6a9_ae43_4ae2_8bda_9473d985ec60_module;
+                        var a5a420281_57cc_49a1_87a5_672f9369621c_module;
+                        manager=window.NFramework.nmoduleManager;
+                
                 
                     
             (()=>{
@@ -37,11 +41,29 @@ var aa9ac7f88_2151_4ca1_a09d_2c157f3c32a8_module;
         
         nmodule.AddMethod('Setup',(...args)=>{
                 var f=async function() {
+
+                
+                manager.GetModule('home-client').AsyncGetThisWithCallback(async (module)=>{
+                            a16329fda_bc2b_44e9_a93d_a27262fb1237_module=module;
+                        })
+                        var getterObj16329fda_bc2b_44e9_a93d_a27262fb1237={
+                            set stter(value) {
+                                (async ()=>{
+                                    await a16329fda_bc2b_44e9_a93d_a27262fb1237_module.AsyncSet('syncProp',value);
+                                })();
+                            }
+                        }
+                        getterObj16329fda_bc2b_44e9_a93d_a27262fb1237.stter= (await this.AsyncGetThisWithCallback(async (module)=>{
+                            a3b51a6a9_ae43_4ae2_8bda_9473d985ec60_module=module;
+                            return await a3b51a6a9_ae43_4ae2_8bda_9473d985ec60_module.AsyncGet('syncProp');
+                        })
+                        )+5;
+
                 console.log(await this.AsyncGetThisWithCallback(async (module)=>{
-                        aa9ac7f88_2151_4ca1_a09d_2c157f3c32a8_module=module;
-                        return await aa9ac7f88_2151_4ca1_a09d_2c157f3c32a8_module.AsyncGet('syncProp');
-                    })
-                    );
+                            a5a420281_57cc_49a1_87a5_672f9369621c_module=module;
+                            return await a5a420281_57cc_49a1_87a5_672f9369621c_module.AsyncGet('syncProp');
+                        })
+                        );
             }
 
         
@@ -61,5 +83,6 @@ var aa9ac7f88_2151_4ca1_a09d_2c157f3c32a8_module;
         
             })();
         
+                
                 
                 
