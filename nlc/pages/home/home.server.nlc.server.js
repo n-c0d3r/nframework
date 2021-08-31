@@ -1,4 +1,4 @@
-var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.nlc.client.js";
+var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.server.nlc.client.js";
                     var nmodules=[];
                     var pages=[];
                     
@@ -20,26 +20,28 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.nlc.client.js";
 
         nmodule.side='both';
 
-        nmodule.name='home';
+        nmodule.name='home-server';
     
     
 
     
+        
         nmodule.AddMethod('Setup',(...args)=>{
             var f=
     
 
-        function() {
-            
-        }
+            function() {
+                
+            }
 
-    
+        
         
     f.call(nmodule,...args); 
 
 }
     
     );
+    
     
     
 
@@ -53,7 +55,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.nlc.client.js";
         var code=fs.readFileSync(clientVersion);
         
         if(nmodule.side!='server'){
-            nmodule.Routing('/nmodules/home',(req,res)=>{
+            nmodule.Routing('/nmodules/home-server',(req,res)=>{
                 res.send(code);
             });
         }

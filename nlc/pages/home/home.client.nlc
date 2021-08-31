@@ -1,0 +1,29 @@
+<module home-client>
+
+    <sync-property syncProp/>
+
+    <server-only>
+
+        <method Setup>
+
+            function(){
+                this->syncProp=5;
+            }
+
+        </method>
+
+    </server-only>
+
+    <client-only>
+
+        <async-method Setup>
+
+            function() {
+                console.log(await this-->syncProp);
+            }
+
+        </async-method>
+
+    </client-only>
+
+</module>

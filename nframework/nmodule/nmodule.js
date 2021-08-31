@@ -163,6 +163,10 @@ var NModule = class{
     AddMethod(name,method){
         this.methods[name]=method;
     }
+    
+    GetThisWithCallback(callback){
+        return callback(this);
+    }
 
     SetupServerMethod(name){
         var serverMethodRouter=new Object();

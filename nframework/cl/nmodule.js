@@ -322,13 +322,34 @@ var NModule = class{
         return this.manager.GetModule(name);
     }
 
+    GetThisWithCallback(callback){
+        return callback(this);
+    }
+
+    async AsyncGetThisWithCallback(callback){
+        var callbackResult=await callback(this);
+        return callbackResult;
+    }
+
     SetupServerMethod(name){
         this.methods[name]=(...args)=>{
 
             var path=`nframework/execute-server-method/${this.name}/${name}`;
 
-            this.manager.NFramework.socket.emit(path,args);
+            this.manager.NFramework.socket.emit(path,args,()=>{
+                
+            });
+        }     
+
+        this.methods[name].WithCallback=(...args)=>{
+
+            var path=`nframework/execute-server-method/${this.name}/${name}`;
+
+            this.manager.NFramework.socket.emit(path,args,()=>{
+                args[args.length-1]();
+            });
         }      
+
 
     }
     

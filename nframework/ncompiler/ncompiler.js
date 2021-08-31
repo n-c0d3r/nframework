@@ -84,6 +84,22 @@ var NCompiler = class{
         return result;
     }
 
+    IsStartTag(index,code){
+        var result=true;
+        for(var i=index+1;i<code.length;i++){
+            var ch=code[i];
+            if(ch=='\n' || ch=='' || ch=='|'){
+                result=false;
+                break;
+            }
+            else
+            if(ch=='>'||ch=='/'){
+                break;
+            }
+        }
+        return result;
+    }
+
     GetTagsOrder(code){
         var tagsOrder=[];
 
@@ -109,7 +125,7 @@ var NCompiler = class{
     
             }
 
-            if(ch=='<'){
+            if(ch=='<' && this.IsStartTag(i,code)){
                 var tagStart=i;
                 var tagEnd=i;
                 var startN=i+1;
@@ -339,6 +355,236 @@ var NCompiler = class{
         return elements;
     }
 
+    CompileNModuleFastGetterAndSetter(code){
+        var result='';
+        var top='';
+
+        for(var i=0;i<code.length;i++){
+
+            /*
+            if(code[i]=='"' || code[i]=="'"){
+            
+                var strC=code[i];
+                i++;
+                for(;i<code.length;i++){
+                    if(code[i]==strC){
+                        
+                        break;
+                    }
+                }
+                
+            }
+            else
+            if(code[i]=='`'){
+
+                
+
+            }
+*/
+            if(i>=code.length){
+                break;
+            }
+
+            if(code[i]+code[i+1]=='->'){
+                var name='';
+                i+=2;
+                for(;i<code.length;i++){ 
+                    if(code[i]!=' '){
+                        break;
+                    }
+                }
+                var startPropName=i;
+
+                if(i>=code.length){
+                    break;
+                }
+
+                var regex=/^[a-zA-Z]+$/;
+
+                for(;i<code.length;i++){ 
+                    if(!(code[i].match(regex) || code[i]=='_')){
+                        break;
+                    }
+                }
+                
+                var endPropName=i;
+
+                name=code.substring(startPropName,endPropName);
+
+                var forCheckIsSetterIndex=endPropName;
+
+                var isSetter=false;
+
+                var setterEqualChrIndex=forCheckIsSetterIndex;
+
+                var endSetterIndex=forCheckIsSetterIndex;
+
+                for(var j=forCheckIsSetterIndex;j<code.length;j++){
+
+                    if(code[i]==';' || code[i]=='.' ||  code[i]=='}' || code[i]=='{' || code[i]=='(' || code[i]==')'  || code[i]=='+'  || code[i]=='-'  || code[i]=='>'  || code[i]=='<'  || code[i]=='\\'  || code[i]=='*' ){
+                        break;
+                    }
+
+                    if(code[j]=='='){
+                        setterEqualChrIndex=j;
+                        isSetter=true;
+                        break;
+                    }
+
+                }
+                if(!isSetter){
+                    result+=`.GetThisWithCallback((module)=>{
+                        return module.Get('${name}');
+                    })`;
+                    i--;
+                }
+                else{
+                    var nextCode = code.substring(setterEqualChrIndex+1,code.length);
+                    const { v4: uuidv4 } = require('uuid');
+                    var fid = uuidv4();
+
+                    var fid2='';
+
+                    for(var fi=0;fi<fid.length;fi++){
+                        if(fid[fi]=='-'){
+                            fid2+='_';
+                        }
+                        else{
+                            fid2+=fid[fi];
+                        }
+                    }
+
+                    fid=fid2;
+
+//.Set('${name}',${value})
+                    top+=`
+                        var a${fid}_module;
+                    `;
+                    result+=`.GetThisWithCallback((module)=>{
+                        a${fid}_module=module;
+                    })
+                    var getterObj${fid}={
+                        set stter(value) {
+                            a${fid}_module.Set('${name}',value);
+                        }
+                    }
+                    getterObj${fid}.stter=`;
+                    result+=nextCode;
+                    var nextCompile=this.CompileNModuleFastGetterAndSetter(result);
+                    result=nextCompile.code;
+                    top+=nextCompile.top;
+                    break;
+                }
+
+                
+            }
+            else if(code[i]+code[i+1]+code[i+2]=='-->'){
+                var name='';
+                i+=3;
+                for(;i<code.length;i++){ 
+                    if(code[i]!=' '){
+                        break;
+                    }
+                }
+                var startPropName=i;
+
+                if(i>=code.length){
+                    break;
+                }
+
+                var regex=/^[a-zA-Z]+$/;
+
+                for(;i<code.length;i++){ 
+                    if(!(code[i].match(regex) || code[i]=='_')){
+                        break;
+                    }
+                }
+                
+                var endPropName=i;
+
+                name=code.substring(startPropName,endPropName);
+
+                var forCheckIsSetterIndex=endPropName;
+
+                var isSetter=false;
+
+                var setterEqualChrIndex=forCheckIsSetterIndex;
+
+                var endSetterIndex=forCheckIsSetterIndex;
+
+                for(var j=forCheckIsSetterIndex;j<code.length;j++){
+
+                    if(code[i]==';' || code[i]=='.' || code[i]=='}' || code[i]=='{' || code[i]=='(' || code[i]==')'  || code[i]=='+'  || code[i]=='-'  || code[i]=='>'  || code[i]=='<'  || code[i]=='\\'  || code[i]=='*' ){
+                        break;
+                    }
+
+                    if(code[j]=='='){
+                        setterEqualChrIndex=j;
+                        isSetter=true;
+                        break;
+                    }
+
+                }
+
+                const { v4: uuidv4 } = require('uuid');
+                var fid = uuidv4();
+
+                var fid2='';
+
+                for(var fi=0;fi<fid.length;fi++){
+                    if(fid[fi]=='-'){
+                        fid2+='_';
+                    }
+                    else{
+                        fid2+=fid[fi];
+                    }
+                }
+
+                fid=fid2;
+
+                if(!isSetter){
+                    top+=`var a${fid}_module;
+                    `;
+                    result+=`.AsyncGetThisWithCallback(async (module)=>{
+                        a${fid}_module=module;
+                        return await a${fid}_module.AsyncGet('${name}');
+                    })
+                    `;
+                    i--;
+                }
+                else{
+                    var nextCode = code.substring(setterEqualChrIndex+1,code.length);
+                    
+
+//.Set('${name}',${value})
+                    top+=`
+                        var a${fid}_module;
+                    `;
+                    result+=`.GetThisWithCallback((module)=>{
+                        a${fid}_module=module;
+                    })
+                    var getterObj${fid}={
+                        set stter(value) {
+                            a${fid}_module.Set('${name}',value);
+                        }
+                    }
+                    getterObj${fid}.stter=`;
+                    result+=nextCode;
+                    result=this.CompileNModuleFastGetterAndSetter(result);
+                    break;
+                }
+
+                
+            }
+            else{
+                result+=code[i];
+            }
+
+        }
+
+        return {'code':result,'top':top};
+    }
+
     RemoveComments(code){
         var result='';
         for(var i=0;i<code.length;i++){
@@ -382,8 +628,9 @@ var NCompiler = class{
         
         var compiledSpecialCharactersCode=this.CompileSpecialCharaters(compiledElement);
 
+        var cmpiledNModuleFastGetterAndSetter=this.CompileNModuleFastGetterAndSetter(compiledSpecialCharactersCode);
 
-        result=compiledSpecialCharactersCode;
+        result=cmpiledNModuleFastGetterAndSetter.top+cmpiledNModuleFastGetterAndSetter.code;
 
         return result;
     }

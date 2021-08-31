@@ -8,8 +8,11 @@ var IORouterManager=class{
     }
 
     IORouting(clientSocket,router){
-        clientSocket.on(router.path,(data)=>{
+        clientSocket.on(router.path,(data,clientCallback)=>{
             router.callback(clientSocket,data);
+            if(clientCallback!=null){
+                clientCallback();
+            }
         });
     }
 

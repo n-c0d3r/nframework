@@ -19,27 +19,10 @@
 
         nmodule.side='both';
 
-        nmodule.name='home';
+        nmodule.name='home-server';
     
     
 
-    
-        nmodule.AddMethod('Setup',(...args)=>{
-            var f=
-    
-
-        function() {
-            
-        }
-
-    
-        
-    f.call(nmodule,...args); 
-
-}
-    
-    );
-    
     
 
 
