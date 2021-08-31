@@ -1,0 +1,3 @@
+manager=window.NFramework.nmoduleManager;
+                
+                

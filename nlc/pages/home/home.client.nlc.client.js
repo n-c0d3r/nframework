@@ -1,7 +1,7 @@
 
-                            var a16329fda_bc2b_44e9_a93d_a27262fb1237_module;
-                        var a3b51a6a9_ae43_4ae2_8bda_9473d985ec60_module;
-                        var a5a420281_57cc_49a1_87a5_672f9369621c_module;
+                            var a7660be3b_148c_4d21_9b47_7f08521b6bd8_module;
+                        var a5ea409bc_da4c_423f_83aa_a7517d7c38a2_module;
+                        var ae7ce5d65_18b8_4156_8162_deca57ec4797_module;
                         manager=window.NFramework.nmoduleManager;
                 
                 
@@ -42,26 +42,25 @@
         nmodule.AddMethod('Setup',(...args)=>{
                 var f=async function() {
 
-                
                 manager.GetModule('home-client').AsyncGetThisWithCallback(async (module)=>{
-                            a16329fda_bc2b_44e9_a93d_a27262fb1237_module=module;
+                            a7660be3b_148c_4d21_9b47_7f08521b6bd8_module=module;
                         })
-                        var getterObj16329fda_bc2b_44e9_a93d_a27262fb1237={
+                        var getterObj7660be3b_148c_4d21_9b47_7f08521b6bd8={
                             set stter(value) {
                                 (async ()=>{
-                                    await a16329fda_bc2b_44e9_a93d_a27262fb1237_module.AsyncSet('syncProp',value);
+                                    await a7660be3b_148c_4d21_9b47_7f08521b6bd8_module.AsyncSet('syncProp',value);
                                 })();
                             }
                         }
-                        getterObj16329fda_bc2b_44e9_a93d_a27262fb1237.stter= (await this.AsyncGetThisWithCallback(async (module)=>{
-                            a3b51a6a9_ae43_4ae2_8bda_9473d985ec60_module=module;
-                            return await a3b51a6a9_ae43_4ae2_8bda_9473d985ec60_module.AsyncGet('syncProp');
+                        getterObj7660be3b_148c_4d21_9b47_7f08521b6bd8.stter= (await this.AsyncGetThisWithCallback(async (module)=>{
+                            a5ea409bc_da4c_423f_83aa_a7517d7c38a2_module=module;
+                            return await a5ea409bc_da4c_423f_83aa_a7517d7c38a2_module.AsyncGet('syncProp');
                         })
                         )+5;
 
                 console.log(await this.AsyncGetThisWithCallback(async (module)=>{
-                            a5a420281_57cc_49a1_87a5_672f9369621c_module=module;
-                            return await a5a420281_57cc_49a1_87a5_672f9369621c_module.AsyncGet('syncProp');
+                            ae7ce5d65_18b8_4156_8162_deca57ec4797_module=module;
+                            return await ae7ce5d65_18b8_4156_8162_deca57ec4797_module.AsyncGet('syncProp');
                         })
                         );
             }

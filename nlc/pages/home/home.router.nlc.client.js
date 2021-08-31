@@ -2,14 +2,6 @@ manager=window.NFramework.nmoduleManager;
                 
                 
                     
-
-    
-    
-    
-                
-                
-                
-                    
             (()=>{
                 
 
