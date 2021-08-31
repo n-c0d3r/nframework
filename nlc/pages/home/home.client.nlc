@@ -22,7 +22,7 @@
 
                 @home-client-->syncProp = (await this-->syncProp)+5;
 
-                console.log(await this-->syncProp);
+                console.log(await @home-client-->syncProp);
             }
 
         </async-method>

@@ -1,7 +1,0 @@
-<page homePage>
-
-    <ejs-src home.ejs />
-
-    <modules home-client/>
-
-</page>
