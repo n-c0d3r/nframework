@@ -20,31 +20,7 @@ manager=window.NFramework.nmoduleManager;
 
         nmodule.side='both';
 
-        nmodule.name='home-client';
-    
-    
-
-    
-    
-        nmodule.baseModules = ['home-client-base'];
-    
-    
-
-    
-
-        
-        nmodule.AddMethod('Setup',(...args)=>{
-                var f=async function() {
-
-                
-
-            }
-
-        
-                f.call(nmodule);
-            }
-    
-        );
+        nmodule.name='demo';
     
     
 

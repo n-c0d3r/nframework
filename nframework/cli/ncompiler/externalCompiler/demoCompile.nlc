@@ -1,7 +1,5 @@
 <module home-client>
 
-    <extends home-client-base/>
-
     <client-only>
 
         <async-method Setup>

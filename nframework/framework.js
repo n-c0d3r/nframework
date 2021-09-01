@@ -4,6 +4,8 @@ var NCompiler = require('./ncompiler/ncompiler');
 
 var NModuleManager = require('./nmoduleManager/nmoduleManager');
 
+var ClientManager=require('./clientManager/clientManager');
+
 var NModule=require('./nmodule/nmodule');
 
 var IORouterManager=require('./ioroutermanager/ioRouterManager');
@@ -17,7 +19,11 @@ var NFramework=class{
         this.nmoduleManager=new NModuleManager();
         this.nmoduleManager.NFramework=this;
 
+        this.clientManager=new ClientManager();
+        this.clientManager.NFramework=this;
+
         this.ioRouterManager=new IORouterManager();
+        this.ioRouterManager.NFramework=this;
 
         this.framework_nmodules_src_dir=__dirname+'/nmodules';
 
@@ -138,7 +144,11 @@ var NFramework=class{
         var framework=this;
         
         socket.on('connection', (csocket) => {
+            framework.clientManager.PushClient(csocket);
             framework.ioRouterManager.SetupFor(csocket);
+            csocket.on('disconnect', function() {
+                framework.clientManager.RemoveClient(csocket);
+            });
         });
 
     }

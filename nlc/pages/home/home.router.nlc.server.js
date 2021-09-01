@@ -91,11 +91,13 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.router.nlc.client.js";modu
 
         var clientVersion=JSCLPath;
 
-        var code=fs.readFileSync(clientVersion);
+        nmodule.client_js_code=fs.readFileSync(clientVersion);
+
+        
         
         if(nmodule.side!='server'){
             nmodule.Routing('/nmodules/home-router',(req,res)=>{
-                res.send(code);
+                res.send(nmodule.client_js_code);
             });
         }
 

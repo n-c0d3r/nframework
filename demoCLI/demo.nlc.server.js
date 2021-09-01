@@ -1,4 +1,4 @@
-var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.nlc.client.js";module.exports=(manager)=>{
+var JSCLPath = "D:\\nframework_gr\\demoCLI/demo.nlc.client.js";module.exports=(manager)=>{
                 var exports=new Object();
                     var nmodules=[];
                     var pages=[];
@@ -10,7 +10,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.nlc.client.js";modu
         var NModule=
         function(){
 
-            return require("D:\\nframework_gr\\nframework\\ncompiler\\tags/../../nmodule/nmodule");
+            return require("D:\\nframework_gr\\nframework\\cli\\ncompiler\\tags/../../nmodule/nmodule");
 
         }()
     
@@ -22,16 +22,31 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.nlc.client.js";modu
 
         nmodule.side='both';
 
-        nmodule.name='home-client';
+        nmodule.name='demo';
     
     
 
     
-    
-        nmodule.baseModules = ['home-client-base'];
-    
+        
+        
+        nmodule.AddMethod('Setup',(...args)=>{
+            var f=
     
 
+            function() {
+                
+            }
+
+        
+        
+    f.call(nmodule,...args); 
+
+}
+    
+    );
+    
+    
+        
     
 
 
@@ -46,7 +61,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.nlc.client.js";modu
         
         
         if(nmodule.side!='server'){
-            nmodule.Routing('/nmodules/home-client',(req,res)=>{
+            nmodule.Routing('/nmodules/demo',(req,res)=>{
                 res.send(nmodule.client_js_code);
             });
         }

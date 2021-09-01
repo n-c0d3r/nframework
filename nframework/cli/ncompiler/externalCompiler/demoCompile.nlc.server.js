@@ -1,4 +1,4 @@
-var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.nlc.client.js";module.exports=(manager)=>{
+var JSCLPath = "D:\\nframework_gr\\nframework\\ncompiler\\externalCompiler/demoCompile.nlc.client.js";module.exports=(manager)=>{
                 var exports=new Object();
                     var nmodules=[];
                     var pages=[];
@@ -23,12 +23,6 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.nlc.client.js";modu
         nmodule.side='both';
 
         nmodule.name='home-client';
-    
-    
-
-    
-    
-        nmodule.baseModules = ['home-client-base'];
     
     
 

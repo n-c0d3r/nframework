@@ -1,0 +1,15 @@
+<module demo>
+
+    <server-only>
+        
+        <method Setup>
+
+            function() {
+                
+            }
+
+        </method>
+        
+    </server-only>
+
+</module>

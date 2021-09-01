@@ -7,8 +7,10 @@ var NModuleManager=class{
         this.modulePaths=[];
         this.svMJSPaths=[];
         this.clMJSPaths=[];
+        this.nlcPaths=[];
         this.pages=new Object();
         this.modules=new Object();
+        this.watches=[];
     }
 
     SetupGetterAndSetterForSyncProps(){
@@ -97,6 +99,12 @@ var NModuleManager=class{
 
     CompileModules(){
 
+        for(var filePath of this.watches){
+            fs.unwatchFile(filePath);
+        }
+
+        this.watches=[];
+
         var compiler=this.NFramework.ncompiler;
         for(var i=0;i<this.modulePaths.length;i++){
             var cr = compiler.CompileFile(this.modulePaths[i]);
@@ -124,20 +132,45 @@ var NModuleManager=class{
             this.svMJSPaths.push(cr.fileJSSVPath);
 
             this.clMJSPaths.push(cr.fileJSCPath);
+
+            this.nlcPaths.push(cr.fileNLCPath);
+
+            
+            var nlcfilePath=cr.fileNLCPath;
+
+            if(this.NFramework.debug.client_nlc){
+                var manager=this;
+                this.watches.push(nlcfilePath);
+                fs.watchFile(nlcfilePath, (curr, prev) => {
+                    manager.CompileModules();
+                    manager.ReRoutingModulesForClient();
+                });
+            }
         }
 
+    }
+
+    ReRoutingModulesForClient(){
+        var keys=Object.keys(this.modules);
+        for(var i=0;i<keys.length;i++){
+            var clMJSPath=this.modules[keys[i]].clMJSPath;
+            this.modules[keys[i]].client_js_code=fs.readFileSync(clMJSPath);
+        }
     }
 
     ImportModules(){
         for(var i=0;i<this.svMJSPaths.length;i++){
             var modulePath=this.svMJSPaths[i];
             var eps=require(modulePath)(this);
+
+
             eps.manager=this;
             var modules=eps.nmodules;
             for(var module of modules){
                 var moduleName=module.name;
                 this.modules[moduleName]=module;
                 this.modules[moduleName].manager=this;
+                this.modules[moduleName].clMJSPath=this.clMJSPaths[i];
                 this.modules[moduleName].AfterImported();
             }
             var pages=eps.pages;

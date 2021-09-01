@@ -2,4 +2,16 @@
 
     <sync-property syncProp/>
 
+    <server-only>
+
+        <method Setup>
+
+            function(){
+                this->syncProp=0; 
+            }   
+
+        </method>
+
+    </server-only>
+
 </module>

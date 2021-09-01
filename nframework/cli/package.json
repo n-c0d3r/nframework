@@ -1,0 +1,14 @@
+{
+  "name": "nlc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nlc"
+  },
+  "author": "",
+  "license": "ISC",
+  "bin": {
+    "nlc":"./index.js"
+  }
+}

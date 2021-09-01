@@ -25,12 +25,6 @@ manager=window.NFramework.nmoduleManager;
     
 
     
-    
-        nmodule.baseModules = ['home-client-base'];
-    
-    
-
-    
 
         
         nmodule.AddMethod('Setup',(...args)=>{
