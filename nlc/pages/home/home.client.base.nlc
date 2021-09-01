@@ -1,0 +1,5 @@
+<module home-client-base>
+
+    <sync-property syncProp/>
+
+</module>

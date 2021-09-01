@@ -14,7 +14,6 @@ tag.Compile=function(element,childsCode,code){
         ((req,res)=>{
             var framework=manager.NFramework;
 
-            console.log(manager.pages);
             var modules=manager.pages['${pageName}'].modules;
 
             var miejs='';

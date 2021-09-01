@@ -1,0 +1,32 @@
+<server-only>
+
+    <module demo> 
+
+        <property demoProp/>
+
+        <method Setup>
+
+            function() {
+                
+                @demo->demoProp=5;
+                
+                @demo->Log(@demo->demoProp);
+
+            }
+
+        </method>
+
+        <method Log>
+
+            function(content) {
+                
+                console.log(content);
+
+            }
+
+        </method>
+
+    </module>
+
+</server-only>
+

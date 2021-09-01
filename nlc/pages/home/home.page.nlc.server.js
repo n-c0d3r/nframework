@@ -29,6 +29,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.page.nlc.client.js";module
     
         this.modules=[];
     this.modules.push('home-client');
+        this.modules.push('home-client-base');
         
     
     

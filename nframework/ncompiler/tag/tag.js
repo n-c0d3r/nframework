@@ -59,14 +59,55 @@ var Tag=class{
 
         var inputsStr=code.data.substring(startInputIndex,endTagIndex);
     
-        var inputs=inputsStr.split(' ');
+        var inputs=[];//inputsStr.split(' ');
 
         var inputsCache=[];
+
+        var oneinput='';
+
+        for(var i=0;i<inputsStr.length;i++){
+            if(inputsStr[i]!='\r' && inputsStr[i]!='\n' && inputsStr[i]!=' '){
+                //inputsCache.push(inputs[i]);
+                oneinput+=inputsStr[i];
+            }
+            else{
+                oneinput+=' ';
+            }
+        }
+
+        inputs=oneinput.split(' ');
 
         for(var i=0;i<inputs.length;i++){
             if(inputs[i]!=''){
                 inputsCache.push(inputs[i]);
             }
+        }
+
+        inputs=inputsCache;
+
+        inputsCache=[];
+
+        for(var i=0;i<inputs.length;i++){
+            var input=inputs[i];
+            var inputr='';
+            var regex=/^[a-zA-Z]+$/;
+            var j=0;
+            var start=0;
+            var end=0;
+            for(;j<input.length;j++){
+                if(input[j]!=' '){
+                    start=j;
+                    break;
+                }
+            }
+            for(j=input.length-1;j>=start;j--){
+                if(input[j]!=' ' && input[j]!='\n' && input[j]!='\r'){
+                    end=j;
+                    break;
+                }
+            }
+            inputr=input.substring(start,end+1);
+            inputsCache.push(inputr);
         }
 
         inputs=inputsCache;

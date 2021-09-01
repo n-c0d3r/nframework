@@ -1,6 +1,6 @@
 <module home-client>
 
-    <sync-property syncProp/>
+    <extends home-client-base/>
 
     <server-only>
 
@@ -20,7 +20,7 @@
 
             function() {
 
-                @home-client-->syncProp = (await this-->syncProp)+5;
+                @home-client-->syncProp = (await @home-client-->syncProp)+5;
 
                 console.log(await @home-client-->syncProp);
             }

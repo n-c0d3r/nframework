@@ -2,6 +2,12 @@
 
     <ejs-src home.ejs/>
 
-    <modules home-client/>
+    <modules 
+
+        home-client 
+
+        home-client-base    
+        
+    />
 
 </page>

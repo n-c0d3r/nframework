@@ -71,9 +71,11 @@ var NCompiler = class{
 
         return cResult;
     }
+    
 
     GetTag(name){
         var result=null;
+
         if(name!=''){
             result = require('./tags/'+name+'.js');
         }
@@ -88,7 +90,7 @@ var NCompiler = class{
         var result=true;
         for(var i=index+1;i<code.length;i++){
             var ch=code[i];
-            if(ch=='\n' || ch=='' || ch=='|'){
+            if(ch=='|'){
                 result=false;
                 break;
             }
@@ -98,6 +100,29 @@ var NCompiler = class{
             }
         }
         return result;
+    }
+
+    GetTagNameFromString(code){
+        var input=code;
+        var inputr='';
+        var regex=/^[a-zA-Z]+$/;
+        var j=0;
+        var start=0;
+        var end=0;
+        for(;j<input.length;j++){
+            if(input[j]!=' '){
+                start=j;
+                break;
+            }
+        }
+        for(j=input.length-1;j>=start;j--){
+            if(input[j]!=' ' && input[j]!='\n' && input[j]!='\r'){
+                end=j;
+                break;
+            }
+        }
+        inputr=input.substring(start,end+1);
+        return inputr;
     }
 
     GetTagsOrder(code){
@@ -166,6 +191,8 @@ var NCompiler = class{
                         }
 
                         var tagName=code.substring(startN,endTagName+1);
+
+                        tagName=this.GetTagNameFromString(tagName);
 
 
                         var tagNameCache='';

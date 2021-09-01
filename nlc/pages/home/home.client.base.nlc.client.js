@@ -20,10 +20,14 @@ manager=window.NFramework.nmoduleManager;
 
         nmodule.side='both';
 
-        nmodule.name='home-server';
+        nmodule.name='home-client-base';
     
     
 
+    
+    
+    nmodule.AddSyncProperty('syncProp');
+    
     
 
 

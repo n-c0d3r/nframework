@@ -50,7 +50,6 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.router.nlc.client.js";modu
         ((req,res)=>{
             var framework=manager.NFramework;
 
-            console.log(manager.pages);
             var modules=manager.pages['homePage'].modules;
 
             var miejs='';

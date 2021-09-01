@@ -1,5 +1,5 @@
 var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.nlc.client.js";
-                            var a17e43429_def6_44cb_96aa_b5ce9364d5c8_module;
+                            var ad23a844b_cb20_4a49_8a22_b396322513a4_module;
                         module.exports=(manager)=>{
                 var exports=new Object();
                     var nmodules=[];
@@ -30,7 +30,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.nlc.client.js";
 
     
     
-    nmodule.AddSyncProperty('syncProp');
+        nmodule.baseModules = ['home-client-base'];
     
     
 
@@ -43,14 +43,14 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.nlc.client.js";
 
             function(){
                 this.GetThisWithCallback((module)=>{
-                            a17e43429_def6_44cb_96aa_b5ce9364d5c8_module=module;
+                            ad23a844b_cb20_4a49_8a22_b396322513a4_module=module;
                         })
-                        var getterObj17e43429_def6_44cb_96aa_b5ce9364d5c8={
+                        var getterObjd23a844b_cb20_4a49_8a22_b396322513a4={
                             set stter(value) {
-                                a17e43429_def6_44cb_96aa_b5ce9364d5c8_module.Set('syncProp',value);
+                                ad23a844b_cb20_4a49_8a22_b396322513a4_module.Set('syncProp',value);
                             }
                         }
-                        getterObj17e43429_def6_44cb_96aa_b5ce9364d5c8.stter=0;
+                        getterObjd23a844b_cb20_4a49_8a22_b396322513a4.stter=0;
             }   
 
         

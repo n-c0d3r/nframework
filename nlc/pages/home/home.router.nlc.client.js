@@ -44,7 +44,6 @@ manager=window.NFramework.nmoduleManager;
         ((req,res)=>{
             var framework=manager.NFramework;
 
-            console.log(manager.pages);
             var modules=manager.pages['homePage'].modules;
 
             var miejs='';
