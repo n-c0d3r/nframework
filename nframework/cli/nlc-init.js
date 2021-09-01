@@ -52,6 +52,17 @@ var CreateNodeModulesFolder=function(target) {
     }
 }
 
+var CreateVSCodeFolder=function(target) {
+    if(!fs.existsSync(`${target}/.vscode`)){
+        fs.copy(__dirname+'/default_app/.vscode', `${target}/.vscode`, function (err) {
+            if (err){
+                console.log('An error occured while copying the .vscode folder.')
+                return console.error(err)
+            }
+        });
+    }
+}
+
 
 module.exports=(input)=>{
     
@@ -72,4 +83,8 @@ module.exports=(input)=>{
     CreateAppFile(target);
 
     CreateNodeModulesFolder(target);
+
+    if(input.dow['use_vscode_setting']){
+        CreateVSCodeFolder(target);
+    }
 }
