@@ -22,32 +22,9 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.server.nlc.client.js";modu
 
         nmodule.side='both';
 
-        nmodule.name='home-server';
+        nmodule.name='undefined';
     
     
-
-    
-        
-        nmodule.AddMethod('Setup',(...args)=>{
-            var f=
-    
-
-            function() {
-                
-            }
-
-        
-        
-    f.call(nmodule,...args); 
-
-}
-    
-    );
-    
-    
-    
-
-
         
     
         var fs=require('fs');
@@ -59,7 +36,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.server.nlc.client.js";modu
         
         
         if(nmodule.side!='server'){
-            nmodule.Routing('/nmodules/home-server',(req,res)=>{
+            nmodule.Routing('/nmodules/undefined',(req,res)=>{
                 res.send(nmodule.client_js_code);
             });
         }

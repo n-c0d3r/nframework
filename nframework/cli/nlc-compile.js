@@ -1,4 +1,4 @@
-var compiler=new (require(__dirname+'/ncompiler/ncompiler'))();
+var compiler=new (require(__dirname+'/../ncompiler/ncompiler'))();
 
 compiler.NFramework=new Object();
 

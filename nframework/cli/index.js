@@ -31,3 +31,9 @@ var input={
 if(dow['compile']==true){
     require('./nlc-compile')(input);
 }
+else if(dow['init']==true){
+    require('./nlc-init')(input);
+}
+else if(dow['run']==true){
+    require('./nlc-run')(input);
+}

@@ -148,6 +148,8 @@ var NCompiler = class{
     
             }
 
+            var regex=/^[a-zA-Z]+$/;
+
             if(ch=='<' && this.IsStartTag(i,code)){
                 var tagStart=i;
                 var tagEnd=i;
@@ -155,7 +157,7 @@ var NCompiler = class{
                 for(var j=i+1;j<code.length;j++){
                     var chj=code[j];
 
-                    if(chj!='/'&&chj!=' '){
+                    if(chj.match(regex) || chj=='_' || chj=='-'){
                         startN=j;
                         break;
                     }

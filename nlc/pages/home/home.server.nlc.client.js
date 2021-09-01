@@ -20,13 +20,9 @@ manager=window.NFramework.nmoduleManager;
 
         nmodule.side='both';
 
-        nmodule.name='home-server';
+        nmodule.name='undefined';
     
     
-
-    
-
-
         
             var nmoduleManager=window.NFramework.nmoduleManager;
             nmoduleManager.ImportModule(nmodule);
