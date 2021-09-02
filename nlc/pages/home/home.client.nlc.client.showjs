@@ -36,7 +36,7 @@ manager=window.NFramework.nmoduleManager;
         nmodule.AddMethod('am',async (...args)=>{
                 var f=async function() {
 
-                var a = await fetch(`http:/localhost:7070/home`);
+                var a = await fetch(`http://localhost:7070/home`);
                 return a;
 
             }

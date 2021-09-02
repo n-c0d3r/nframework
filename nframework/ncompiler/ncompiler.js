@@ -741,24 +741,38 @@ var NCompiler = class{
 
     RemoveComments(code){
         var result='';
+        var strChr='';
+        var isInStr=false;
         for(var i=0;i<code.length;i++){
-            if(code[i]=='/'&code[i+1]=='*'){
-                for(var j=i+1;j<code.length;j++){
-                    if(code[j-1]=='*'&&code[j]=='/'){
-                        i=j+1;
-                        break;
+            if(!isInStr && (code[i]=="'"||code[i]=='`'||code[i]=='"')){
+                isInStr=true;
+                strChr=code[i];
+            }
+            else{
+                if(code[i]==strChr){
+                    isInStr=false;
+                }
+            }
+            if(!isInStr){
+                if(code[i]=='/'&code[i+1]=='*'){
+                    for(var j=i+1;j<code.length;j++){
+                        if(code[j-1]=='*'&&code[j]=='/'){
+                            i=j+1;
+                            break;
+                        }
+                    }
+                }
+    
+                if(code[i]=='/'&code[i+1]=='/'){
+                    for(var j=i+1;j<code.length;j++){
+                        if(code[j]=='\r'||code[j]=='\n'){
+                            i=j+1;
+                            break;
+                        }
                     }
                 }
             }
-
-            if(code[i]=='/'&code[i+1]=='/'){
-                for(var j=i+1;j<code.length;j++){
-                    if(code[j]=='\r'||code[j]=='\n'){
-                        i=j+1;
-                        break;
-                    }
-                }
-            }
+            
 
             if(i>=code.length){
                 break;
