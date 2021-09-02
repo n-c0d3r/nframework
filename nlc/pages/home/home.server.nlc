@@ -5,7 +5,6 @@
         <method setup>
 
             function() {
-                console.log((a<=6));
             }
 
         </method>

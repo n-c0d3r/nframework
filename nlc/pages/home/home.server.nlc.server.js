@@ -25,6 +25,28 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.server.nlc.client.js";modu
         nmodule.name='home-server';
     
     
+
+    
+        
+        nmodule.AddMethod('setup',(...args)=>{
+            var f=
+    
+
+            function() {
+            }
+
+        
+        
+    return f.call(nmodule,...args); 
+
+}
+    
+    );
+    
+    
+    
+
+
         
     
         var fs=require('fs');

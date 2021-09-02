@@ -29,26 +29,18 @@ var JSCLPath = "D:\\nframework_gr/nlc/console/console.main.nlc.client.js";module
     
         nmodule.AddMethod('setup',async (...args)=>{
                 var f=async function(){
-            
 
-        }
-
-    
-                var f2=f.bind(nmodule);
-                return await f2(...args);
-            }
-    
-        );
-    
-    
-
-    
-        nmodule.AddMethod('start',async (...args)=>{
-                var f=async function(){
+            var input = await manager.GetModule('console').GetThisWithCallback((module)=>{
+                            return module.Get('readLine');
+                        })();
             
             manager.GetModule('console').GetThisWithCallback((module)=>{
-                            return module.Get('log2');
-                        })('dfg');
+                            return module.Get('log');
+                        })(input);
+
+            manager.GetModule('console').GetThisWithCallback((module)=>{
+                            return module.Get('clear');
+                        })();
 
         }
 

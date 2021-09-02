@@ -7,5 +7,8 @@
     },
     "server":{
         "PORT":7070
+    },
+    "console":{
+        "enable":true
     }
 }

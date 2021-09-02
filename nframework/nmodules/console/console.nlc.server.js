@@ -27,13 +27,32 @@ var JSCLPath = "D:\\nframework_gr\\nframework/nmodules/console/console.nlc.clien
     
 
     
+
+        
+
+            const readline = require('readline');
+
+            const rl = readline.createInterface({ input: process.stdin , output: process.stdout });
+
+            const ReadLine = (function () {
+                const getLineGen = (async function* () {
+                    for await (const line of rl) {
+                        yield line;
+                    }
+                })();
+                return async () => ((await getLineGen.next()).value);
+            })();
+
+            if(manager.NFramework.console.enable){
+
+                
         nmodule.AddMethod('log',(...args)=>{
             var f=
     
-        function(...args) {
-            console.log(...args);
-        }
-    
+                    function(...args) {
+                        console.log(...args);
+                    }
+                
         
     return f.call(nmodule,...args); 
 
@@ -43,12 +62,29 @@ var JSCLPath = "D:\\nframework_gr\\nframework/nmodules/console/console.nlc.clien
     
     
 
+                
+        nmodule.AddMethod('clear',(...args)=>{
+            var f=
     
-        nmodule.AddMethod('log2',async (...args)=>{
-                var f=async function(...args) {
-            console.log(...args);
-        }
+                    function() {
+                        console.clear();
+                    }
+                
+        
+    return f.call(nmodule,...args); 
+
+}
     
+    );
+    
+    
+
+                
+        nmodule.AddMethod('readLine',async (...args)=>{
+                var f=async function() {
+                        return await ReadLine();
+                    }
+                
                 var f2=f.bind(nmodule);
                 return await f2(...args);
             }
@@ -56,6 +92,14 @@ var JSCLPath = "D:\\nframework_gr\\nframework/nmodules/console/console.nlc.clien
         );
     
     
+
+            }
+
+        
+
+    
+
+
 
 
         

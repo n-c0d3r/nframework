@@ -1,0 +1,18 @@
+
+<module console-demo>
+
+    <async-method setup>
+
+        function(){
+
+            var input = await @console->readLine();
+            
+            @console->log(input);
+
+            @console->clear();
+
+        }
+
+    </async-method>
+
+</module>

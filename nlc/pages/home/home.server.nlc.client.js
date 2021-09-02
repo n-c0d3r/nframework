@@ -23,6 +23,10 @@ manager=window.NFramework.nmoduleManager;
         nmodule.name='home-server';
     
     
+
+    
+
+
         
             var nmoduleManager=window.NFramework.nmoduleManager;
             nmoduleManager.ImportModule(nmodule);
