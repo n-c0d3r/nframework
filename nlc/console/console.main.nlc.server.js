@@ -1,4 +1,4 @@
-var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.server.nlc.client.js";module.exports=(manager)=>{
+var JSCLPath = "D:\\nframework_gr/nlc/console/console.main.nlc.client.js";module.exports=(manager)=>{
                 var exports=new Object();
                     var nmodules=[];
                     var pages=[];
@@ -22,9 +22,46 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.server.nlc.client.js";modu
 
         nmodule.side='both';
 
-        nmodule.name='home-server';
+        nmodule.name='console-main';
     
     
+
+    
+        nmodule.AddMethod('setup',async (...args)=>{
+                var f=async function(){
+            
+
+        }
+
+    
+                var f2=f.bind(nmodule);
+                await f2(...args);
+            }
+    
+        );
+    
+    
+
+    
+        nmodule.AddMethod('start',async (...args)=>{
+                var f=async function(){
+            
+            manager.GetModule('console').GetThisWithCallback((module)=>{
+                            return module.Get('log2');
+                        })('dfg');
+
+        }
+
+    
+                var f2=f.bind(nmodule);
+                await f2(...args);
+            }
+    
+        );
+    
+    
+
+
         
     
         var fs=require('fs');
@@ -36,7 +73,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.server.nlc.client.js";modu
         
         
         if(nmodule.side!='server'){
-            nmodule.Routing('/nmodules/home-server',(req,res)=>{
+            nmodule.Routing('/nmodules/console-main',(req,res)=>{
                 res.send(nmodule.client_js_code);
             });
         }

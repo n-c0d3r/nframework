@@ -1,6 +1,4 @@
-var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.base.nlc.client.js";
-                            var ad0a15c74_e5f3_4332_b824_57b153ea3911_module;
-                        module.exports=(manager)=>{
+var JSCLPath = "D:\\nframework_gr\\nframework/nmodules/console/console.nlc.client.js";module.exports=(manager)=>{
                 var exports=new Object();
                     var nmodules=[];
                     var pages=[];
@@ -24,36 +22,18 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.base.nlc.client.js"
 
         nmodule.side='both';
 
-        nmodule.name='home-client-base';
+        nmodule.name='console';
     
     
 
     
-    
-    nmodule.AddSyncProperty('syncProp');
-    
-    
-
-    
-
-        
-        nmodule.AddMethod('setup',(...args)=>{
+        nmodule.AddMethod('log',(...args)=>{
             var f=
     
-
-            function(){
-                this.GetThisWithCallback((module)=>{
-                            ad0a15c74_e5f3_4332_b824_57b153ea3911_module=module;
-                        })
-                        var getterObjd0a15c74_e5f3_4332_b824_57b153ea3911={
-                            set stter(value) {
-                                ad0a15c74_e5f3_4332_b824_57b153ea3911_module.Set('syncProp',value);
-                            }
-                        }
-                        getterObjd0a15c74_e5f3_4332_b824_57b153ea3911.stter=0; 
-            }   
-
-        
+        function(...args) {
+            console.log(...args);
+        }
+    
         
     f.call(nmodule,...args); 
 
@@ -63,6 +43,18 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.base.nlc.client.js"
     
     
 
+    
+        nmodule.AddMethod('log2',async (...args)=>{
+                var f=async function(...args) {
+            console.log(...args);
+        }
+    
+                var f2=f.bind(nmodule);
+                await f2(...args);
+            }
+    
+        );
+    
     
 
 
@@ -77,7 +69,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.base.nlc.client.js"
         
         
         if(nmodule.side!='server'){
-            nmodule.Routing('/nmodules/home-client-base',(req,res)=>{
+            nmodule.Routing('/nmodules/console',(req,res)=>{
                 res.send(nmodule.client_js_code);
             });
         }

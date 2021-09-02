@@ -4,11 +4,23 @@
 
     <client-only>
 
-        <async-method Setup>
+        <async-method am>
 
             function() {
 
-                
+                var data = await fetch('http://localhost:7070/home');
+
+                return data;
+
+            }
+
+        </async-method>
+
+        <async-method setup>
+
+            function() {
+
+                console.log(this->am());
 
             }
 

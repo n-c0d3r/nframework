@@ -1,10 +1,11 @@
+
 <module home-client-base>
 
     <sync-property syncProp/>
 
     <server-only>
 
-        <method Setup>
+        <method setup>
 
             function(){
                 this->syncProp=0; 

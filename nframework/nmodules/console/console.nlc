@@ -1,0 +1,17 @@
+
+<module console>
+
+    <method log>
+        function(...args) {
+            console.log(...args);
+        }
+    </method>
+
+    <async-method log2>
+        function(...args) {
+            console.log(...args);
+        }
+    </async-method>
+
+</module>
+

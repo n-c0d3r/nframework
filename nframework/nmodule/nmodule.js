@@ -213,14 +213,14 @@ var NModule = class{
     }
 
     Setup(){
-        if(this.methods.Setup!=null){
-            this.methods.Setup.call(this);
+        if(this.methods.setup!=null){
+            this.methods.setup.call(this);
         }
     }
 
     Start(){
-        if(this.methods.Start!=null){
-            this.methods.Start.call(this);
+        if(this.methods.start!=null){
+            this.methods.start.call(this);
         }
     }
     
@@ -258,6 +258,11 @@ var NModule = class{
             var router = this.routers[i];
             this.NoSafe__Routing(router.path,router.callback);
         }
+    }
+
+    async AsyncGetThisWithCallback(callback){
+        var callbackResult=await callback(this);
+        return callbackResult;
     }
 
     NoSafe__Routing(path,callback){

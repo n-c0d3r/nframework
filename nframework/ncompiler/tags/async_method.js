@@ -61,9 +61,10 @@ tag.Compile=function(element,childsCode,code){
     compiledCodeFunc='async '+compiledCodeFunc;
 
     var compiledCode=`
-        nmodule.AddMethod('${inputs[0]}',(...args)=>{
+        nmodule.AddMethod('${inputs[0]}',async (...args)=>{
                 var f=${compiledCodeFunc}
-                f.call(nmodule);
+                var f2=f.bind(nmodule);
+                await f2(...args);
             }
     
         );

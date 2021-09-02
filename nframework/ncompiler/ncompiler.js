@@ -149,6 +149,7 @@ var NCompiler = class{
             }
 
             var regex=/^[a-zA-Z]+$/;
+            var regex2=/^[0-9]+$/;
 
             if(ch=='<' && this.IsStartTag(i,code)){
                 var tagStart=i;
@@ -450,9 +451,10 @@ var NCompiler = class{
                     var startName=i;
                     var endName=i;
                     var regex=/^[a-zA-Z]+$/;
+                    var regex2=/^[0-9]+$/;
     
                     for(;i<code.length;i++){ 
-                        if(!(code[i].match(regex) || code[i]=='_'  || code[i]=='-')){
+                        if(!(code[i].match(regex) || code[i].match(regex2) || code[i]=='_'  || code[i]=='-')){
                             endName=i;
                             break;
                         }
@@ -544,9 +546,10 @@ var NCompiler = class{
                     }
     
                     var regex=/^[a-zA-Z]+$/;
+                    var regex2=/^[0-9]+$/;
     
                     for(;i<code.length;i++){ 
-                        if(!(code[i].match(regex) || code[i]=='_')){
+                        if(!(code[i].match(regex) || code[i]=='_' || code[i].match(regex2))){
                             break;
                         }
                     }
@@ -637,9 +640,10 @@ var NCompiler = class{
                     }
     
                     var regex=/^[a-zA-Z]+$/;
+                    var regex2=/^[0-9]+$/;
     
                     for(;i<code.length;i++){ 
-                        if(!(code[i].match(regex) || code[i]=='_')){
+                        if(!(code[i].match(regex) || code[i].match(regex2) || code[i]=='_')){
                             break;
                         }
                     }

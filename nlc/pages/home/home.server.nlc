@@ -1,7 +1,8 @@
+
 <module home-server>
 
     <server-only>
-        <method Setup>
+        <method setup>
 
             function() {
                 console.log((a<=6));

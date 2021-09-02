@@ -10,7 +10,7 @@ var Tag=class{
     GetInputs(element,childsCode,code){
         var endTagIndex=element.startContentIndex;
 
-        for(var i=element.startContentIndex;i<=element.endContentIndex;i++){
+        for(var i=element.startContentIndex;i<code.data.length;i++){
             if((code.data[i]=='>' && !this.isAutoClose)
                 || (code.data[i]=='/' && (this.isAutoClose))){
                 endTagIndex=i;
@@ -20,44 +20,28 @@ var Tag=class{
 
         var startInputIndex=element.startContentIndex;
         
-        for(var i=element.startContentIndex;i<endTagIndex;i++){
-            var ch=code.data[i];
+        var endTagName=startInputIndex;
 
-            if(ch=='<'){
-                var tagStart=i;
-                var tagEnd=i;
-                var startN=i+1;
-                for(var j=i+1;j<code.data.length;j++){
-                    var chj=code.data[j];
+        
+        var regex=/^[a-zA-Z]+$/;
+        var regex2=/^[0-9]+$/;
 
-                    if(chj!='/'&&chj!=' '){
-                        startN=j;
-                        break;
-                    }
+        var startTagNameIndex=startInputIndex;
 
-                }
-                if(true){//code.data[startN]=='N'){
-                    
-                    if(true){//code.data[startN+1]==':' && code.data[startN+2]!=':'){
-                        
-                        var endTagName=startN+1;
-                        
-                        for(var j=startN+1;j<code.data.length;j++){
-                            var chj=code.data[j];
-
-                            if(chj==' '||chj=='>'||chj=='/'){
-                                endTagName=j-1;
-                                startInputIndex=endTagName+1;
-                                break;
-                            }
-
-                        }
-                    }
-                }
+        for(var i=element.startContentIndex;i<code.data.length;i++){
+            if(code.data[i].match(regex) || code.data[i]=='_' || code.data[i]=='-'){
+                startTagNameIndex=i;
+                break;
             }
         }
 
-        var inputsStr=code.data.substring(startInputIndex,endTagIndex);
+        endTagName=startTagNameIndex+this.name.length;
+        
+        
+
+        var inputsStr=code.data.substring(endTagName+1,endTagIndex);
+
+
     
         var inputs=[];//inputsStr.split(' ');
 
