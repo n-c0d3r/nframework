@@ -20,7 +20,7 @@ tag.Compile=function(element,childsCode,code){
 
     compiledCode+=`
         
-    f.call(nmodule,...args); 
+    return f.call(nmodule,...args); 
 
 }
     

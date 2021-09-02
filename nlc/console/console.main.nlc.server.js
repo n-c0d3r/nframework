@@ -35,7 +35,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/console/console.main.nlc.client.js";module
 
     
                 var f2=f.bind(nmodule);
-                await f2(...args);
+                return await f2(...args);
             }
     
         );
@@ -54,7 +54,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/console/console.main.nlc.client.js";module
 
     
                 var f2=f.bind(nmodule);
-                await f2(...args);
+                return await f2(...args);
             }
     
         );

@@ -33,7 +33,7 @@ manager=window.NFramework.nmoduleManager;
 
     
                 var f2=f.bind(nmodule);
-                await f2(...args);
+                return await f2(...args);
             }
     
         );
@@ -52,7 +52,7 @@ manager=window.NFramework.nmoduleManager;
 
     
                 var f2=f.bind(nmodule);
-                await f2(...args);
+                return await f2(...args);
             }
     
         );

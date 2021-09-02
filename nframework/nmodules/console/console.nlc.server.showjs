@@ -35,7 +35,7 @@ var JSCLPath = "D:\\nframework_gr\\nframework/nmodules/console/console.nlc.clien
         }
     
         
-    f.call(nmodule,...args); 
+    return f.call(nmodule,...args); 
 
 }
     
@@ -50,7 +50,7 @@ var JSCLPath = "D:\\nframework_gr\\nframework/nmodules/console/console.nlc.clien
         }
     
                 var f2=f.bind(nmodule);
-                await f2(...args);
+                return await f2(...args);
             }
     
         );
