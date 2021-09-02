@@ -14,4 +14,16 @@
 
     </client-only>
 
+    <server-only>
+
+        <method setup>
+
+            function() {
+                @demoGlobal();
+            }
+
+        </method>
+
+    </server-only>
+
 </module>

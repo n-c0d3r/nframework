@@ -2,6 +2,13 @@ var JSCLPath = "D:\\nframework_gr\\nframework/nmodules/console/console.nlc.clien
                 var exports=new Object();
                     var nmodules=[];
                     var pages=[];
+                    exports.customTypeDatas=[];
+                    exports.customTypeDatas.Add=function(key,value){
+                        exports.customTypeDatas.push({
+                            'key':key,
+                            'value':value
+                        });
+                    }
 
                     
                 

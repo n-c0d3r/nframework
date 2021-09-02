@@ -7,6 +7,7 @@ var NModuleManager=class{
         this.modulePaths=[];
         this.svMJSPaths=[];
         this.clMJSPaths=[];
+        this.customTypeDatas=new Object();
         this.nlcPaths=[];
         this.pages=new Object();
         this.modules=new Object();
@@ -163,6 +164,9 @@ var NModuleManager=class{
             var modulePath=this.svMJSPaths[i];
             var eps=require(modulePath)(this);
 
+            for(var ctData of eps.customTypeDatas){
+                this.customTypeDatas[ctData.key]=ctData.value;
+            }
 
             eps.manager=this;
             var modules=eps.nmodules;
@@ -200,6 +204,20 @@ var NModuleManager=class{
 
     GetPage(name){
         return this.pages[name];
+    }
+
+    Get(name){
+        if(name in this.modules){
+            return this.modules[name];
+        }
+        else
+        if(name in this.pages){
+        return this.pages[name];
+        }
+        else
+        if(name in this.customTypeDatas){
+            return this.customTypeDatas[name];
+        }
     }
 
 }

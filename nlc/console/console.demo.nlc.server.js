@@ -1,7 +1,14 @@
-var JSCLPath = "D:\\nframework_gr/nlc/console/console.main.nlc.client.js";module.exports=(manager)=>{
+var JSCLPath = "D:\\nframework_gr/nlc/console/console.demo.nlc.client.js";module.exports=(manager)=>{
                 var exports=new Object();
                     var nmodules=[];
                     var pages=[];
+                    exports.customTypeDatas=[];
+                    exports.customTypeDatas.Add=function(key,value){
+                        exports.customTypeDatas.push({
+                            'key':key,
+                            'value':value
+                        });
+                    }
 
                     
                 
@@ -22,7 +29,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/console/console.main.nlc.client.js";module
 
         nmodule.side='both';
 
-        nmodule.name='console-main';
+        nmodule.name='console-demo';
     
     
 
@@ -30,15 +37,15 @@ var JSCLPath = "D:\\nframework_gr/nlc/console/console.main.nlc.client.js";module
         nmodule.AddMethod('setup',async (...args)=>{
                 var f=async function(){
 
-            var input = await manager.GetModule('console').GetThisWithCallback((module)=>{
+            var input = await (manager.Get('console')).GetThisWithCallback((module)=>{
                             return module.Get('readLine');
                         })();
             
-            manager.GetModule('console').GetThisWithCallback((module)=>{
+            (manager.Get('console')).GetThisWithCallback((module)=>{
                             return module.Get('log');
                         })(input);
 
-            manager.GetModule('console').GetThisWithCallback((module)=>{
+            (manager.Get('console')).GetThisWithCallback((module)=>{
                             return module.Get('clear');
                         })();
 
@@ -65,7 +72,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/console/console.main.nlc.client.js";module
         
         
         if(nmodule.side!='server'){
-            nmodule.Routing('/nmodules/console-main',(req,res)=>{
+            nmodule.Routing('/nmodules/console-demo',(req,res)=>{
                 res.send(nmodule.client_js_code);
             });
         }

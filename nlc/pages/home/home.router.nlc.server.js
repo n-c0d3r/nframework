@@ -2,6 +2,13 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.router.nlc.client.js";modu
                 var exports=new Object();
                     var nmodules=[];
                     var pages=[];
+                    exports.customTypeDatas=[];
+                    exports.customTypeDatas.Add=function(key,value){
+                        exports.customTypeDatas.push({
+                            'key':key,
+                            'value':value
+                        });
+                    }
 
                     
                 

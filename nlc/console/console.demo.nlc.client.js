@@ -20,7 +20,7 @@ manager=window.NFramework.nmoduleManager;
 
         nmodule.side='both';
 
-        nmodule.name='console-main';
+        nmodule.name='console-demo';
     
     
 
@@ -28,15 +28,15 @@ manager=window.NFramework.nmoduleManager;
         nmodule.AddMethod('setup',async (...args)=>{
                 var f=async function(){
 
-            var input = await manager.GetModule('console').GetThisWithCallback((module)=>{
+            var input = await (manager.Get('console')).GetThisWithCallback((module)=>{
                             return module.Get('readLine');
                         })();
             
-            manager.GetModule('console').GetThisWithCallback((module)=>{
+            (manager.Get('console')).GetThisWithCallback((module)=>{
                             return module.Get('log');
                         })(input);
 
-            manager.GetModule('console').GetThisWithCallback((module)=>{
+            (manager.Get('console')).GetThisWithCallback((module)=>{
                             return module.Get('clear');
                         })();
 

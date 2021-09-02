@@ -22,6 +22,8 @@ tag.Compile=function(element,childsCode,code){
 
     var inputs=tag.GetInputs(element,childsCode,code);
 
+    var moduleName=inputs[inputs.length-1];
+    
     var nmoduleImportCode=`
         function(){
 
@@ -58,7 +60,7 @@ tag.Compile=function(element,childsCode,code){
 
         nmodule.side='${side}';
 
-        nmodule.name='${inputs[0]}';
+        nmodule.name='${moduleName}';
     
     `;
     
@@ -79,7 +81,7 @@ tag.Compile=function(element,childsCode,code){
         
         
         if(nmodule.side!='server'){
-            nmodule.Routing('/nmodules/${inputs[0]}',(req,res)=>{
+            nmodule.Routing('/nmodules/${moduleName}',(req,res)=>{
                 res.send(nmodule.client_js_code);
             });
         }

@@ -1,0 +1,7 @@
+<global demoGlobal>
+
+    function() {
+        console.log('demoGlobalFunctionCreated');
+    }
+
+</global>

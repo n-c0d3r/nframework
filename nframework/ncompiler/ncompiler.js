@@ -341,6 +341,13 @@ var NCompiler = class{
                 var exports=new Object();
                     var nmodules=[];
                     var pages=[];
+                    exports.customTypeDatas=[];
+                    exports.customTypeDatas.Add=function(key,value){
+                        exports.customTypeDatas.push({
+                            'key':key,
+                            'value':value
+                        });
+                    }
 
                     ${code}
                     
@@ -391,7 +398,7 @@ var NCompiler = class{
         return elements;
     }
 
-    CompileFastGetNModule(code){
+    CompileFastGet(code){
         var result='';        
         
         var isInStr=false;
@@ -462,7 +469,7 @@ var NCompiler = class{
 
                     var name=code.substring(startName,endName);
                     
-                    result+=`manager.GetModule('${name}')`;
+                    result+=`(manager.Get('${name}'))`;
 
                     i-=1;
                 }
@@ -800,7 +807,7 @@ var NCompiler = class{
 
         var cnmfgas=cmpiledNModuleFastGetterAndSetter.top+cmpiledNModuleFastGetterAndSetter.code;
 
-        result=this.CompileFastGetNModule(cnmfgas);
+        result=this.CompileFastGet(cnmfgas);
 
         return result;
     }

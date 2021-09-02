@@ -2,6 +2,13 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.nlc.client.js";modu
                 var exports=new Object();
                     var nmodules=[];
                     var pages=[];
+                    exports.customTypeDatas=[];
+                    exports.customTypeDatas.Add=function(key,value){
+                        exports.customTypeDatas.push({
+                            'key':key,
+                            'value':value
+                        });
+                    }
 
                     
                 
@@ -29,6 +36,29 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.nlc.client.js";modu
     
     
         nmodule.baseModules = ['home-client-base'];
+    
+    
+
+    
+
+    
+
+        
+        nmodule.AddMethod('setup',(...args)=>{
+            var f=
+    
+
+            function() {
+                (manager.Get('demoGlobal'))();
+            }
+
+        
+        
+    return f.call(nmodule,...args); 
+
+}
+    
+    );
     
     
 

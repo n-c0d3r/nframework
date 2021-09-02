@@ -1,4 +1,4 @@
-var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.page.nlc.client.js";module.exports=(manager)=>{
+var JSCLPath = "D:\\nframework_gr/nlc/demo.nlc.client.js";module.exports=(manager)=>{
                 var exports=new Object();
                     var nmodules=[];
                     var pages=[];
@@ -12,43 +12,13 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.page.nlc.client.js";module
 
                     
                 
-                    
+                    exports.customTypeDatas.Add('demoGlobal',
 
-    
-    
-    var Page=require('D:\\nframework_gr\\nframework\\ncompiler\\tags/../../page/page');
-    
-    var page_homePage=new Page();
-
-    page_homePage.name='homePage';
-
-    page_homePage.Setup=function(){
-
-    
-
-    
-    
-        this.ejs_src='home.ejs';
-    
-    
-
-    
-    
-        this.modules=[];
-    this.modules.push('home-client');
-        this.modules.push('home-client-base');
-        
-    
-    
-
-
+    function() {
+        console.log('demoGlobalFunctionCreated');
     }
-        page_homePage.Setup.call(page_homePage);
-        pages.push( page_homePage);
 
-    
-    
-    
+)
                 
                 
                     
