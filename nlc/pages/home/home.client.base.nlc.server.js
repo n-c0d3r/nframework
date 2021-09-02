@@ -1,9 +1,5 @@
 var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.base.nlc.client.js";
-<<<<<<< HEAD
-                            var ad0a15c74_e5f3_4332_b824_57b153ea3911_module;
-=======
-                            var a6f4568ba_add2_49e6_a5a4_42ccfa2bc142_module;
->>>>>>> parent of 10d589c (add uninstall.bat and install.bat)
+                            var a8dc6d72d_7039_41aa_acdb_ceb280b38363_module;
                         module.exports=(manager)=>{
                 var exports=new Object();
                     var nmodules=[];
@@ -47,25 +43,14 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.base.nlc.client.js"
 
             function(){
                 this.GetThisWithCallback((module)=>{
-<<<<<<< HEAD
-                            ad0a15c74_e5f3_4332_b824_57b153ea3911_module=module;
+                            a8dc6d72d_7039_41aa_acdb_ceb280b38363_module=module;
                         })
-                        var getterObjd0a15c74_e5f3_4332_b824_57b153ea3911={
+                        var getterObj8dc6d72d_7039_41aa_acdb_ceb280b38363={
                             set stter(value) {
-                                ad0a15c74_e5f3_4332_b824_57b153ea3911_module.Set('syncProp',value);
+                                a8dc6d72d_7039_41aa_acdb_ceb280b38363_module.Set('syncProp',value);
                             }
                         }
-                        getterObjd0a15c74_e5f3_4332_b824_57b153ea3911.stter=0; 
-=======
-                            a6f4568ba_add2_49e6_a5a4_42ccfa2bc142_module=module;
-                        })
-                        var getterObj6f4568ba_add2_49e6_a5a4_42ccfa2bc142={
-                            set stter(value) {
-                                a6f4568ba_add2_49e6_a5a4_42ccfa2bc142_module.Set('syncProp',value);
-                            }
-                        }
-                        getterObj6f4568ba_add2_49e6_a5a4_42ccfa2bc142.stter=0; 
->>>>>>> parent of 10d589c (add uninstall.bat and install.bat)
+                        getterObj8dc6d72d_7039_41aa_acdb_ceb280b38363.stter=0; 
             }   
 
         
