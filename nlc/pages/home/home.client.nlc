@@ -8,9 +8,8 @@
 
             function() {
 
-                var data = await fetch('http://localhost:7070/home');
-
-                return data;
+                var a = await fetch(`http:/localhost:7070/home`);
+                return a;
 
             }
 

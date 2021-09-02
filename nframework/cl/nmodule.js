@@ -307,14 +307,14 @@ var NModule = class{
     }
 
     Setup(){
-        if(this.methods.Setup!=null){
-            this.methods.Setup.call(this);
+        if(this.methods.setup!=null){
+            this.methods.setup.call(this);
         }
     }
 
     Start(){
-        if(this.methods.Start!=null){
-            this.methods.Start.call(this);
+        if(this.methods.start!=null){
+            this.methods.start.call(this);
         }
     }
     

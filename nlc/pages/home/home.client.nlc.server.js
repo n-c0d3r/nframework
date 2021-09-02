@@ -25,6 +25,16 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.nlc.client.js";modu
         nmodule.name='home-client';
     
     
+
+    
+    
+        nmodule.baseModules = ['home-client-base'];
+    
+    
+
+    
+
+
         
     
         var fs=require('fs');
