@@ -6,41 +6,102 @@ var tag=new Tag();
 
 tag.isAutoClose=false;
 
-tag.Compile=function(element,childsCode,code){
+const { v4: uuidv4 } = require('uuid');
+
+tag.Compile=function(element,childsCode,code,manager){
     var contents=tag.GetContent(element,childsCode,code);
     
     var inputs=tag.GetInputs(element,childsCode,code);
 
-    var childs=`
-        var childs=[];
-    `;
+    var rfid = uuidv4();
 
-    for(var i=0;i<contents.length-1;i++){
+    var rfid2='';
+
+    for(var i=0;i<rfid.length;i++){
+        if(rfid[i]!='-'){
+            rfid2+=rfid[i];
+        }
+        else
+        rfid2+='_'
+    }
+
+    rfid=rfid2;
+
+    var childs=``;
+
+    for(var i=0;i<contents.length;i++){
         if(contents[i].type=='childCode'){
-            childs+=`childs.push(${contents[i].code})`;
+            childs+=`result_${rfid}.appendChild(${contents[i].code})`;
         }
     }
-    var i=contents.length-1;
-    if(contents[i].type=='childCode'){
-        childs+=`childs.push(${contents[i].code})`;
+
+    var attributes=`
+        var attributes=[];
+    `;
+
+    var regex=/^[a-zA-Z]+$/;
+    var regex2=/^[0-9]+$/;
+
+    for(var i=0;i<inputs.length;i++){
+        var atbName='';
+        var isStart=false;
+        for(var j=0;j<inputs[i].length;j++){
+            if(!isStart && (inputs[i][j].match(regex) || inputs[i][j].match(regex2) || inputs[i][j]=='-' || inputs[i][j]=='_')){
+                isStart=true;
+            }
+            if(isStart && !(inputs[i][j].match(regex) || inputs[i][j].match(regex2) || inputs[i][j]=='-' || inputs[i][j]=='_')){
+                isStart=false;
+                break;
+            }
+            if(isStart){
+                atbName+=inputs[i][j];
+            }
+        }
+        attributes+=`
+            attributes.push({
+                key:'${atbName}',
+                value:(()=>{return ${inputs[i]}})()
+            });
+        `;
     }
-    console.log(contents);
-    
+
+    attributes+=`
+        for(var attribue of attributes){
+            result_${rfid}.setAttribute(attribue.key,attribue.value);
+        }
+    `;
+
+    var textContent=``;//result.textContent+=
+
+
+
+    for(var i=0;i<contents.length;i++){
+        if(contents[i].type=='textContent'){
+            var fid = uuidv4();
+            manager.textContents[fid]=contents[i].code;
+            textContent+=`result_${rfid}.textContent+=manager.GetTextContent('${fid}');
+            `;
+        }
+    }
+
 
     var compiledCode=`
 
         ${htmlImport}
 
-        ()=>{
+        (()=>{
 
-            var result=document.createElement('div');
+            var result_${rfid}=document.createElement('div');
 
             ${childs}
             
-            
-            return result;
+            ${attributes}
 
-        }
+            ${textContent}
+            
+            return result_${rfid};
+
+        })()
             
 
     `;

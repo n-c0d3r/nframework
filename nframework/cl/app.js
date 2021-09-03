@@ -6,10 +6,16 @@ framework.IOConnectToServer(()=>{
     
 });
 
-nmoduleManager.AutoSetParentForModules();
+(async ()=>{
 
-nmoduleManager.AfterConnected();
+    await nmoduleManager.GetDatasFromServer();
 
-nmoduleManager.Setup();
+    nmoduleManager.AutoSetParentForModules();
     
-nmoduleManager.Start();
+    nmoduleManager.AfterConnected();
+    
+    nmoduleManager.Setup();
+        
+    nmoduleManager.Start();
+
+})()

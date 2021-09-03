@@ -14,6 +14,15 @@ var NModuleManager=class{
         this.pages=new Object();
         this.modules=new Object();
         this.watches=[];
+        this.textContents=new Object();
+    }
+
+    Routing(){
+        var manager=this;
+        var express_server=this.NFramework.express_server;
+        express_server.get('/textContents',(req,res)=>{
+            res.send(manager.textContents);
+        });
     }
 
     SetupGetterAndSetterForSyncProps(){

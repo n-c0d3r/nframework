@@ -48,41 +48,68 @@ manager=window.NFramework.nmoduleManager;
                 
                 
 
-                console.log(
+                document.body.appendChild(
                     
 
         
 
-        ()=>{
+        (()=>{
 
-            var result=document.createElement('div');
+            var result_61d98aef_682a_473d_8813_c2c0aaf8938d=document.createElement('div');
 
-            
-        var childs=[];
-    childs.push(
+            result_61d98aef_682a_473d_8813_c2c0aaf8938d.appendChild(
 
         
 
-        ()=>{
+        (()=>{
 
-            var result=document.createElement('div');
+            var result_696360f3_9f0d_4831_8c9c_6858d127668f=document.createElement('div');
 
             
-        var childs=[];
+            
+            
+        var attributes=[];
     
-            
-            
-            return result;
-
+            attributes.push({
+                key:'id',
+                value:(()=>{return id="div2"})()
+            });
+        
+        for(var attribue of attributes){
+            result_696360f3_9f0d_4831_8c9c_6858d127668f.setAttribute(attribue.key,attribue.value);
         }
+    
+
+            result_696360f3_9f0d_4831_8c9c_6858d127668f.textContent+=manager.GetTextContent('75e0fedd-5314-4a3f-883b-5d75f71be531');
+            
+            
+            return result_696360f3_9f0d_4831_8c9c_6858d127668f;
+
+        })()
             
 
     )
             
             
-            return result;
-
+        var attributes=[];
+    
+            attributes.push({
+                key:'id',
+                value:(()=>{return id="div1"})()
+            });
+        
+        for(var attribue of attributes){
+            result_61d98aef_682a_473d_8813_c2c0aaf8938d.setAttribute(attribue.key,attribue.value);
         }
+    
+
+            result_61d98aef_682a_473d_8813_c2c0aaf8938d.textContent+=manager.GetTextContent('5a6d6ee4-d530-4e18-810a-056021911442');
+            result_61d98aef_682a_473d_8813_c2c0aaf8938d.textContent+=manager.GetTextContent('1e001bf0-f4a0-4195-bd8e-5724a0486871');
+            
+            
+            return result_61d98aef_682a_473d_8813_c2c0aaf8938d;
+
+        })()
             
 
     

@@ -12,14 +12,15 @@
                 
                 <use html>
 
-                console.log(
-                    <html:div id="div1">
+                document.body.appendChild(
+                    <div id="div1">
+                        div1
+                        
+                        <div id="div2">
+                            div2
+                        </div>
 
-                        <html:div id="div2">
-
-                        </html:div>
-
-                    </html:div>
+                    </div>
                 );
 
                 </use>

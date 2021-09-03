@@ -51,6 +51,7 @@ var NFramework=class{
     }
 
     Run(){
+        this.nmoduleManager.Routing();
         this.nmoduleManager.Setup();
         this.nmoduleManager.Start();
     }

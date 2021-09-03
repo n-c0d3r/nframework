@@ -2,14 +2,25 @@ var NModuleManager = class{
     constructor(){
         this.modules=new Object();
         this.customTypeDatas=new Object();
+        this.textContents=new Object();
     }
 
+
+    async GetDatasFromServer(){
+        var response=await fetch(window.origin+'/textContents');
+        var data = await response.json();
+        this.textContents=data;
+    }
 
     ImportModule(module){
         var moduleName = module.name;
         this.modules[moduleName]=module;
         this.modules[moduleName].manager=this;
         this.modules[moduleName].AfterImported();
+    }
+
+    GetTextContent(id){
+        return this.textContents[id];
     }
 
     Setup(){
