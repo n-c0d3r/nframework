@@ -5,7 +5,6 @@ var Element=require('./element/element');
 var NCompiler = class{
 
     constructor(){
-
     }
 
     CreateModuleFromCode(codeSV,codeCL,path){
@@ -74,13 +73,45 @@ var NCompiler = class{
     GetTag(name){
         var result=null;
 
+        var useNone=function() {
+            result = require('./tags/none_tag.js');
+            result.name=name;
+        }
+
         if(name!=''){
-            result = require('./tags/'+name+'.js');
+            if(fs.existsSync(__dirname+'/tags/'+name+'.js')){
+                result = require('./tags/'+name+'.js');
+                result.name=name;
+                return result;
+            }
+            else{
+                var isExists=false;
+                for(var base of this.useBases){
+                    var basePath=this.GetTagNameFromString(base.name);
+                    var basePath2='';
+                    for(var i=0;i<basePath.length;i++){
+                        var ch='/'
+                        if(basePath[i]!=':'){
+                            ch=basePath[i];
+                        }
+                        basePath2+=ch;
+                    }
+                    basePath=basePath2;
+                    var fullPath=__dirname+'/tags/'+basePath+'/'+name+'.js';
+                    if(fs.existsSync(fullPath)){
+                        result = require(fullPath);
+                        result.name=name;
+                        isExists=true;
+                        return result;
+                    }
+                }
+                useNone();
+            }
         }
         else{
             result = require('./tags/region.js');
+            result.name=name;
         }
-        result.name=name;
         return result;
     }
 
@@ -121,6 +152,28 @@ var NCompiler = class{
         }
         inputr=input.substring(start,end+1);
         return inputr;
+    }
+
+    ClearSpace(name){
+        var start=0;
+        var end=name.length-1;
+
+        for(var i=0;i<name.length;i++){
+            if(name[i]!=' '){
+                start=i;
+                break;
+            }
+        }
+
+        for(var i=name.length-1;i>=0;i--){
+            if(name[i]!=' '){
+                end=i;
+                break;
+            }
+        }
+
+        return name.substring(start,end+1);
+
     }
 
     GetTagsOrder(code){
@@ -194,6 +247,63 @@ var NCompiler = class{
                         var tagName=code.substring(startN,endTagName+1);
 
                         tagName=this.GetTagNameFromString(tagName);
+
+                        if(tagName=='use'){
+                            var checkIsCloseStart=startN;
+                            var __tagStart=startN;
+                            var isCloseTag=false;
+                            for(var t=checkIsCloseStart;t>=0;t--){
+                                if(code[t]=='<'){
+                                    __tagStart=t;
+                                    break;
+                                }
+                            }
+                            for(var t=__tagStart+1;t<checkIsCloseStart;t++){
+                                if(code[t]=='/'){
+                                    isCloseTag=true;
+                                    break;
+                                }
+                            }
+                            if(!isCloseTag){
+                                this.useLevel++;
+
+                                var useLevel=this.useLevel;
+                                var endTagNameUse=endTagName+1;
+                                var endBaseName=endTagNameUse+1;
+                                for(var t=endTagNameUse;t<code.length;t++){
+                                    if(code[t]=='>'){
+                                        endBaseName=t;
+                                        break;
+                                    }
+                                }
+                                var baseName=this.ClearSpace(code.substring(endTagNameUse,endBaseName));
+
+                                this.useBases.push({
+                                    level:useLevel,
+                                    name:baseName
+                                });
+                            }
+                            else{
+                                var lastOpenTagBaseIndex=this.useBases.length-1;
+                                var base=new Object();
+                                var baseIndex=lastOpenTagBaseIndex;
+                                for(var t=lastOpenTagBaseIndex;t>=0;t--){
+                                    if(this.useBases[t].level==this.useLevel){
+                                        base=this.useBases[t];
+                                        baseIndex=t;
+                                        break;
+                                    }
+                                }
+                                var bases=[];
+                                for(var t=0;t<this.useBases.length;t++){
+                                    if(t!=baseIndex){
+                                        bases.push(this.useBases[t]);
+                                    }
+                                }
+                                this.useBases=bases;
+                                this.useLevel--;
+                            }
+                        }
 
 
                         var tagNameCache='';
@@ -793,6 +903,9 @@ var NCompiler = class{
 
     CompileCode(code,forSV){
         var result=code;
+
+        this.useBases=[];
+        this.useLevel=0;
 
         var removedCommentsCode=this.RemoveComments(code);
 

@@ -1,4 +1,4 @@
-var JSCLPath = "D:\\nframework_gr/nlc/console/console.demo.nlc.client.js";module.exports=(manager)=>{
+var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.base.nlc.client.js";module.exports=(manager)=>{
                 var exports=new Object();
                     var nmodules=[];
                     var pages=[];
@@ -29,7 +29,9 @@ var JSCLPath = "D:\\nframework_gr/nlc/console/console.demo.nlc.client.js";module
 
         nmodule.side='both';
 
-        nmodule.name='console-demo';
+        nmodule.name='home-client-base';
+
+        nmodule.__TYPE='NMODULE';
 
         nmodule.RunExternalMethod=function(callback){
             callback.call(nmodule);
@@ -40,30 +42,32 @@ var JSCLPath = "D:\\nframework_gr/nlc/console/console.demo.nlc.client.js";module
     
 
     
-        this.AddMethod('setup',async (...args)=>{
-                var f=async function(){
-
-            var input = await (manager.Get('console')).GetThisWithCallback((module)=>{
-                            return module.Get('readLine');
-                        })();
-            
-            (manager.Get('console')).GetThisWithCallback((module)=>{
-                            return module.Get('log');
-                        })(input);
-
-            (manager.Get('console')).GetThisWithCallback((module)=>{
-                            return module.Get('clear');
-                        })();
-
-        }
+    
+    this.AddSyncProperty('syncProp');
+    
+    
 
     
-                var f2=f.bind(this);
-                return await f2(...args);
-            }
+
+        
+        this.AddMethod('setup',(...args)=>{
+            var f=
     
-        );
+
+            function(){
+                
+            }   
+
+        
+        
+    return f.call(this,...args); 
+
+}
     
+    );
+    
+    
+
     
 
 
@@ -80,7 +84,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/console/console.demo.nlc.client.js";module
         
         
         if(nmodule.side!='server'){
-            nmodule.Routing('/nmodules/console-demo',(req,res)=>{
+            nmodule.Routing('/nmodules/home-client-base',(req,res)=>{
                 res.send(nmodule.client_js_code);
             });
         }

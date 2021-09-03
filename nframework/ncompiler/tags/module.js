@@ -62,6 +62,8 @@ tag.Compile=function(element,childsCode,code){
 
         nmodule.name='${moduleName}';
 
+        nmodule.__TYPE='NMODULE';
+
         nmodule.RunExternalMethod=function(callback){
             callback.call(nmodule);
         }

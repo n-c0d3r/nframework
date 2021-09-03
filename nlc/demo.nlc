@@ -1,23 +1,7 @@
 <global demoGlobal>
 
     function() {
-        console.log(Object.keys(@home-client.properties));
-        console.log(@home-client -> base);
-        return 'Demo Global Function';
+        
     }
 
 </global>
-
-<module checkGlobalDemo>
-
-    <method setup>
-
-        function(){
-
-            
-            
-        }
-
-    </method>
-
-</module>

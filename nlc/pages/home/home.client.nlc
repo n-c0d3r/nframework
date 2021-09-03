@@ -7,7 +7,21 @@
         <async-method setup>
 
             function() {
-                @demoGlobal();
+                
+                //NDOM
+                
+                <use html>
+
+                console.log(<div>
+
+
+                </div>);
+
+                </use>
+
+                
+
+
             }
 
         </async-method>

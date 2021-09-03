@@ -22,6 +22,8 @@ manager=window.NFramework.nmoduleManager;
 
         nmodule.name='home-client-base';
 
+        nmodule.__TYPE='NMODULE';
+
         nmodule.RunExternalMethod=function(callback){
             callback.call(nmodule);
         }

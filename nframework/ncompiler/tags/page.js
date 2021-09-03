@@ -35,6 +35,8 @@ tag.Compile=function(element,childsCode,code){
 
     page_${inputs[0]}.name='${inputs[0]}';
 
+    page_${inputs[0]}.__TYPE='PAGE';
+
     page_${inputs[0]}.Setup=function(){
 
     `;

@@ -27,10 +27,10 @@ tag.Compile=function(element,childsCode,code){
 
         ()=>{
 
+            var result=document.createElement('div');
             
+            return result;
 
-            ${tagContent}
-            
         }
             
 

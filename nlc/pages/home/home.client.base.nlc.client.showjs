@@ -20,7 +20,9 @@ manager=window.NFramework.nmoduleManager;
 
         nmodule.side='both';
 
-        nmodule.name='console-demo';
+        nmodule.name='home-client-base';
+
+        nmodule.__TYPE='NMODULE';
 
         nmodule.RunExternalMethod=function(callback){
             callback.call(nmodule);
@@ -31,30 +33,11 @@ manager=window.NFramework.nmoduleManager;
     
 
     
-        this.AddMethod('setup',async (...args)=>{
-                var f=async function(){
-
-            var input = await (manager.Get('console')).GetThisWithCallback((module)=>{
-                            return module.Get('readLine');
-                        })();
-            
-            (manager.Get('console')).GetThisWithCallback((module)=>{
-                            return module.Get('log');
-                        })(input);
-
-            (manager.Get('console')).GetThisWithCallback((module)=>{
-                            return module.Get('clear');
-                        })();
-
-        }
-
     
-                var f2=f.bind(this);
-                return await f2(...args);
-            }
+    this.AddSyncProperty('syncProp');
     
-        );
     
+
     
 
 

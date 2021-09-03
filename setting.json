@@ -1,7 +1,7 @@
 {
     "nmodules_src_dir":"./nlc",
     "debug":{
-        "show_nlc_compiled_js":false,
+        "show_nlc_compiled_js":true,
         "client_nlc":true,
         "auto_restart_when_nlc_changed":false
     },
@@ -9,6 +9,6 @@
         "PORT":7070
     },
     "console":{
-        "enable":true
+        "enable":false
     }
 }

@@ -31,6 +31,8 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.base.nlc.client.js"
 
         nmodule.name='home-client-base';
 
+        nmodule.__TYPE='NMODULE';
+
         nmodule.RunExternalMethod=function(callback){
             callback.call(nmodule);
         }
