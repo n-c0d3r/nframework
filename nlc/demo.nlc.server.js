@@ -16,6 +16,10 @@ var JSCLPath = "D:\\nframework_gr/nlc/demo.nlc.client.js";module.exports=(manage
             var data=
 
     function() {
+        console.log(Object.keys((manager.Get('home-client')).properties));
+        console.log((manager.Get('home-client')) .GetThisWithCallback((module)=>{
+                            return module.Get('base');
+                        }));
         return 'Demo Global Function';
     }
 

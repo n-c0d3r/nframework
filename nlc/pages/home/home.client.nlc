@@ -7,7 +7,7 @@
         <async-method setup>
 
             function() {
-                console.log(@demoGlobal);
+                @demoGlobal();
             }
 
         </async-method>

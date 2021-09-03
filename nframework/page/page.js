@@ -21,10 +21,18 @@ var Page=class{
                 data=`
                     window.NFramework.nmoduleManager.customTypeDatas['${globalObjName}']=${data}
                 `;
+
+                var compiler=manager.NFramework.ncompiler;
+
+                var compiledData=compiler.CompileNModuleFastGetterAndSetter(data);
+
+                compiledData=compiledData.code;
+                compiledData = compiler.CompileFastGet(compiledData);
                 
                 express_server.get(url,(req,res)=>{
 
-                    res.send(data);
+
+                    res.send(compiledData);
                 });
             }
         }
