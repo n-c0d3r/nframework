@@ -6,7 +6,7 @@ tag.isAutoClose=true;
 
 tag.Compile=function(element,childsCode,code){
     var inputs=tag.GetInputs(element,childsCode,code);
-    return `nmodule.side='${inputs[0]}';`;
+    return `this.side='${inputs[0]}';`;
 }
 
 

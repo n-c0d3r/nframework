@@ -21,18 +21,26 @@ manager=window.NFramework.nmoduleManager;
         nmodule.side='both';
 
         nmodule.name='home-client-base';
-    
+
+        nmodule.RunExternalMethod=function(callback){
+            callback.call(nmodule);
+        }
+
+
+        nmodule.RunExternalMethod(function(){
     
 
     
     
-    nmodule.AddSyncProperty('syncProp');
+    this.AddSyncProperty('syncProp');
     
     
 
     
 
 
+        });
+    
         
             var nmoduleManager=window.NFramework.nmoduleManager;
             nmoduleManager.ImportModule(nmodule);

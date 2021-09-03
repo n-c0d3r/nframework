@@ -9,7 +9,7 @@ tag.Compile=function(element,childsCode,code){
     
     return `
     
-    nmodule.AddSyncProperty('${inputs[0]}');
+    this.AddSyncProperty('${inputs[0]}');
     
     `;
 }

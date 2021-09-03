@@ -37,7 +37,7 @@ tag.Compile=function(element,childsCode,code){
 
             miejs="<nframework-scripts>" +miejs+ "</nframework-scripts>";
 
-            res.render( manager.pages['${pageName}'].ejs_src,{
+            res.render( manager.pages['${pageName}'].src,{
                 NFramework:miejs
             });
         })(req,res);

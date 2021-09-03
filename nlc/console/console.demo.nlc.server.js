@@ -30,11 +30,17 @@ var JSCLPath = "D:\\nframework_gr/nlc/console/console.demo.nlc.client.js";module
         nmodule.side='both';
 
         nmodule.name='console-demo';
-    
+
+        nmodule.RunExternalMethod=function(callback){
+            callback.call(nmodule);
+        }
+
+
+        nmodule.RunExternalMethod(function(){
     
 
     
-        nmodule.AddMethod('setup',async (...args)=>{
+        this.AddMethod('setup',async (...args)=>{
                 var f=async function(){
 
             var input = await (manager.Get('console')).GetThisWithCallback((module)=>{
@@ -52,7 +58,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/console/console.demo.nlc.client.js";module
         }
 
     
-                var f2=f.bind(nmodule);
+                var f2=f.bind(this);
                 return await f2(...args);
             }
     
@@ -61,6 +67,8 @@ var JSCLPath = "D:\\nframework_gr/nlc/console/console.demo.nlc.client.js";module
     
 
 
+        });
+    
         
     
         var fs=require('fs');

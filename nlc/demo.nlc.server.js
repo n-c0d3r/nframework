@@ -43,11 +43,17 @@ var JSCLPath = "D:\\nframework_gr/nlc/demo.nlc.client.js";module.exports=(manage
         nmodule.side='both';
 
         nmodule.name='checkGlobalDemo';
-    
+
+        nmodule.RunExternalMethod=function(callback){
+            callback.call(nmodule);
+        }
+
+
+        nmodule.RunExternalMethod(function(){
     
 
     
-        nmodule.AddMethod('setup',(...args)=>{
+        this.AddMethod('setup',(...args)=>{
             var f=
     
 
@@ -59,7 +65,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/demo.nlc.client.js";module.exports=(manage
 
     
         
-    return f.call(nmodule,...args); 
+    return f.call(this,...args); 
 
 }
     
@@ -68,6 +74,8 @@ var JSCLPath = "D:\\nframework_gr/nlc/demo.nlc.client.js";module.exports=(manage
     
 
 
+        });
+    
         
     
         var fs=require('fs');

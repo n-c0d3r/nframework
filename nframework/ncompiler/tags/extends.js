@@ -20,7 +20,7 @@ tag.Compile=function(element,childsCode,code){
 
     return `
     
-        nmodule.baseModules = [${baseModules}];
+        this.baseModules = [${baseModules}];
     
     `;
 }

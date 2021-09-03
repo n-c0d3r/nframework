@@ -32,14 +32,16 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.page.nlc.client.js";module
 
     
     
-        this.ejs_src='home.ejs';
+        this.src='home.ejs';
     
     
 
 
+
     
-        this.useAllGlobalObjects=true;
-    
+            this.useAllGlobalObjects=true;
+        
+
 
 
     

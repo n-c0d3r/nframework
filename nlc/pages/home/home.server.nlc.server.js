@@ -30,12 +30,18 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.server.nlc.client.js";modu
         nmodule.side='both';
 
         nmodule.name='home-server';
-    
+
+        nmodule.RunExternalMethod=function(callback){
+            callback.call(nmodule);
+        }
+
+
+        nmodule.RunExternalMethod(function(){
     
 
     
         
-        nmodule.AddMethod('setup',(...args)=>{
+        this.AddMethod('setup',(...args)=>{
             var f=
     
 
@@ -45,7 +51,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.server.nlc.client.js";modu
 
         
         
-    return f.call(nmodule,...args); 
+    return f.call(this,...args); 
 
 }
     
@@ -55,6 +61,8 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.server.nlc.client.js";modu
     
 
 
+        });
+    
         
     
         var fs=require('fs');

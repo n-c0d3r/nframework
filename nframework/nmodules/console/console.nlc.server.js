@@ -30,7 +30,13 @@ var JSCLPath = "D:\\nframework_gr\\nframework/nmodules/console/console.nlc.clien
         nmodule.side='both';
 
         nmodule.name='console';
-    
+
+        nmodule.RunExternalMethod=function(callback){
+            callback.call(nmodule);
+        }
+
+
+        nmodule.RunExternalMethod(function(){
     
 
     
@@ -53,7 +59,7 @@ var JSCLPath = "D:\\nframework_gr\\nframework/nmodules/console/console.nlc.clien
             if(manager.NFramework.console.enable){
 
                 
-        nmodule.AddMethod('log',(...args)=>{
+        this.AddMethod('log',(...args)=>{
             var f=
     
                     function(...args) {
@@ -61,7 +67,7 @@ var JSCLPath = "D:\\nframework_gr\\nframework/nmodules/console/console.nlc.clien
                     }
                 
         
-    return f.call(nmodule,...args); 
+    return f.call(this,...args); 
 
 }
     
@@ -70,7 +76,7 @@ var JSCLPath = "D:\\nframework_gr\\nframework/nmodules/console/console.nlc.clien
     
 
                 
-        nmodule.AddMethod('clear',(...args)=>{
+        this.AddMethod('clear',(...args)=>{
             var f=
     
                     function() {
@@ -78,7 +84,7 @@ var JSCLPath = "D:\\nframework_gr\\nframework/nmodules/console/console.nlc.clien
                     }
                 
         
-    return f.call(nmodule,...args); 
+    return f.call(this,...args); 
 
 }
     
@@ -87,12 +93,12 @@ var JSCLPath = "D:\\nframework_gr\\nframework/nmodules/console/console.nlc.clien
     
 
                 
-        nmodule.AddMethod('readLine',async (...args)=>{
+        this.AddMethod('readLine',async (...args)=>{
                 var f=async function() {
                         return await ReadLine();
                     }
                 
-                var f2=f.bind(nmodule);
+                var f2=f.bind(this);
                 return await f2(...args);
             }
     
@@ -109,6 +115,8 @@ var JSCLPath = "D:\\nframework_gr\\nframework/nmodules/console/console.nlc.clien
 
 
 
+        });
+    
         
     
         var fs=require('fs');

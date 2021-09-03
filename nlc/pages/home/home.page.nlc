@@ -1,10 +1,12 @@
 
 <page homePage>
 
-    <ejs-src home />
+    <src home.ejs />
 
 
-    <global-objects-all/>
+
+    <global-objects * />
+
 
 
     <modules 

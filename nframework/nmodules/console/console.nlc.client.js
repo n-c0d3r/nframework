@@ -21,14 +21,22 @@ manager=window.NFramework.nmoduleManager;
         nmodule.side='both';
 
         nmodule.name='console';
+
+        nmodule.RunExternalMethod=function(callback){
+            callback.call(nmodule);
+        }
+
+
+        nmodule.RunExternalMethod(function(){
     
-    
 
     
 
 
 
 
+        });
+    
         
             var nmoduleManager=window.NFramework.nmoduleManager;
             nmoduleManager.ImportModule(nmodule);

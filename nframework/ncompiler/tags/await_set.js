@@ -15,7 +15,7 @@ tag.Compile=function(element,childsCode,code){
         compiledCode+=contents[i].code;
     }
 
-    return `await nmodule.AsyncSet('${inputs[0]}',${compiledCode})`;
+    return `await this.AsyncSet('${inputs[0]}',${compiledCode})`;
 }
 
 

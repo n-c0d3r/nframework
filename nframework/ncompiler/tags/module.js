@@ -61,12 +61,22 @@ tag.Compile=function(element,childsCode,code){
         nmodule.side='${side}';
 
         nmodule.name='${moduleName}';
-    
+
+        nmodule.RunExternalMethod=function(callback){
+            callback.call(nmodule);
+        }
+
+
+        nmodule.RunExternalMethod(function(){
     `;
     
     for(var i=0;i<contents.length;i++){
         compiledCode+=contents[i].code;
     }
+
+    compiledCode+=`
+        });
+    `;
 
     if(element.forSV){
         compiledCode+=`

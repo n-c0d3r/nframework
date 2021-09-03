@@ -21,11 +21,17 @@ manager=window.NFramework.nmoduleManager;
         nmodule.side='both';
 
         nmodule.name='console-demo';
-    
+
+        nmodule.RunExternalMethod=function(callback){
+            callback.call(nmodule);
+        }
+
+
+        nmodule.RunExternalMethod(function(){
     
 
     
-        nmodule.AddMethod('setup',async (...args)=>{
+        this.AddMethod('setup',async (...args)=>{
                 var f=async function(){
 
             var input = await (manager.Get('console')).GetThisWithCallback((module)=>{
@@ -43,7 +49,7 @@ manager=window.NFramework.nmoduleManager;
         }
 
     
-                var f2=f.bind(nmodule);
+                var f2=f.bind(this);
                 return await f2(...args);
             }
     
@@ -52,6 +58,8 @@ manager=window.NFramework.nmoduleManager;
     
 
 
+        });
+    
         
             var nmoduleManager=window.NFramework.nmoduleManager;
             nmoduleManager.ImportModule(nmodule);

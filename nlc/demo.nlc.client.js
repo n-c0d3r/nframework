@@ -25,11 +25,17 @@ manager=window.NFramework.nmoduleManager;
         nmodule.side='both';
 
         nmodule.name='checkGlobalDemo';
-    
+
+        nmodule.RunExternalMethod=function(callback){
+            callback.call(nmodule);
+        }
+
+
+        nmodule.RunExternalMethod(function(){
     
 
     
-        nmodule.AddMethod('setup',(...args)=>{
+        this.AddMethod('setup',(...args)=>{
             var f=
     
 
@@ -41,7 +47,7 @@ manager=window.NFramework.nmoduleManager;
 
     
         
-    return f.call(nmodule,...args); 
+    return f.call(this,...args); 
 
 }
     
@@ -50,6 +56,8 @@ manager=window.NFramework.nmoduleManager;
     
 
 
+        });
+    
         
             var nmoduleManager=window.NFramework.nmoduleManager;
             nmoduleManager.ImportModule(nmodule);

@@ -21,25 +21,31 @@ manager=window.NFramework.nmoduleManager;
         nmodule.side='both';
 
         nmodule.name='home-client';
-    
+
+        nmodule.RunExternalMethod=function(callback){
+            callback.call(nmodule);
+        }
+
+
+        nmodule.RunExternalMethod(function(){
     
 
     
     
-        nmodule.baseModules = ['home-client-base'];
+        this.baseModules = ['home-client-base'];
     
     
 
     
 
         
-        nmodule.AddMethod('setup',async (...args)=>{
+        this.AddMethod('setup',async (...args)=>{
                 var f=async function() {
                 console.log((manager.Get('demoGlobal')));
             }
 
         
-                var f2=f.bind(nmodule);
+                var f2=f.bind(this);
                 return await f2(...args);
             }
     
@@ -50,6 +56,8 @@ manager=window.NFramework.nmoduleManager;
     
 
 
+        });
+    
         
             var nmoduleManager=window.NFramework.nmoduleManager;
             nmoduleManager.ImportModule(nmodule);

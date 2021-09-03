@@ -10,7 +10,7 @@ tag.Compile=function(element,childsCode,code){
     var inputs=tag.GetInputs(element,childsCode,code);
 
     var compiledCode=`{
-        nmodule.AddServerMethod('${inputs[0]}',(clientSocket,...args)=>{
+        this.AddServerMethod('${inputs[0]}',(clientSocket,...args)=>{
             var f=
     `;
     
@@ -20,7 +20,7 @@ tag.Compile=function(element,childsCode,code){
 
     compiledCode+=`
         
-    f.call(nmodule,...args); 
+    f.call(this,...args); 
 
 }
     

@@ -9,7 +9,7 @@ tag.Compile=function(element,childsCode,code){
     
     return `
     
-    nmodule.AddProperty('${inputs[0]}');
+    this.AddProperty('${inputs[0]}');
     
     `;
 }

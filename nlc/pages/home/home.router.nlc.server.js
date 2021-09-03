@@ -30,7 +30,13 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.router.nlc.client.js";modu
         nmodule.side='both';
 
         nmodule.name='home-router';
-    
+
+        nmodule.RunExternalMethod=function(callback){
+            callback.call(nmodule);
+        }
+
+
+        nmodule.RunExternalMethod(function(){
     
 
     
@@ -80,7 +86,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.router.nlc.client.js";modu
 
             miejs="<nframework-scripts>" +miejs+ "</nframework-scripts>";
 
-            res.render( manager.pages['homePage'].ejs_src,{
+            res.render( manager.pages['homePage'].src,{
                 NFramework:miejs
             });
         })(req,res);
@@ -99,6 +105,8 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.router.nlc.client.js";modu
     
 
 
+        });
+    
         
     
         var fs=require('fs');

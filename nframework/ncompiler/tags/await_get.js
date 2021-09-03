@@ -7,7 +7,7 @@ tag.isAutoClose=true;
 tag.Compile=function(element,childsCode,code){
     var inputs=tag.GetInputs(element,childsCode,code);
 
-    return `await nmodule.AsyncGet('${inputs[0]}')`;
+    return `await this.AsyncGet('${inputs[0]}')`;
 }
 
 

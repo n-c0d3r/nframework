@@ -21,7 +21,13 @@ manager=window.NFramework.nmoduleManager;
         nmodule.side='both';
 
         nmodule.name='home-router';
-    
+
+        nmodule.RunExternalMethod=function(callback){
+            callback.call(nmodule);
+        }
+
+
+        nmodule.RunExternalMethod(function(){
     
 
     
@@ -67,7 +73,7 @@ manager=window.NFramework.nmoduleManager;
 
             miejs="<nframework-scripts>" +miejs+ "</nframework-scripts>";
 
-            res.render( manager.pages['homePage'].ejs_src,{
+            res.render( manager.pages['homePage'].src,{
                 NFramework:miejs
             });
         })(req,res);
@@ -82,6 +88,8 @@ manager=window.NFramework.nmoduleManager;
     
 
 
+        });
+    
         
             var nmoduleManager=window.NFramework.nmoduleManager;
             nmoduleManager.ImportModule(nmodule);
