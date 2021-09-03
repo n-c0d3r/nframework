@@ -35,7 +35,7 @@ manager=window.NFramework.nmoduleManager;
         
         nmodule.AddMethod('setup',async (...args)=>{
                 var f=async function() {
-                console.log((manager.Get('demoGlobal'))());
+                console.log((manager.Get('demoGlobal')));
             }
 
         

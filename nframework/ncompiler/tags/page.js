@@ -28,6 +28,10 @@ tag.Compile=function(element,childsCode,code){
     var Page=require('${pagePath}');
     
     var page_${inputs[0]}=new Page();
+    
+    page_${inputs[0]}.customTypeDatas=[];
+
+    page_${inputs[0]}.useAllGlobalObjects=false;
 
     page_${inputs[0]}.name='${inputs[0]}';
 

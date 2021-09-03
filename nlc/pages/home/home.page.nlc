@@ -3,9 +3,9 @@
 
     <ejs-src home />
 
-    <global-objects
-        demoGlobal
-    />
+
+    <global-objects-all/>
+
 
     <modules 
 

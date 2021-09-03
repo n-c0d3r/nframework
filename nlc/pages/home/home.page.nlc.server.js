@@ -19,6 +19,10 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.page.nlc.client.js";module
     var Page=require('D:\\nframework_gr\\nframework\\ncompiler\\tags/../../page/page');
     
     var page_homePage=new Page();
+    
+    page_homePage.customTypeDatas=[];
+
+    page_homePage.useAllGlobalObjects=false;
 
     page_homePage.name='homePage';
 
@@ -32,13 +36,11 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.page.nlc.client.js";module
     
     
 
+
     
+        this.useAllGlobalObjects=true;
     
-        this.customTypeDatas=[];
-    this.customTypeDatas.push('demoGlobal');
-        
-    
-    
+
 
     
     

@@ -191,6 +191,7 @@ var NModuleManager=class{
     }
 
     ImportModules(){
+        var useALlGlobalObjs_pages=[];
         for(var i=0;i<this.svMJSPaths.length;i++){
             var modulePath=this.svMJSPaths[i];
             var eps=require(modulePath)(this);
@@ -214,12 +215,20 @@ var NModuleManager=class{
             var pages=eps.pages;
             for(var page of pages){
                 this.pages[page.name]=page;
+                if(page.useAllGlobalObjects){
+                    useALlGlobalObjs_pages.push(page.name);
+                }
             }
         }
 
         var moduleNames=Object.keys(this.modules);
         for(var moduleName of moduleNames){
             this.AutoSetParent(moduleName);
+        }
+
+        for(var pageName of useALlGlobalObjs_pages){
+            this.pages[pageName].customTypeDatas=Object.keys(this.customTypeDatas);
+            this.pages[pageName].SetupGlobalObjectsRouter();
         }
     }
 

@@ -5,7 +5,7 @@ var Page=class{
         
     }
 
-    AfterSetup(){
+    SetupGlobalObjectsRouter(){
         var manager=this.manager;
 
         for(var globalObjName of this.customTypeDatas){
@@ -28,7 +28,10 @@ var Page=class{
                 });
             }
         }
+    }
 
+    AfterSetup(){
+        this.SetupGlobalObjectsRouter();
     }
 
 }
