@@ -49,19 +49,44 @@ manager=window.NFramework.nmoduleManager;
                 
 
                 console.log(
+                    
 
         
 
         ()=>{
 
             var result=document.createElement('div');
+
+            
+        var childs=[];
+    childs.push(
+
+        
+
+        ()=>{
+
+            var result=document.createElement('div');
+
+            
+        var childs=[];
+    
+            
             
             return result;
 
         }
             
 
-    );
+    )
+            
+            
+            return result;
+
+        }
+            
+
+    
+                );
 
                 
 

@@ -1,13 +1,10 @@
 const fs=require('fs');
 
-var NModule=require('../nmodule/nmodule');
-
 var Element=require('./element/element');
 
 var NCompiler = class{
 
     constructor(){
-
     }
 
     CreateModuleFromCode(codeSV,codeCL,path){
@@ -76,13 +73,45 @@ var NCompiler = class{
     GetTag(name){
         var result=null;
 
+        var useNone=function() {
+            result = require('./tags/none_tag.js');
+            result.name=name;
+        }
+
         if(name!=''){
-            result = require('./tags/'+name+'.js');
+            if(fs.existsSync(__dirname+'/tags/'+name+'.js')){
+                result = require('./tags/'+name+'.js');
+                result.name=name;
+                return result;
+            }
+            else{
+                var isExists=false;
+                for(var base of this.useBases){
+                    var basePath=this.GetTagNameFromString(base.name);
+                    var basePath2='';
+                    for(var i=0;i<basePath.length;i++){
+                        var ch='/'
+                        if(basePath[i]!=':'){
+                            ch=basePath[i];
+                        }
+                        basePath2+=ch;
+                    }
+                    basePath=basePath2;
+                    var fullPath=__dirname+'/tags/'+basePath+'/'+name+'.js';
+                    if(fs.existsSync(fullPath)){
+                        result = require(fullPath);
+                        result.name=name;
+                        isExists=true;
+                        return result;
+                    }
+                }
+                useNone();
+            }
         }
         else{
             result = require('./tags/region.js');
+            result.name=name;
         }
-        result.name=name;
         return result;
     }
 
@@ -125,6 +154,28 @@ var NCompiler = class{
         return inputr;
     }
 
+    ClearSpace(name){
+        var start=0;
+        var end=name.length-1;
+
+        for(var i=0;i<name.length;i++){
+            if(name[i]!=' '){
+                start=i;
+                break;
+            }
+        }
+
+        for(var i=name.length-1;i>=0;i--){
+            if(name[i]!=' '){
+                end=i;
+                break;
+            }
+        }
+
+        return name.substring(start,end+1);
+
+    }
+
     GetTagsOrder(code){
         var tagsOrder=[];
 
@@ -150,6 +201,9 @@ var NCompiler = class{
     
             }
 
+            var regex=/^[a-zA-Z]+$/;
+            var regex2=/^[0-9]+$/;
+
             if(ch=='<' && this.IsStartTag(i,code)){
                 var tagStart=i;
                 var tagEnd=i;
@@ -157,7 +211,7 @@ var NCompiler = class{
                 for(var j=i+1;j<code.length;j++){
                     var chj=code[j];
 
-                    if(chj!='/'&&chj!=' '){
+                    if(chj.match(regex) || chj=='_' || chj=='-'){
                         startN=j;
                         break;
                     }
@@ -193,6 +247,63 @@ var NCompiler = class{
                         var tagName=code.substring(startN,endTagName+1);
 
                         tagName=this.GetTagNameFromString(tagName);
+
+                        if(tagName=='use'){
+                            var checkIsCloseStart=startN;
+                            var __tagStart=startN;
+                            var isCloseTag=false;
+                            for(var t=checkIsCloseStart;t>=0;t--){
+                                if(code[t]=='<'){
+                                    __tagStart=t;
+                                    break;
+                                }
+                            }
+                            for(var t=__tagStart+1;t<checkIsCloseStart;t++){
+                                if(code[t]=='/'){
+                                    isCloseTag=true;
+                                    break;
+                                }
+                            }
+                            if(!isCloseTag){
+                                this.useLevel++;
+
+                                var useLevel=this.useLevel;
+                                var endTagNameUse=endTagName+1;
+                                var endBaseName=endTagNameUse+1;
+                                for(var t=endTagNameUse;t<code.length;t++){
+                                    if(code[t]=='>'){
+                                        endBaseName=t;
+                                        break;
+                                    }
+                                }
+                                var baseName=this.ClearSpace(code.substring(endTagNameUse,endBaseName));
+
+                                this.useBases.push({
+                                    level:useLevel,
+                                    name:baseName
+                                });
+                            }
+                            else{
+                                var lastOpenTagBaseIndex=this.useBases.length-1;
+                                var base=new Object();
+                                var baseIndex=lastOpenTagBaseIndex;
+                                for(var t=lastOpenTagBaseIndex;t>=0;t--){
+                                    if(this.useBases[t].level==this.useLevel){
+                                        base=this.useBases[t];
+                                        baseIndex=t;
+                                        break;
+                                    }
+                                }
+                                var bases=[];
+                                for(var t=0;t<this.useBases.length;t++){
+                                    if(t!=baseIndex){
+                                        bases.push(this.useBases[t]);
+                                    }
+                                }
+                                this.useBases=bases;
+                                this.useLevel--;
+                            }
+                        }
 
 
                         var tagNameCache='';
@@ -321,6 +432,7 @@ var NCompiler = class{
     }
 
     CompileElement(element,codeinput){
+        var manager=this.NFramework.nmoduleManager;
         var code='';
         var einputCode=new Object();
 
@@ -340,6 +452,13 @@ var NCompiler = class{
                 var exports=new Object();
                     var nmodules=[];
                     var pages=[];
+                    exports.customTypeDatas=[];
+                    exports.customTypeDatas.Add=function(key,value){
+                        exports.customTypeDatas.push({
+                            'key':key,
+                            'value':value
+                        });
+                    }
 
                     ${code}
                     
@@ -358,7 +477,7 @@ var NCompiler = class{
         }
         else{
             if(element.tag.isAutoClose){
-                code=element.tag.Compile(element,'',einputCode);
+                code=element.tag.Compile(element,'',einputCode,manager);
                 element.code=code;
             }
             else{
@@ -372,7 +491,7 @@ var NCompiler = class{
                     
                     `;
                 }
-                code=element.tag.Compile(element,childsCode,einputCode);
+                code=element.tag.Compile(element,childsCode,einputCode,manager);
                 element.code=code;
             }
         }
@@ -390,7 +509,7 @@ var NCompiler = class{
         return elements;
     }
 
-    CompileFastGetNModule(code){
+    CompileFastGet(code){
         var result='';        
         
         var isInStr=false;
@@ -450,9 +569,10 @@ var NCompiler = class{
                     var startName=i;
                     var endName=i;
                     var regex=/^[a-zA-Z]+$/;
+                    var regex2=/^[0-9]+$/;
     
                     for(;i<code.length;i++){ 
-                        if(!(code[i].match(regex) || code[i]=='_'  || code[i]=='-')){
+                        if(!(code[i].match(regex) || code[i].match(regex2) || code[i]=='_'  || code[i]=='-')){
                             endName=i;
                             break;
                         }
@@ -460,7 +580,7 @@ var NCompiler = class{
 
                     var name=code.substring(startName,endName);
                     
-                    result+=`manager.GetModule('${name}')`;
+                    result+=`(manager.Get('${name}'))`;
 
                     i-=1;
                 }
@@ -544,9 +664,10 @@ var NCompiler = class{
                     }
     
                     var regex=/^[a-zA-Z]+$/;
+                    var regex2=/^[0-9]+$/;
     
                     for(;i<code.length;i++){ 
-                        if(!(code[i].match(regex) || code[i]=='_')){
+                        if(!(code[i].match(regex) || code[i]=='_' || code[i].match(regex2))){
                             break;
                         }
                     }
@@ -637,9 +758,10 @@ var NCompiler = class{
                     }
     
                     var regex=/^[a-zA-Z]+$/;
+                    var regex2=/^[0-9]+$/;
     
                     for(;i<code.length;i++){ 
-                        if(!(code[i].match(regex) || code[i]=='_')){
+                        if(!(code[i].match(regex) || code[i].match(regex2) || code[i]=='_')){
                             break;
                         }
                     }
@@ -737,24 +859,38 @@ var NCompiler = class{
 
     RemoveComments(code){
         var result='';
+        var strChr='';
+        var isInStr=false;
         for(var i=0;i<code.length;i++){
-            if(code[i]=='/'&code[i+1]=='*'){
-                for(var j=i+1;j<code.length;j++){
-                    if(code[j-1]=='*'&&code[j]=='/'){
-                        i=j+1;
-                        break;
+            if(!isInStr && (code[i]=="'"||code[i]=='`'||code[i]=='"')){
+                isInStr=true;
+                strChr=code[i];
+            }
+            else{
+                if(code[i]==strChr){
+                    isInStr=false;
+                }
+            }
+            if(!isInStr){
+                if(code[i]=='/'&code[i+1]=='*'){
+                    for(var j=i+1;j<code.length;j++){
+                        if(code[j-1]=='*'&&code[j]=='/'){
+                            i=j+1;
+                            break;
+                        }
+                    }
+                }
+    
+                if(code[i]=='/'&code[i+1]=='/'){
+                    for(var j=i+1;j<code.length;j++){
+                        if(code[j]=='\r'||code[j]=='\n'){
+                            i=j+1;
+                            break;
+                        }
                     }
                 }
             }
-
-            if(code[i]=='/'&code[i+1]=='/'){
-                for(var j=i+1;j<code.length;j++){
-                    if(code[j]=='\r'||code[j]=='\n'){
-                        i=j+1;
-                        break;
-                    }
-                }
-            }
+            
 
             if(i>=code.length){
                 break;
@@ -767,6 +903,9 @@ var NCompiler = class{
 
     CompileCode(code,forSV){
         var result=code;
+
+        this.useBases=[];
+        this.useLevel=0;
 
         var removedCommentsCode=this.RemoveComments(code);
 
@@ -782,7 +921,7 @@ var NCompiler = class{
 
         var cnmfgas=cmpiledNModuleFastGetterAndSetter.top+cmpiledNModuleFastGetterAndSetter.code;
 
-        result=this.CompileFastGetNModule(cnmfgas);
+        result=this.CompileFastGet(cnmfgas);
 
         return result;
     }

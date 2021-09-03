@@ -331,6 +331,25 @@ var NCompiler = class{
 
                         tag.start=tagStart;
 
+                        tag.isClose=(()=>{
+                            var checkIsCloseStart=startN;
+                            var __tagStart=startN;
+                            var isCloseTag=false;
+                            for(var t=checkIsCloseStart;t>=0;t--){
+                                if(code[t]=='<'){
+                                    __tagStart=t;
+                                    break;
+                                }
+                            }
+                            for(var t=__tagStart+1;t<checkIsCloseStart;t++){
+                                if(code[t]=='/'){
+                                    isCloseTag=true;
+                                    break;
+                                }
+                            }
+                            return isCloseTag;
+                        })();
+
                         tagsOrder.push(tag);
 
                     }
@@ -354,9 +373,13 @@ var NCompiler = class{
 
         for(var i=0;i<tagsOrder.length;i++){
             if(!tagsOrder[i].isAutoClose){
-                if(openTags[tagsOrder[i].name]==null){
+                var openTagKey=tagsOrder[i].name;
+
+                //console.log(tagsOrder[i].isClose);
+
+                if(!tagsOrder[i].isClose){
                     level++;
-                    openTags[tagsOrder[i].name]=tagsOrder[i];
+                    openTags[openTagKey]=tagsOrder[i];
                     var element=new Element();
                     element.NFramework=this.NFramework;
                     element.tag=tagsOrder[i];
@@ -366,7 +389,7 @@ var NCompiler = class{
                 }
                 else{
                     level--;
-                    openTags[tagsOrder[i].name]=null;
+                    openTags[openTagKey]=null;
                     currentElement.endContentIndex=tagsOrder[i].start;
                     currentElement=currentElement.parent;
                 }

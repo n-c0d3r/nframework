@@ -11,15 +11,21 @@ tag.Compile=function(element,childsCode,code){
     
     var inputs=tag.GetInputs(element,childsCode,code);
 
-    var tagContent=`
-        textContent=[0
+    var childs=`
+        var childs=[];
     `;
 
-    for(var i=0;i<contents.length;i++){
-        tagContent+=',`contents[i].code`';
+    for(var i=0;i<contents.length-1;i++){
+        if(contents[i].type=='childCode'){
+            childs+=`childs.push(${contents[i].code})`;
+        }
     }
-
-    tagContent+=`]`;
+    var i=contents.length-1;
+    if(contents[i].type=='childCode'){
+        childs+=`childs.push(${contents[i].code})`;
+    }
+    console.log(contents);
+    
 
     var compiledCode=`
 
@@ -28,6 +34,9 @@ tag.Compile=function(element,childsCode,code){
         ()=>{
 
             var result=document.createElement('div');
+
+            ${childs}
+            
             
             return result;
 
