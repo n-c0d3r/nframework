@@ -34,6 +34,14 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.page.nlc.client.js";module
 
     
     
+        this.customTypeDatas=[];
+    this.customTypeDatas.push('demoGlobal');
+        
+    
+    
+
+    
+    
         this.modules=[];
     this.modules.push('home-client');
         this.modules.push('home-client-base');
@@ -44,6 +52,8 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.page.nlc.client.js";module
 
     }
         page_homePage.Setup.call(page_homePage);
+        page_homePage.manager=manager;
+        page_homePage.AfterSetup();
         pages.push( page_homePage);
 
     

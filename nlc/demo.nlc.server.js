@@ -12,13 +12,83 @@ var JSCLPath = "D:\\nframework_gr/nlc/demo.nlc.client.js";module.exports=(manage
 
                     
                 
-                    exports.customTypeDatas.Add('demoGlobal',
+                    exports.customTypeDatas.Add('demoGlobal',(()=>{
+            var data=
 
     function() {
-        console.log('demoGlobalFunctionCreated');
+        return 'Demo Global Function';
     }
 
-)
+;
+            return data;
+        })())
+                
+                
+                
+                    
+
+        var NModule=
+        function(){
+
+            return require("D:\\nframework_gr\\nframework\\ncompiler\\tags/../../nmodule/nmodule");
+
+        }()
+    
+    ;
+    
+        var nmodule=new NModule();
+
+        var This=nmodule;
+
+        nmodule.side='both';
+
+        nmodule.name='checkGlobalDemo';
+    
+    
+
+    
+        nmodule.AddMethod('setup',(...args)=>{
+            var f=
+    
+
+        function(){
+
+            
+            
+        }
+
+    
+        
+    return f.call(nmodule,...args); 
+
+}
+    
+    );
+    
+    
+
+
+        
+    
+        var fs=require('fs');
+
+        var clientVersion=JSCLPath;
+
+        nmodule.client_js_code=fs.readFileSync(clientVersion);
+
+        
+        
+        if(nmodule.side!='server'){
+            nmodule.Routing('/nmodules/checkGlobalDemo',(req,res)=>{
+                res.send(nmodule.client_js_code);
+            });
+        }
+
+        
+
+            nmodules.push(nmodule);
+        
+        
                 
                 
                     

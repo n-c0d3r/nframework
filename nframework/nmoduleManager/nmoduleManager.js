@@ -8,6 +8,8 @@ var NModuleManager=class{
         this.svMJSPaths=[];
         this.clMJSPaths=[];
         this.customTypeDatas=new Object();
+        this.customTypeDataInfos=new Object();
+        this.jsCode=new Object();
         this.nlcPaths=[];
         this.pages=new Object();
         this.modules=new Object();
@@ -98,6 +100,10 @@ var NModuleManager=class{
 
     }
 
+    GetJSCode(name){
+        return this.jsCode[name];
+    }
+
     CompileModules(){
 
         for(var filePath of this.watches){
@@ -159,6 +165,31 @@ var NModuleManager=class{
         }
     }
 
+    AutoSetParent(name){
+        var nameParts=name.split('-');
+        var newName=nameParts[nameParts.length-1];
+        
+        if(nameParts.length==1){
+            return 0;
+        }
+        else{
+            var parentName='';
+            for(var i=0;i<nameParts.length-2;i++){
+                parentName+=nameParts[i]+'-';
+            }
+            parentName+=nameParts[nameParts.length-2];
+
+            var parentModule=this.modules[parentName];
+
+            if(parentModule!=null){
+                parentModule.AddProperty(newName);
+                parentModule.Set(newName,this.modules[name]);
+            }
+        }
+
+
+    }
+
     ImportModules(){
         for(var i=0;i<this.svMJSPaths.length;i++){
             var modulePath=this.svMJSPaths[i];
@@ -166,6 +197,9 @@ var NModuleManager=class{
 
             for(var ctData of eps.customTypeDatas){
                 this.customTypeDatas[ctData.key]=ctData.value;
+                this.customTypeDataInfos[ctData.key]=new Object();
+                this.customTypeDataInfos[ctData.key].isSetupCLRouter=false;
+                this.customTypeDataInfos[ctData.key].path=this.clMJSPaths[i];
             }
 
             eps.manager=this;
@@ -181,6 +215,11 @@ var NModuleManager=class{
             for(var page of pages){
                 this.pages[page.name]=page;
             }
+        }
+
+        var moduleNames=Object.keys(this.modules);
+        for(var moduleName of moduleNames){
+            this.AutoSetParent(moduleName);
         }
     }
 

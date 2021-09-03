@@ -1,6 +1,4 @@
-var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.base.nlc.client.js";
-                            var a8dbc4212_6d3b_44ed_a85c_c53a69b2344c_module;
-                        module.exports=(manager)=>{
+var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.base.nlc.client.js";module.exports=(manager)=>{
                 var exports=new Object();
                     var nmodules=[];
                     var pages=[];
@@ -49,15 +47,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.base.nlc.client.js"
     
 
             function(){
-                this.GetThisWithCallback((module)=>{
-                            a8dbc4212_6d3b_44ed_a85c_c53a69b2344c_module=module;
-                        })
-                        var getterObj8dbc4212_6d3b_44ed_a85c_c53a69b2344c={
-                            set stter(value) {
-                                a8dbc4212_6d3b_44ed_a85c_c53a69b2344c_module.Set('syncProp',value);
-                            }
-                        }
-                        getterObj8dbc4212_6d3b_44ed_a85c_c53a69b2344c.stter=0; 
+                
             }   
 
         

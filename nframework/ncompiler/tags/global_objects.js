@@ -7,17 +7,17 @@ tag.isAutoClose=true;
 tag.Compile=function(element,childsCode,code){
     var inputs=tag.GetInputs(element,childsCode,code);
 
-    var compiledPath = inputs[0];
+    var code=`this.customTypeDatas=[];
+    `;
 
-    var parts=inputs[0].split('.');
-
-    if(parts[parts.length-1]!='ejs'){
-        compiledPath+='.ejs';
+    for(var i=0;i<inputs.length;i++){
+        code+=`this.customTypeDatas.push('${inputs[i]}');
+        `;
     }
     
     return `
     
-        this.ejs_src='${compiledPath}';
+        ${code}
     
     `;
 }

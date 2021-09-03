@@ -322,6 +322,7 @@ var NCompiler = class{
     }
 
     CompileElement(element,codeinput){
+        var manager=this.NFramework.nmoduleManager;
         var code='';
         var einputCode=new Object();
 
@@ -366,7 +367,7 @@ var NCompiler = class{
         }
         else{
             if(element.tag.isAutoClose){
-                code=element.tag.Compile(element,'',einputCode);
+                code=element.tag.Compile(element,'',einputCode,manager);
                 element.code=code;
             }
             else{
@@ -380,7 +381,7 @@ var NCompiler = class{
                     
                     `;
                 }
-                code=element.tag.Compile(element,childsCode,einputCode);
+                code=element.tag.Compile(element,childsCode,einputCode,manager);
                 element.code=code;
             }
         }

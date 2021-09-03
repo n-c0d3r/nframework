@@ -1,7 +1,11 @@
 
 <page homePage>
 
-    <ejs-src home.ejs/>
+    <ejs-src home />
+
+    <global-objects
+        demoGlobal
+    />
 
     <modules 
 

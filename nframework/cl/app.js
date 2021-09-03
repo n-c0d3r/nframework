@@ -6,6 +6,8 @@ framework.IOConnectToServer(()=>{
     
 });
 
+nmoduleManager.AutoSetParentForModules();
+
 nmoduleManager.AfterConnected();
 
 nmoduleManager.Setup();

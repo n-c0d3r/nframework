@@ -56,9 +56,16 @@ manager=window.NFramework.nmoduleManager;
                 var module=modules[i];
                 miejs+=' <script  src="/nmodules/'+module+'"></script>';
             }
-            
 
-            miejs+="<script src='/appcl'></script>";
+            var globalObjects=manager.pages['homePage'].customTypeDatas;
+
+            for(var globalObjectName of globalObjects){
+                miejs+="\n<script src='/global-objects/"+globalObjectName+"'></script>";
+            }
+
+            miejs+="\n<script src='/appcl'></script>";
+
+            miejs="<nframework-scripts>" +miejs+ "</nframework-scripts>";
 
             res.render( manager.pages['homePage'].ejs_src,{
                 NFramework:miejs

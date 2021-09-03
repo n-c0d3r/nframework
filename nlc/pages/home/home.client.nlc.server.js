@@ -41,29 +41,6 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.nlc.client.js";modu
 
     
 
-    
-
-        
-        nmodule.AddMethod('setup',(...args)=>{
-            var f=
-    
-
-            function() {
-                (manager.Get('demoGlobal'))();
-            }
-
-        
-        
-    return f.call(nmodule,...args); 
-
-}
-    
-    );
-    
-    
-
-    
-
 
         
     

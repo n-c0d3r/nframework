@@ -43,6 +43,8 @@ tag.Compile=function(element,childsCode,code){
     pageCode+=`
     }
         page_${inputs[0]}.Setup.call(page_${inputs[0]});
+        page_${inputs[0]}.manager=manager;
+        page_${inputs[0]}.AfterSetup();
         pages.push( page_${inputs[0]});
 
     `;

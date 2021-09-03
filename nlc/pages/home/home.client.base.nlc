@@ -8,7 +8,7 @@
         <method setup>
 
             function(){
-                this->syncProp=0; 
+                
             }   
 
         </method>

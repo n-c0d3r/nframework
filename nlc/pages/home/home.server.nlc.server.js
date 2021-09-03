@@ -40,6 +40,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.server.nlc.client.js";modu
     
 
             function() {
+
             }
 
         
