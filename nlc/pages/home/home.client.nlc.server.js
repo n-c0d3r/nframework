@@ -13,14 +13,6 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.nlc.client.js";modu
                     
                 
                     
-                
-                
-                
-                    
-                
-                
-                
-                    
 
         var NModule=
         function(){

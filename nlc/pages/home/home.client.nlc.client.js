@@ -2,14 +2,6 @@ manager=window.NFramework.nmoduleManager;
                 
                 
                     
-                
-                
-                
-                    
-                
-                
-                
-                    
             (()=>{
                 
 
@@ -74,51 +66,51 @@ manager=window.NFramework.nmoduleManager;
 
         (()=>{
 
-            var result_de8daa9b_d1b0_477c_a931_6da501dc0695=document.createElement('div');
+            var result_6cf7a076_a05d_41ea_a4c7_642e2be86687=document.createElement('div');
             
             
-        var attributes_de8daa9b_d1b0_477c_a931_6da501dc0695=[];
+        var attributes_6cf7a076_a05d_41ea_a4c7_642e2be86687=[];
     
-            attributes_de8daa9b_d1b0_477c_a931_6da501dc0695.push({
+            attributes_6cf7a076_a05d_41ea_a4c7_642e2be86687.push({
                 key:'id',
                 value:(()=>{return id="div1"})()
             });
         
-        for(var attribue of attributes_de8daa9b_d1b0_477c_a931_6da501dc0695){
-            result_de8daa9b_d1b0_477c_a931_6da501dc0695.setAttribute(attribue.key,attribue.value);
+        for(var attribue of attributes_6cf7a076_a05d_41ea_a4c7_642e2be86687){
+            result_6cf7a076_a05d_41ea_a4c7_642e2be86687.setAttribute(attribue.key,attribue.value);
         }
     
 
-            result_de8daa9b_d1b0_477c_a931_6da501dc0695.textContent+=manager.GetTextContent('bdfd5881-581e-443b-95ce-0ca2dc87d9bb');
-            result_de8daa9b_d1b0_477c_a931_6da501dc0695.textContent+=manager.GetTextContent('b6e69ad9-e5f2-4432-b854-d0624d414a39');
+            result_6cf7a076_a05d_41ea_a4c7_642e2be86687.textContent+=manager.GetTextContent('7b90b44f-d3d7-471b-85e5-acb96db082b7');
+            result_6cf7a076_a05d_41ea_a4c7_642e2be86687.textContent+=manager.GetTextContent('c0a8e01d-0ab2-45a6-90bd-f2474246150c');
             
 
             
-                result_de8daa9b_d1b0_477c_a931_6da501dc0695.appendChild(
+                result_6cf7a076_a05d_41ea_a4c7_642e2be86687.appendChild(
 
         (()=>{
 
-            var result_677721f1_5bbe_4c48_ac81_728162e5fbd9=document.createElement('a');
+            var result_c2029ede_5c05_4c4a_9f66_312f49115545=document.createElement('a');
             
             
-        var attributes_677721f1_5bbe_4c48_ac81_728162e5fbd9=[];
+        var attributes_c2029ede_5c05_4c4a_9f66_312f49115545=[];
     
-            attributes_677721f1_5bbe_4c48_ac81_728162e5fbd9.push({
+            attributes_c2029ede_5c05_4c4a_9f66_312f49115545.push({
                 key:'href',
                 value:(()=>{return href="https://youtube.com"})()
             });
         
-        for(var attribue of attributes_677721f1_5bbe_4c48_ac81_728162e5fbd9){
-            result_677721f1_5bbe_4c48_ac81_728162e5fbd9.setAttribute(attribue.key,attribue.value);
+        for(var attribue of attributes_c2029ede_5c05_4c4a_9f66_312f49115545){
+            result_c2029ede_5c05_4c4a_9f66_312f49115545.setAttribute(attribue.key,attribue.value);
         }
     
 
-            result_677721f1_5bbe_4c48_ac81_728162e5fbd9.textContent+=manager.GetTextContent('07fb3c08-08fd-472a-ab82-6c574f51371e');
+            result_c2029ede_5c05_4c4a_9f66_312f49115545.textContent+=manager.GetTextContent('e1eabd01-5eec-4a4d-974f-81ec62747a9b');
             
 
             
             
-            return result_677721f1_5bbe_4c48_ac81_728162e5fbd9;
+            return result_c2029ede_5c05_4c4a_9f66_312f49115545;
 
         })()
             
@@ -126,7 +118,7 @@ manager=window.NFramework.nmoduleManager;
     );
                 
             
-            return result_de8daa9b_d1b0_477c_a931_6da501dc0695;
+            return result_6cf7a076_a05d_41ea_a4c7_642e2be86687;
 
         })()
             

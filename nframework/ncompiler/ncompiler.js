@@ -76,6 +76,9 @@ var NCompiler = class{
         var useNone=function() {
             result = require('./tags/none_tag.js');
             result.name=name;
+            result.notFoundName=name;
+            result.notFound=true;
+            return result;
         }
 
         if(name!=''){
@@ -176,7 +179,7 @@ var NCompiler = class{
 
     }
 
-    GetTagsOrder(code){
+    GetTagsOrder(code,nlcPath){
         var tagsOrder=[];
 
         for(var i=0;i<code.length;i++){
@@ -247,6 +250,7 @@ var NCompiler = class{
                         var tagName=code.substring(startN,endTagName+1);
 
                         tagName=this.GetTagNameFromString(tagName);
+
 
                         if(tagName=='use' || tagName=='use-for-all' ){
                             var checkIsCloseStart=startN;
@@ -328,6 +332,21 @@ var NCompiler = class{
                         tagName=tagNameCache;
 
                         var tag={...this.GetTag(tagName)};
+                        
+                        if(tag.notFound){
+                            var line=1;
+
+                            for(var i=0;i<startN;i++){
+                                if(code[i]=='\n'){
+                                    line++;
+                                }
+                            }
+                        
+                            console.log(`${nlcPath}:${line}`);
+                            console.log(`   '${tagName}' tag not found.`);
+                            process.exit();
+                        }
+
 
                         tag.start=tagStart;
 
@@ -372,43 +391,46 @@ var NCompiler = class{
         var currentElement=result;
 
         for(var i=0;i<tagsOrder.length;i++){
-            if(!tagsOrder[i].isAutoClose){
-                var openTagKey=tagsOrder[i].name;
-
-                //console.log(tagsOrder[i].isClose);
-
-                if(!tagsOrder[i].isClose){
-                    level++;
-                    openTags[openTagKey]=tagsOrder[i];
+            if(tagsOrder[i].name!='use'){
+                if(!tagsOrder[i].isAutoClose){
+                    var openTagKey=tagsOrder[i].name;
+    
+                    //console.log(tagsOrder[i].isClose);
+    
+                    if(!tagsOrder[i].isClose){
+                        level++;
+                        openTags[openTagKey]=tagsOrder[i];
+                        var element=new Element();
+                        element.NFramework=this.NFramework;
+                        element.tag=tagsOrder[i];
+                        element.startContentIndex=tagsOrder[i].start;
+                        currentElement.AppendChild(element);
+                        currentElement=element;
+                    }
+                    else{
+                        level--;
+                        openTags[openTagKey]=null;
+                        currentElement.endContentIndex=tagsOrder[i].start;
+                        currentElement=currentElement.parent;
+                    }
+                }
+                else{
                     var element=new Element();
                     element.NFramework=this.NFramework;
                     element.tag=tagsOrder[i];
                     element.startContentIndex=tagsOrder[i].start;
-                    currentElement.AppendChild(element);
-                    currentElement=element;
-                }
-                else{
-                    level--;
-                    openTags[openTagKey]=null;
-                    currentElement.endContentIndex=tagsOrder[i].start;
-                    currentElement=currentElement.parent;
-                }
-            }
-            else{
-                var element=new Element();
-                element.NFramework=this.NFramework;
-                element.tag=tagsOrder[i];
-                element.startContentIndex=tagsOrder[i].start;
-                for(var j=element.startContentIndex;j<code.length;j++){
-                    if(code[j]=='>'){
-                        element.endContentIndex=j;
-                        break;
+                    for(var j=element.startContentIndex;j<code.length;j++){
+                        if(code[j]=='>'){
+                            element.endContentIndex=j;
+                            break;
+                        }
                     }
+                    currentElement.AppendChild(element);
                 }
-                currentElement.AppendChild(element);
+    
+                tagsOrder[i].level=level;
             }
-
-            tagsOrder[i].level=level;
+            
 
         }
 
@@ -442,10 +464,10 @@ var NCompiler = class{
         return result;
     }
 
-    GetElementsFromCode(code){
+    GetElementsFromCode(code,nlcPath){
         var result=[];
         
-        var tagsOrder=this.GetTagsOrder(code);
+        var tagsOrder=this.GetTagsOrder(code,nlcPath);
         
         var elements=this.GetElementsFromTagsOrder(tagsOrder,code);
 
@@ -454,7 +476,7 @@ var NCompiler = class{
         return result;
     }
 
-    CompileElement(element,codeinput){
+    CompileElement(element,codeinput,nlcPath){
         var manager=this.NFramework.nmoduleManager;
         var code='';
         var einputCode=new Object();
@@ -463,7 +485,7 @@ var NCompiler = class{
 
         if(element.tag==null){
             for(var i=0;i<element.childs.length;i++){
-                var ei_code = this.CompileElement(element.childs[i],codeinput);
+                var ei_code = this.CompileElement(element.childs[i],codeinput,nlcPath);
                 code+=`
                 
                     ${ei_code}
@@ -500,13 +522,13 @@ var NCompiler = class{
         }
         else{
             if(element.tag.isAutoClose){
-                code=element.tag.Compile(element,'',einputCode,manager);
+                code=element.tag.Compile(element,'',einputCode,manager,nlcPath);
                 element.code=code;
             }
             else{
                 var childsCode='';
                 for(var i=0;i<element.childs.length;i++){
-                    var ei_code = this.CompileElement(element.childs[i],codeinput);
+                    var ei_code = this.CompileElement(element.childs[i],codeinput,nlcPath);
                     element.childs[i].code=ei_code;
                     childsCode+=`
                     
@@ -514,7 +536,7 @@ var NCompiler = class{
                     
                     `;
                 }
-                code=element.tag.Compile(element,childsCode,einputCode,manager);
+                code=element.tag.Compile(element,childsCode,einputCode,manager,nlcPath);
                 element.code=code;
             }
         }
@@ -924,7 +946,7 @@ var NCompiler = class{
         return result;
     }
 
-    CompileCode(code,forSV){
+    CompileCode(code,forSV,nlcPath){
         var result=code;
 
         this.useBases=[];
@@ -932,11 +954,11 @@ var NCompiler = class{
 
         var removedCommentsCode=this.RemoveComments(code);
 
-        var elements=this.GetElementsFromCode(removedCommentsCode);
+        var elements=this.GetElementsFromCode(removedCommentsCode,nlcPath);
 
         elements=this.SetSideForElements(elements,forSV);
 
-        var compiledElement=this.CompileElement(elements,removedCommentsCode);
+        var compiledElement=this.CompileElement(elements,removedCommentsCode,nlcPath);
         
         var compiledSpecialCharactersCode=this.CompileSpecialCharaters(compiledElement);
 
@@ -953,9 +975,9 @@ var NCompiler = class{
 
         var code=fs.readFileSync(path).toString();
 
-        var compiledCodeSV=this.CompileCode(code,true);
+        var compiledCodeSV=this.CompileCode(code,true,path);
 
-        var compiledCodeCL=this.CompileCode(code,false);
+        var compiledCodeCL=this.CompileCode(code,false,path);
 
         var cResult = this.CreateModuleFromCode(compiledCodeSV,compiledCodeCL,path);
 

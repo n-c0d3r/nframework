@@ -1,5 +1,5 @@
-<use-for-all html/>
-<use-for-all dom/>
+<use html>
+<use dom>
 
 <module home-client>
 
