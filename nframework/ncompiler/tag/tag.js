@@ -10,6 +10,7 @@ var Tag=class{
     GetInputs(element,childsCode,code){
         var endTagIndex=element.startContentIndex;
 
+        
         for(var i=element.startContentIndex;i<code.data.length;i++){
             if((code.data[i]=='>' && !this.isAutoClose)
                 || (code.data[i]=='/' && (this.isAutoClose))){
@@ -17,12 +18,13 @@ var Tag=class{
                 break;
             }
         }
+        
 
         var startInputIndex=element.startContentIndex;
-        
-        var endTagName=startInputIndex;
 
-        
+        var endTagName=startInputIndex;
+    
+            
         var regex=/^[a-zA-Z]+$/;
         var regex2=/^[0-9]+$/;
 
@@ -37,10 +39,16 @@ var Tag=class{
 
         endTagName=startTagNameIndex+this.name.length;
         
-        
+        if (endTagName==endTagIndex){
+            return [];
+        }
 
         var inputsStr=code.data.substring(endTagName+1,endTagIndex);
 
+        // if(this.htmlTagName=='img'){
+        //     console.log(inputsStr+'/');
+        //     console.log(code.data.substring(endTagIndex,code.length));
+        // }
 
     
         var inputs=[];//inputsStr.split(' ');
@@ -97,6 +105,7 @@ var Tag=class{
         inputs=inputsCache;
 
         return inputs;
+        
     }
 
 

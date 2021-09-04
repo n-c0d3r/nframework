@@ -55,59 +55,92 @@ manager=window.NFramework.nmoduleManager;
 
         (()=>{
 
-            var result_61d98aef_682a_473d_8813_c2c0aaf8938d=document.createElement('div');
+            var result_ffe72717_dc95_4e4b_acea_ea839943c285=document.createElement('div');
+            
+            
+        var attributes_ffe72717_dc95_4e4b_acea_ea839943c285=[];
+    
+            attributes_ffe72717_dc95_4e4b_acea_ea839943c285.push({
+                key:'id',
+                value:(()=>{return id="div1"})()
+            });
+        
+        for(var attribue of attributes_ffe72717_dc95_4e4b_acea_ea839943c285){
+            result_ffe72717_dc95_4e4b_acea_ea839943c285.setAttribute(attribue.key,attribue.value);
+        }
+    
 
-            result_61d98aef_682a_473d_8813_c2c0aaf8938d.appendChild(
+            result_ffe72717_dc95_4e4b_acea_ea839943c285.textContent+=manager.GetTextContent('881ddf35-7010-4452-8173-4bc78f8442ba');
+            result_ffe72717_dc95_4e4b_acea_ea839943c285.textContent+=manager.GetTextContent('420688e5-1737-4043-94f3-27cd53990b3a');
+            result_ffe72717_dc95_4e4b_acea_ea839943c285.textContent+=manager.GetTextContent('76b33caf-ddf8-42c0-b74c-cc107497271c');
+            
+
+            
+            result_ffe72717_dc95_4e4b_acea_ea839943c285.appendChild(
 
         
 
         (()=>{
 
-            var result_696360f3_9f0d_4831_8c9c_6858d127668f=document.createElement('div');
-
+            var result_8cd9023d_bc20_40f4_8e6b_8453131c751e=document.createElement('div');
             
             
-            
-        var attributes=[];
+        var attributes_8cd9023d_bc20_40f4_8e6b_8453131c751e=[];
     
-            attributes.push({
+            attributes_8cd9023d_bc20_40f4_8e6b_8453131c751e.push({
                 key:'id',
                 value:(()=>{return id="div2"})()
             });
         
-        for(var attribue of attributes){
-            result_696360f3_9f0d_4831_8c9c_6858d127668f.setAttribute(attribue.key,attribue.value);
+        for(var attribue of attributes_8cd9023d_bc20_40f4_8e6b_8453131c751e){
+            result_8cd9023d_bc20_40f4_8e6b_8453131c751e.setAttribute(attribue.key,attribue.value);
         }
     
 
-            result_696360f3_9f0d_4831_8c9c_6858d127668f.textContent+=manager.GetTextContent('75e0fedd-5314-4a3f-883b-5d75f71be531');
+            result_8cd9023d_bc20_40f4_8e6b_8453131c751e.textContent+=manager.GetTextContent('c54c4bc8-e094-4535-b695-e4d8235434f7');
+            
+
             
             
-            return result_696360f3_9f0d_4831_8c9c_6858d127668f;
+            return result_8cd9023d_bc20_40f4_8e6b_8453131c751e;
 
         })()
             
 
-    )
+    );
+            
+            result_ffe72717_dc95_4e4b_acea_ea839943c285.appendChild(
+
+        
+
+        (()=>{
+
+            var input_3df83639_36cf_4e28_b8e9_f906e5fc2fea=document.createElement('input');
             
             
-        var attributes=[];
+        var attributes_3df83639_36cf_4e28_b8e9_f906e5fc2fea=[];
     
-            attributes.push({
-                key:'id',
-                value:(()=>{return id="div1"})()
+            attributes_3df83639_36cf_4e28_b8e9_f906e5fc2fea.push({
+                key:'type',
+                value:(()=>{return type="text"})()
             });
         
-        for(var attribue of attributes){
-            result_61d98aef_682a_473d_8813_c2c0aaf8938d.setAttribute(attribue.key,attribue.value);
+        for(let attribue of attributes_3df83639_36cf_4e28_b8e9_f906e5fc2fea){
+            input_3df83639_36cf_4e28_b8e9_f906e5fc2fea.setAttribute(attribue.key,attribue.value);
         }
     
 
-            result_61d98aef_682a_473d_8813_c2c0aaf8938d.textContent+=manager.GetTextContent('5a6d6ee4-d530-4e18-810a-056021911442');
-            result_61d98aef_682a_473d_8813_c2c0aaf8938d.textContent+=manager.GetTextContent('1e001bf0-f4a0-4195-bd8e-5724a0486871');
             
             
-            return result_61d98aef_682a_473d_8813_c2c0aaf8938d;
+            return input_3df83639_36cf_4e28_b8e9_f906e5fc2fea;
+
+        })()
+            
+
+    );
+            
+            
+            return result_ffe72717_dc95_4e4b_acea_ea839943c285;
 
         })()
             

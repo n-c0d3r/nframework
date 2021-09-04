@@ -1,10 +1,10 @@
 var htmlImport=require('./import');
 
-var tag=require('./htmlTag');
+var tag=require('./autoClosehtmlTag');
 
-tag.htmlTagName='div';
+tag.htmlTagName='img';
 
-tag.isAutoClose=false;
+tag.isAutoClose=true;
 
 const { v4: uuidv4 } = require('uuid');
 
