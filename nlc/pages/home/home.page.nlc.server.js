@@ -13,6 +13,10 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.page.nlc.client.js";module
                     
                 
                     
+                
+                
+                
+                    
 
     
     
@@ -27,6 +31,8 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.page.nlc.client.js";module
     page_homePage.name='homePage';
 
     page_homePage.__TYPE='PAGE';
+    
+    page_homePage.modules=[];
 
     page_homePage.Setup=function(){
 
@@ -37,18 +43,22 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.page.nlc.client.js";module
         this.src='home.ejs';
     
     
-
-
-
+    
     
             this.useAllGlobalObjects=true;
         
 
-
+    
+    
+        
+    this.modules.push('dom');
+        
+    
+    
 
     
     
-        this.modules=[];
+        
     this.modules.push('home-client');
         this.modules.push('home-client-base');
         

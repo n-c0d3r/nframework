@@ -1,7 +1,0 @@
-manager=window.NFramework.nmoduleManager;
-                
-                
-                    
-                
-                
-                

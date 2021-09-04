@@ -16,13 +16,15 @@ tag.Compile=function(element,childsCode,code){
     }
 
     compiledCode=`
-    {
+    (()=>{
         var styleE = document.createElement('style');
 
         styleE.textContent = `+'`' +compiledCode + '`;'+`
 
         document.body.appendChild(styleE);
-    }
+
+        return styleE;
+    })()
     `;
 
     if(element.forSV){

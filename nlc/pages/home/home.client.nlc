@@ -1,3 +1,6 @@
+<use-for-all html/>
+<use-for-all dom/>
+
 <module home-client>
 
     <extends home-client-base/>
@@ -7,33 +10,40 @@
         <async-method setup>
 
             function() {
-                
-                //NDOM
-                
-                <use html>
 
-                    document.body.appendChild(
-                        <div id="div1">
+                
+
+            }
+
+        </async-method>
+
+        <async-method start>
+
+            function() {
+
+                var div1  = 
+                    <div id="div1">
                             
-                            <div id="div2">
-                                div2
-                            </div>
+                        <a href="https://youtube.com">
+                            Youtube
+                        </a>
 
-                            <input type="text"/>
+                    </div>;
 
-                            <script>
+                @dom->body.appendChild(
+                    div1
+                );
 
-                                console.log('script');
 
-                            </script>
 
-                        </div>
-                    );
+                var style1=
+                    <style>
+                        body{
+                            background-color:blue;
+                        }
+                    </style>;
 
-                </use>
-
-                
-
+                div1.appendChild(style1);
 
             }
 

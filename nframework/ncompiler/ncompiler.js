@@ -248,7 +248,7 @@ var NCompiler = class{
 
                         tagName=this.GetTagNameFromString(tagName);
 
-                        if(tagName=='use'){
+                        if(tagName=='use' || tagName=='use-for-all' ){
                             var checkIsCloseStart=startN;
                             var __tagStart=startN;
                             var isCloseTag=false;

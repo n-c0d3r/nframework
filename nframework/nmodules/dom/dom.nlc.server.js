@@ -1,4 +1,4 @@
-var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.base.nlc.client.js";module.exports=(manager)=>{
+var JSCLPath = "D:\\nframework_gr\\nframework/nmodules/dom/dom.nlc.client.js";module.exports=(manager)=>{
                 var exports=new Object();
                     var nmodules=[];
                     var pages=[];
@@ -29,7 +29,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.base.nlc.client.js"
 
         nmodule.side='both';
 
-        nmodule.name='home-client-base';
+        nmodule.name='dom';
 
         nmodule.__TYPE='NMODULE';
 
@@ -39,33 +39,6 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.base.nlc.client.js"
 
 
         nmodule.RunExternalMethod(function(){
-    
-
-    
-    
-    this.AddSyncProperty('syncProp');
-    
-    
-
-    
-
-        
-        this.AddMethod('setup',(...args)=>{
-            var f=
-    
-
-            function(){
-                
-            }   
-
-        
-        
-    return f.call(this,...args); 
-
-}
-    
-    );
-    
     
 
     
@@ -84,7 +57,7 @@ var JSCLPath = "D:\\nframework_gr/nlc/pages/home/home.client.base.nlc.client.js"
         
         
         if(nmodule.side!='server'){
-            nmodule.Routing('/nmodules/home-client-base',(req,res)=>{
+            nmodule.Routing('/nmodules/dom',(req,res)=>{
                 res.send(nmodule.client_js_code);
             });
         }
