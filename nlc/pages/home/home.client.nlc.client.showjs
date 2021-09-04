@@ -48,105 +48,128 @@ manager=window.NFramework.nmoduleManager;
                 
                 
 
-                document.body.appendChild(
-                    
-
-        
+                    document.body.appendChild(
+                        
 
         (()=>{
 
-            var result_ffe72717_dc95_4e4b_acea_ea839943c285=document.createElement('div');
+            var result_6b35b502_15ca_4cb8_8b46_7233e74ad39b=document.createElement('div');
             
             
-        var attributes_ffe72717_dc95_4e4b_acea_ea839943c285=[];
+        var attributes_6b35b502_15ca_4cb8_8b46_7233e74ad39b=[];
     
-            attributes_ffe72717_dc95_4e4b_acea_ea839943c285.push({
+            attributes_6b35b502_15ca_4cb8_8b46_7233e74ad39b.push({
                 key:'id',
                 value:(()=>{return id="div1"})()
             });
         
-        for(var attribue of attributes_ffe72717_dc95_4e4b_acea_ea839943c285){
-            result_ffe72717_dc95_4e4b_acea_ea839943c285.setAttribute(attribue.key,attribue.value);
+        for(var attribue of attributes_6b35b502_15ca_4cb8_8b46_7233e74ad39b){
+            result_6b35b502_15ca_4cb8_8b46_7233e74ad39b.setAttribute(attribue.key,attribue.value);
         }
     
 
-            result_ffe72717_dc95_4e4b_acea_ea839943c285.textContent+=manager.GetTextContent('881ddf35-7010-4452-8173-4bc78f8442ba');
-            result_ffe72717_dc95_4e4b_acea_ea839943c285.textContent+=manager.GetTextContent('420688e5-1737-4043-94f3-27cd53990b3a');
-            result_ffe72717_dc95_4e4b_acea_ea839943c285.textContent+=manager.GetTextContent('76b33caf-ddf8-42c0-b74c-cc107497271c');
+            result_6b35b502_15ca_4cb8_8b46_7233e74ad39b.textContent+=manager.GetTextContent('2dbda3ec-1068-402c-9bbd-5cb63af9b8f2');
+            result_6b35b502_15ca_4cb8_8b46_7233e74ad39b.textContent+=manager.GetTextContent('3c0612f9-e491-4570-b133-be5269717539');
+            result_6b35b502_15ca_4cb8_8b46_7233e74ad39b.textContent+=manager.GetTextContent('507a4e1e-6f3c-40f5-b03a-a2bf8850b21d');
+            result_6b35b502_15ca_4cb8_8b46_7233e74ad39b.textContent+=manager.GetTextContent('bf26cc70-d76d-423b-927b-5a99b15f84fa');
             
 
             
-            result_ffe72717_dc95_4e4b_acea_ea839943c285.appendChild(
-
-        
+                result_6b35b502_15ca_4cb8_8b46_7233e74ad39b.appendChild(
 
         (()=>{
 
-            var result_8cd9023d_bc20_40f4_8e6b_8453131c751e=document.createElement('div');
+            var result_b0d4d877_3a2b_4332_b8e5_9c6ba1901955=document.createElement('div');
             
             
-        var attributes_8cd9023d_bc20_40f4_8e6b_8453131c751e=[];
+        var attributes_b0d4d877_3a2b_4332_b8e5_9c6ba1901955=[];
     
-            attributes_8cd9023d_bc20_40f4_8e6b_8453131c751e.push({
+            attributes_b0d4d877_3a2b_4332_b8e5_9c6ba1901955.push({
                 key:'id',
                 value:(()=>{return id="div2"})()
             });
         
-        for(var attribue of attributes_8cd9023d_bc20_40f4_8e6b_8453131c751e){
-            result_8cd9023d_bc20_40f4_8e6b_8453131c751e.setAttribute(attribue.key,attribue.value);
+        for(var attribue of attributes_b0d4d877_3a2b_4332_b8e5_9c6ba1901955){
+            result_b0d4d877_3a2b_4332_b8e5_9c6ba1901955.setAttribute(attribue.key,attribue.value);
         }
     
 
-            result_8cd9023d_bc20_40f4_8e6b_8453131c751e.textContent+=manager.GetTextContent('c54c4bc8-e094-4535-b695-e4d8235434f7');
+            result_b0d4d877_3a2b_4332_b8e5_9c6ba1901955.textContent+=manager.GetTextContent('21f70fde-65d4-425e-a583-129925b99074');
             
 
             
             
-            return result_8cd9023d_bc20_40f4_8e6b_8453131c751e;
+            return result_b0d4d877_3a2b_4332_b8e5_9c6ba1901955;
 
         })()
             
 
     );
-            
-            result_ffe72717_dc95_4e4b_acea_ea839943c285.appendChild(
-
-        
+                
+                result_6b35b502_15ca_4cb8_8b46_7233e74ad39b.appendChild(
 
         (()=>{
 
-            var input_3df83639_36cf_4e28_b8e9_f906e5fc2fea=document.createElement('input');
+            var result_01340534_c722_440d_add0_8cee9d827f41=document.createElement('input');
             
             
-        var attributes_3df83639_36cf_4e28_b8e9_f906e5fc2fea=[];
+        var attributes_01340534_c722_440d_add0_8cee9d827f41=[];
     
-            attributes_3df83639_36cf_4e28_b8e9_f906e5fc2fea.push({
+            attributes_01340534_c722_440d_add0_8cee9d827f41.push({
                 key:'type',
                 value:(()=>{return type="text"})()
             });
         
-        for(let attribue of attributes_3df83639_36cf_4e28_b8e9_f906e5fc2fea){
-            input_3df83639_36cf_4e28_b8e9_f906e5fc2fea.setAttribute(attribue.key,attribue.value);
+        for(var attribue of attributes_01340534_c722_440d_add0_8cee9d827f41){
+            result_01340534_c722_440d_add0_8cee9d827f41.setAttribute(attribue.key,attribue.value);
         }
     
 
             
+
             
-            return input_3df83639_36cf_4e28_b8e9_f906e5fc2fea;
+            
+            return result_01340534_c722_440d_add0_8cee9d827f41;
 
         })()
             
 
     );
+                
+                result_6b35b502_15ca_4cb8_8b46_7233e74ad39b.appendChild(
+
+        (()=>{
+
+            var result_c4c68ec4_e591_46eb_ab24_5592d4c0e4f2=document.createElement('script');
             
             
-            return result_ffe72717_dc95_4e4b_acea_ea839943c285;
+        var attributes_c4c68ec4_e591_46eb_ab24_5592d4c0e4f2=[];
+    
+        for(var attribue of attributes_c4c68ec4_e591_46eb_ab24_5592d4c0e4f2){
+            result_c4c68ec4_e591_46eb_ab24_5592d4c0e4f2.setAttribute(attribue.key,attribue.value);
+        }
+    
+
+            result_c4c68ec4_e591_46eb_ab24_5592d4c0e4f2.textContent+=manager.GetTextContent('36c259f3-16de-47be-b1f1-9a2f7cf13090');
+            
+
+            
+            
+            return result_c4c68ec4_e591_46eb_ab24_5592d4c0e4f2;
+
+        })()
+            
+
+    );
+                
+            
+            return result_6b35b502_15ca_4cb8_8b46_7233e74ad39b;
 
         })()
             
 
     
-                );
+                    );
 
                 
 

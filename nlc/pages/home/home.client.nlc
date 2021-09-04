@@ -12,18 +12,23 @@
                 
                 <use html>
 
-                document.body.appendChild(
-                    <div id="div1">
-                        div1
-                        
-                        <div id="div2">
-                            div2
+                    document.body.appendChild(
+                        <div id="div1">
+                            
+                            <div id="div2">
+                                div2
+                            </div>
+
+                            <input type="text"/>
+
+                            <script>
+
+                                console.log('script');
+
+                            </script>
+
                         </div>
-
-                        <input type="text"/>
-
-                    </div>
-                );
+                    );
 
                 </use>
 

@@ -1,11 +1,17 @@
-var htmlImport=require('./import');
 
-var tag=require('./autoClosehtmlTag');
+        var htmlImport=require('./import');
 
-tag.htmlTagName='input';
+        var htmlTagCompile=require('./htmlTag');
 
-tag.isAutoClose=true;
+        var Tag=require('../../tag/tag');
 
-const { v4: uuidv4 } = require('uuid');
+        var tag=new Tag();
 
-module.exports=tag;
+        tag.isAutoClose=true;
+
+        tag.Compile=function(element,childsCode,code,manager){
+            return htmlTagCompile(element,childsCode,code,manager,'input',tag);
+        }
+
+        module.exports=tag;
+    

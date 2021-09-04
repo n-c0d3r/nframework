@@ -1,14 +1,8 @@
-var htmlImport=require('./import');
-
-var Tag=require('../../tag/tag');
-
-var tag=new Tag();
-
-tag.isAutoClose=false;
-
 const { v4: uuidv4 } = require('uuid');
 
-tag.Compile=function(element,childsCode,code,manager){
+module.exports=function(element,childsCode,code,manager,htmlTagName,tag){
+    var isAutoClose=tag.isAutoClose;
+
     var contents=tag.GetContent(element,childsCode,code);
     
     var inputs=tag.GetInputs(element,childsCode,code);
@@ -29,13 +23,17 @@ tag.Compile=function(element,childsCode,code,manager){
 
     var childs=``;
 
-    for(var i=0;i<contents.length;i++){
-        if(contents[i].type=='childCode'){
-            childs+=`
-            result_${rfid}.appendChild(${contents[i].code});
-            `;
+    if(isAutoClose!=true){
+        for(var i=0;i<contents.length;i++){
+            if(contents[i].type=='childCode'){
+                childs+=`
+                result_${rfid}.appendChild(${contents[i].code});
+                `;
+            }
         }
     }
+
+
 
     var attributes=`
         var attributes_${rfid}=[];
@@ -89,11 +87,9 @@ tag.Compile=function(element,childsCode,code,manager){
 
     var compiledCode=`
 
-        ${htmlImport}
-
         (()=>{
 
-            var result_${rfid}=document.createElement('${this.htmlTagName}');
+            var result_${rfid}=document.createElement('${htmlTagName}');
             
             ${attributes}
 
@@ -110,5 +106,3 @@ tag.Compile=function(element,childsCode,code,manager){
 
     return compiledCode;
 }
-
-module.exports=tag;

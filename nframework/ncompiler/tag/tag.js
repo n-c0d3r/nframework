@@ -38,6 +38,7 @@ var Tag=class{
         }
 
         endTagName=startTagNameIndex+this.name.length;
+
         
         if (endTagName==endTagIndex){
             return [];
