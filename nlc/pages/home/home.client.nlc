@@ -10,7 +10,7 @@
         <async-method setup>
 
             function() {
-
+                
                 
 
             }
@@ -39,7 +39,7 @@
                 var style1=
                     <style>
                         body{
-                            background-color:blue;
+                            background-color:white;
                         }
                     </style>;
 

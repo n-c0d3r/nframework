@@ -43,7 +43,7 @@ manager=window.NFramework.nmoduleManager;
         
         this.AddMethod('setup',async (...args)=>{
                 var f=async function() {
-
+                
                 
 
             }
@@ -66,51 +66,53 @@ manager=window.NFramework.nmoduleManager;
 
         (()=>{
 
-            var result_6cf7a076_a05d_41ea_a4c7_642e2be86687=document.createElement('div');
+            var result_cd4de762_fb6e_4970_b90f_4c054e1b7392=document.createElement('div');
             
             
-        var attributes_6cf7a076_a05d_41ea_a4c7_642e2be86687=[];
+        var attributes_cd4de762_fb6e_4970_b90f_4c054e1b7392=[];
     
-            attributes_6cf7a076_a05d_41ea_a4c7_642e2be86687.push({
+            var acd4de762_fb6e_4970_b90f_4c054e1b7392id=true;
+            attributes_cd4de762_fb6e_4970_b90f_4c054e1b7392.push({
                 key:'id',
-                value:(()=>{return id="div1"})()
+                value:(()=>{return acd4de762_fb6e_4970_b90f_4c054e1b7392id="div1"})()
             });
         
-        for(var attribue of attributes_6cf7a076_a05d_41ea_a4c7_642e2be86687){
-            result_6cf7a076_a05d_41ea_a4c7_642e2be86687.setAttribute(attribue.key,attribue.value);
+        for(var attribue of attributes_cd4de762_fb6e_4970_b90f_4c054e1b7392){
+            result_cd4de762_fb6e_4970_b90f_4c054e1b7392.setAttribute(attribue.key,attribue.value);
         }
     
 
-            result_6cf7a076_a05d_41ea_a4c7_642e2be86687.textContent+=manager.GetTextContent('7b90b44f-d3d7-471b-85e5-acb96db082b7');
-            result_6cf7a076_a05d_41ea_a4c7_642e2be86687.textContent+=manager.GetTextContent('c0a8e01d-0ab2-45a6-90bd-f2474246150c');
+            result_cd4de762_fb6e_4970_b90f_4c054e1b7392.textContent+=manager.GetTextContent('4243f153-8f6f-4b2b-b88a-fcdb0b3b480c');
+            result_cd4de762_fb6e_4970_b90f_4c054e1b7392.textContent+=manager.GetTextContent('659d5c0b-be92-439c-9a5c-a6ab4bcd19d5');
             
 
             
-                result_6cf7a076_a05d_41ea_a4c7_642e2be86687.appendChild(
+                result_cd4de762_fb6e_4970_b90f_4c054e1b7392.appendChild(
 
         (()=>{
 
-            var result_c2029ede_5c05_4c4a_9f66_312f49115545=document.createElement('a');
+            var result_f8aabf5b_6b6b_4da3_b165_1253b74e0bd3=document.createElement('a');
             
             
-        var attributes_c2029ede_5c05_4c4a_9f66_312f49115545=[];
+        var attributes_f8aabf5b_6b6b_4da3_b165_1253b74e0bd3=[];
     
-            attributes_c2029ede_5c05_4c4a_9f66_312f49115545.push({
+            var af8aabf5b_6b6b_4da3_b165_1253b74e0bd3href=true;
+            attributes_f8aabf5b_6b6b_4da3_b165_1253b74e0bd3.push({
                 key:'href',
-                value:(()=>{return href="https://youtube.com"})()
+                value:(()=>{return af8aabf5b_6b6b_4da3_b165_1253b74e0bd3href="https://youtube.com"})()
             });
         
-        for(var attribue of attributes_c2029ede_5c05_4c4a_9f66_312f49115545){
-            result_c2029ede_5c05_4c4a_9f66_312f49115545.setAttribute(attribue.key,attribue.value);
+        for(var attribue of attributes_f8aabf5b_6b6b_4da3_b165_1253b74e0bd3){
+            result_f8aabf5b_6b6b_4da3_b165_1253b74e0bd3.setAttribute(attribue.key,attribue.value);
         }
     
 
-            result_c2029ede_5c05_4c4a_9f66_312f49115545.textContent+=manager.GetTextContent('e1eabd01-5eec-4a4d-974f-81ec62747a9b');
+            result_f8aabf5b_6b6b_4da3_b165_1253b74e0bd3.textContent+=manager.GetTextContent('e0fd6d89-dabd-4a3c-b0e7-8bbc3915e33e');
             
 
             
             
-            return result_c2029ede_5c05_4c4a_9f66_312f49115545;
+            return result_f8aabf5b_6b6b_4da3_b165_1253b74e0bd3;
 
         })()
             
@@ -118,7 +120,7 @@ manager=window.NFramework.nmoduleManager;
     );
                 
             
-            return result_6cf7a076_a05d_41ea_a4c7_642e2be86687;
+            return result_cd4de762_fb6e_4970_b90f_4c054e1b7392;
 
         })()
             
@@ -140,7 +142,7 @@ manager=window.NFramework.nmoduleManager;
 
         styleE.textContent = `
                         body{
-                            background-color:blue;
+                            background-color:white;
                         }
                     `;
 

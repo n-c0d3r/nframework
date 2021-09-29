@@ -46,7 +46,8 @@ var NFramework=class{
 
     Build(){
         this.nmoduleManager.BuildModulePathsArray();
-        this.nmoduleManager.CompileModules();
+        if(this.recompile_when_startup)
+            this.nmoduleManager.CompileModules();
         this.nmoduleManager.ImportModules();
     }
 
