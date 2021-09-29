@@ -1,0 +1,50 @@
+
+<module console>
+
+    <server-only>
+
+        <region>
+
+            if(manager.NFramework.console.enable){
+
+                const readline = require('readline');
+
+                const rl = readline.createInterface({ input: process.stdin , output: process.stdout });
+
+                const ReadLine = (function () {
+                    const getLineGen = (async function* () {
+                        for await (const line of rl) {
+                            yield line;
+                        }
+                    })();
+                    return async () => ((await getLineGen.next()).value);
+                })();
+
+                <method log>
+                    function(...args) {
+                        console.log(...args);
+                    }
+                </method>
+
+                <method clear>
+                    function() {
+                        console.clear();
+                    }
+                </method>
+
+                <async-method readLine>
+                    function() {
+                        return await ReadLine();
+                    }
+                </async-method>
+
+            }
+
+        </region>
+
+    </server-only>
+
+
+
+</module>
+

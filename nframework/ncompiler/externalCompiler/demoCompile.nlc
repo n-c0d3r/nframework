@@ -1,0 +1,17 @@
+<module home-client>
+
+    <client-only>
+
+        <async-method Setup>
+
+            function() {
+
+                
+
+            }
+
+        </async-method>
+
+    </client-only>
+
+</module>
