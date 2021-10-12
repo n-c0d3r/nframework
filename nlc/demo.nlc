@@ -1,7 +1,12 @@
-<global demoGlobal>
+<module demo>
 
-    function() {
-        
-    }
+    <method setup>
 
-</global>
+        function(){
+            console.log('running');
+        }
+
+
+    </method>
+
+</module>

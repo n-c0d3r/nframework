@@ -134,7 +134,10 @@ var NFramework=class{
         var express_server=express();
         express_server.set('view engine','ejs');
         express_server.use(express.static("public"));
+
         this.express_server=express_server;
+
+
 
         var server=express_server.listen(this.server.PORT);
         this.httpServer=server;

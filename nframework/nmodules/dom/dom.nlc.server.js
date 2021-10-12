@@ -1,4 +1,4 @@
-var JSCLPath = "D:\\nframework_gr\\nframework/nmodules/dom/dom.nlc.client.js";module.exports=(manager)=>{
+var JSCLPath = "D:\\demonframework\\nframework/nmodules/dom/dom.nlc.client.js";module.exports=(manager)=>{
                 var exports=new Object();
                     var nmodules=[];
                     var pages=[];
@@ -17,7 +17,7 @@ var JSCLPath = "D:\\nframework_gr\\nframework/nmodules/dom/dom.nlc.client.js";mo
         var NModule=
         function(){
 
-            return require("D:\\nframework_gr\\nframework\\ncompiler\\tags/../../nmodule/nmodule");
+            return require("D:\\demonframework\\nframework\\ncompiler\\tags/../../nmodule/nmodule");
 
         }()
     

@@ -9,6 +9,10 @@
   "author": "",
   "license": "ISC",
   "bin": {
-    "nlc":"./index.js"
+    "nlc": "./index.js"
+  },
+  "dependencies": {
+    "fs-extra": "^10.0.0",
+    "universalify": "^2.0.0"
   }
 }
