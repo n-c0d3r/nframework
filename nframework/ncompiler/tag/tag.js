@@ -7,6 +7,52 @@ var Tag=class{
         return element.startContentIndex + ' ' + element.endContentIndex;
     }
 
+    CheckInStr(inputs){
+
+        var result=inputs;
+
+        var inStrIndex=-1;
+
+        for(var i=0;i<inputs.length;i++){
+
+            let isInStr=false;
+
+            var input=inputs[i];
+
+            let strChr='';
+
+            for(var j=0;j<input.length;j++){
+
+                if(!isInStr && (input[j]=='"' || input[j]=="'" || input[j]=='`')){
+                    strChr=input[j];
+                    isInStr=true;
+                }
+                else
+                    if(isInStr && input[j]==strChr){
+                        isInStr=false;
+                    }
+                
+            }
+
+            if(isInStr && i<inputs.length-1){
+                inStrIndex=i;
+                break;
+            }
+
+        }
+
+
+        if(inStrIndex>=0){
+
+            result[inStrIndex]+=' '+result[inStrIndex+1];
+            result.splice(inStrIndex+1, 1);
+            
+            result=this.CheckInStr(result);
+
+        }
+
+    }
+
     GetInputs(element,childsCode,code){
         var endTagIndex=element.startContentIndex;
 
@@ -85,8 +131,48 @@ var Tag=class{
                 oneinput+=' ';
             }
         }
+      
+        var Split=function(data){
+            var resultStr=[];
 
+            var s='';
+
+            var isInStr=false;
+            var strChr='"';
+
+            for(var i=0;i<data.length;i++){
+                if(!isInStr && (data[i]=='"' || data[i]=="'" || data[i] == '`')){
+                    strChr=data[i];
+                    isInStr=true;
+                }
+                
+                if((data[i]==' ' && !isInStr) || i==(data.length-1)){
+                    if(i==(data.length-1) && (data[i]!=' ')){
+                        s+=data[i];
+                    }
+                    resultStr.push(s);
+                    s='';
+                }
+                else{
+                    s+=data[i];
+                }
+
+                if(!isInStr && data[i]==strChr){
+                    isInStr=false;
+                }
+            }
+
+
+            return resultStr;
+        }
         inputs=oneinput.split(' ');
+
+        var newInputs=this.CheckInStr(inputs);
+
+
+        
+
+        
 
         for(var i=0;i<inputs.length;i++){
             if(inputs[i]!=''){
