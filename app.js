@@ -1,14 +1,9 @@
-var nframework=require('./nframework/framework');
+const nframework  = require('./nframework/framework');
+const app         = nframework();
 
-var app=nframework();
+app.appDir =__dirname;
 
-app.appDir=__dirname;
-
-app.LoadSetting(__dirname+'/setting.json');
-
+app.LoadSetting(__dirname + '/setting.json');
 app.Init();
-
 app.Build();
-
 app.Run();
-

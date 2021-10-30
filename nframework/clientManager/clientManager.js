@@ -1,4 +1,4 @@
-var ClientManager=class{
+class ClientManager {
     constructor(){
         this.clientSockets=[];
     }
@@ -8,11 +8,11 @@ var ClientManager=class{
     }
 
     RemoveClient(client){
-        var i = this.clientSockets.indexOf(client);
+        let i = this.clientSockets.indexOf(client);
         this.clientSockets.splice(i,1);
     }
 
 }
 
 
-module.exports=ClientManager;
+module.exports = new ClientManager;

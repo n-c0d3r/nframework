@@ -1,187 +1,83 @@
+var a49920e54_8f8f_4961_9b94_3edc8c8e7d4a_module;
 
-                            var a49920e54_8f8f_4961_9b94_3edc8c8e7d4a_module;
-                        manager=window.NFramework.nmoduleManager;
-                
-                
-                    
-            (()=>{
-                
+manager = window.NFramework.nmoduleManager;
 
-        var NModule=
-            function(){
+(function() {
+    const NModule = function() {
+        return window.NFramework.NModule;
+    }();
 
-                return window.NFramework.NModule;
+    let nmodule = new NModule();
 
-            }()
+    var This = nmodule;
 
-        ;
-    
-        var nmodule=new NModule();
+    nmodule.side = 'both';
+    nmodule.name = 'dom';
+    nmodule.__TYPE = 'NMODULE';
 
-        var This=nmodule;
+    nmodule.RunExternalMethod = (callback) => callback.call(nmodule);
 
-        nmodule.side='both';
+    nmodule.RunExternalMethod(function() {
+        this.AddProperty('body');
 
-        nmodule.name='dom';
-
-        nmodule.__TYPE='NMODULE';
-
-        nmodule.RunExternalMethod=function(callback){
-            callback.call(nmodule);
-        }
-
-
-        nmodule.RunExternalMethod(function(){
-    
-
-    
-
-        
-    
-    this.AddProperty('body');
-    
-    
-
-        
-        this.AddMethod('setup',(...args)=>{
-            var f=
-    
-
-            function(){
-                this.GetThisWithCallback((module)=>{
-                            a49920e54_8f8f_4961_9b94_3edc8c8e7d4a_module=module;
-                        })
-                        var getterObj49920e54_8f8f_4961_9b94_3edc8c8e7d4a={
-                            set stter(value) {
-                                a49920e54_8f8f_4961_9b94_3edc8c8e7d4a_module.Set('body',value);
-                            }
-                        }
-                        getterObj49920e54_8f8f_4961_9b94_3edc8c8e7d4a.stter=document.body;
+        this.AddMethod('setup', (...args) => {
+            let f = () => {
+                this.GetThisWithCallback((module) => a49920e54_8f8f_4961_9b94_3edc8c8e7d4a_module = module);
+                let getterObj49920e54_8f8f_4961_9b94_3edc8c8e7d4a = {
+                    set stter(value) {
+                        a49920e54_8f8f_4961_9b94_3edc8c8e7d4a_module.Set('body', value);
+                    }
+                };
+                getterObj49920e54_8f8f_4961_9b94_3edc8c8e7d4a.stter = document.body;
             }
+            return f.call(this, ...args);
+        });
 
-        
-        
-    return f.call(this,...args); 
-
-}
-    
-    );
-    
-    
-
-        
-        this.AddMethod('getElementById',(...args)=>{
-            var f=
-    
-            function(pr0){
+        this.AddMethod('getElementById', (...args) => {
+            let f = function(pr0) {
                 return document.getElementById(pr0);
             }
-        
-        
-    return f.call(this,...args); 
+            return f.call(this, ...args);
+        });
 
-}
-    
-    );
-    
-    
-
-        
-        this.AddMethod('getElementsByName',(...args)=>{
-            var f=
-    
-            function(pr0){
+        this.AddMethod('getElementsByName', (...args) => {
+            let f = function(pr0) {
                 return document.getElementsByName(pr0);
             }
-        
-        
-    return f.call(this,...args); 
+            return f.call(this, ...args);
+        });
 
-}
-    
-    );
-    
-    
-
-        
-        this.AddMethod('getElementsByClassName',(...args)=>{
-            var f=
-    
-            function(pr0){
+        this.AddMethod('getElementsByClassName', (...args) => {
+            let f = function(pr0) {
                 return document.getElementsByClassName(pr0);
             }
-        
-        
-    return f.call(this,...args); 
+            return f.call(this, ...args);
+        });
 
-}
-    
-    );
-    
-    
-
-        
-        this.AddMethod('getElementsByTagName',(...args)=>{
-            var f=
-    
-            function(pr0){
+        this.AddMethod('getElementsByTagName', (...args) => {
+            let f = function(pr0) {
                 return document.getElementsByTagName(pr0);
             }
-        
-        
-    return f.call(this,...args); 
+            return f.call(this, ...args);
+        });
 
-}
-    
-    );
-    
-    
-
-        
-        this.AddMethod('querySelector',(...args)=>{
-            var f=
-    
-            function(pr0){
+        this.AddMethod('querySelector', (...args) => {
+            let f = function(pr0) {
                 return document.querySelector(pr0);
             }
-        
-        
-    return f.call(this,...args); 
+            return f.call(this, ...args);
+        });
 
-}
-    
-    );
-    
-    
-
-        
-        this.AddMethod('querySelectorAll',(...args)=>{
-            var f=
-    
-            function(pr0){
+        this.AddMethod('querySelectorAll', (...args) => {
+            let f = function(pr0) {
                 return document.querySelectorAll(pr0);
             }
-        
-        
-    return f.call(this,...args); 
-
-}
-    
-    );
-    
-    
-
-    
-
-
+            return f.call(this, ...args);
         });
-    
-        
-            var nmoduleManager=window.NFramework.nmoduleManager;
-            nmoduleManager.ImportModule(nmodule);
-        
-            })();
-        
-                
-                
-                
+    });
+
+
+    var nmoduleManager = window.NFramework.nmoduleManager;
+    nmoduleManager.ImportModule(nmodule);
+
+})();

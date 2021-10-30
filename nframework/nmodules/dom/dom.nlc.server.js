@@ -1,77 +1,47 @@
-var JSCLPath = "D:\\demonframework\\nframework/nmodules/dom/dom.nlc.client.js";module.exports=(manager)=>{
-                var exports=new Object();
-                    var nmodules=[];
-                    var pages=[];
-                    exports.customTypeDatas=[];
-                    exports.customTypeDatas.Add=function(key,value){
-                        exports.customTypeDatas.push({
-                            'key':key,
-                            'value':value
-                        });
-                    }
+const JSCLPath = "D:\\demonframework\\nframework/nmodules/dom/dom.nlc.client.js";
 
-                    
-                
-                    
+module.exports = (manager) => {
+    const fs = require('fs');
+    const clientVersion = JSCLPath;
 
-        var NModule=
-        function(){
+    const NModule = () => {
+        return require("D:\\demonframework\\nframework\\ncompiler\\tags/../../nmodule/nmodule");
+    }();
 
-            return require("D:\\demonframework\\nframework\\ncompiler\\tags/../../nmodule/nmodule");
+    var exports = new Object();
+    var nmodules = [];
+    var pages = [];
 
-        }()
-    
-    ;
-    
-        var nmodule=new NModule();
-
-        var This=nmodule;
-
-        nmodule.side='both';
-
-        nmodule.name='dom';
-
-        nmodule.__TYPE='NMODULE';
-
-        nmodule.RunExternalMethod=function(callback){
-            callback.call(nmodule);
-        }
-
-
-        nmodule.RunExternalMethod(function(){
-    
-
-    
-
-
+    exports.customTypeDatas = [];
+    exports.customTypeDatas.Add = (key, value) => {
+        exports.customTypeDatas.push({
+            'key': key,
+            'value': value
         });
-    
-        
-    
-        var fs=require('fs');
+    }
 
-        var clientVersion=JSCLPath;
+    var nmodule = new NModule();
 
-        nmodule.client_js_code=fs.readFileSync(clientVersion);
+    var This = nmodule;
 
-        
-        
-        if(nmodule.side!='server'){
-            nmodule.Routing('/nmodules/dom',(req,res)=>{
-                res.send(nmodule.client_js_code);
-            });
-        }
+    nmodule.side = 'both';
+    nmodule.name = 'dom';
+    nmodule.__TYPE = 'NMODULE';
+    nmodule.RunExternalMethod = (callback) => callback.call(nmodule);
 
-        
+    nmodule.RunExternalMethod(function() {
+        // Code
+    });
 
-            nmodules.push(nmodule);
-        
-        
-                
-                
-                    
-                    exports.nmodules=nmodules;
-                    exports.pages=pages;
-                    return exports;
-                }
-                
+    nmodule.client_js_code = fs.readFileSync(clientVersion);
+
+    if (nmodule.side != 'server')
+        nmodule.Routing('/nmodules/dom', (req, res) => res.send(nmodule.client_js_code));
+
+    nmodules.push(nmodule);
+
+    exports.nmodules = nmodules;
+    exports.pages = pages;
+
+    return exports;
+}

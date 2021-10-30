@@ -1,21 +1,19 @@
-var Tag=require('../tag/tag');
+const Tag = require('../tag/tag');
+let tag = new Tag();
 
-var tag=new Tag();
+tag.isAutoClose = true;
 
-tag.isAutoClose=false;
+tag.Compile = function(element, childsCode, code) {
+    let contents = tag.GetContent(element, childsCode, code);
 
-tag.Compile=function(element,childsCode,code){
-    var contents=tag.GetContent(element,childsCode,code);
+    let compiledCode = ``;
 
-    var compiledCode=``;
-
-    if(element.forSV){
-        for(var i=0;i<contents.length;i++){
-            compiledCode+=contents[i].code;
-        }
+    if (element.forSV) {
+        for (let i = 0; i < contents.length; i++)
+            compiledCode += contents[i].code;
     }
 
     return compiledCode;
 }
 
-module.exports=tag;
+module.exports = tag;

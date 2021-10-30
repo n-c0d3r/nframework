@@ -1,50 +1,26 @@
-manager=window.NFramework.nmoduleManager;
-                
-                
-                    
-            (()=>{
-                
+manager = window.NFramework.nmoduleManager;
 
-        var NModule=
-            function(){
+(function() {
+    const NModule = () => {
+        return window.NFramework.NModule;
+    }();
 
-                return window.NFramework.NModule;
+    var nmodule = new NModule();
+    var This = nmodule;
 
-            }()
+    nmodule.side = 'both';
 
-        ;
-    
-        var nmodule=new NModule();
+    nmodule.name = 'console';
 
-        var This=nmodule;
+    nmodule.__TYPE = 'NMODULE';
 
-        nmodule.side='both';
+    nmodule.RunExternalMethod = (callback) => callback.call(nmodule);
 
-        nmodule.name='console';
-
-        nmodule.__TYPE='NMODULE';
-
-        nmodule.RunExternalMethod=function(callback){
-            callback.call(nmodule);
-        }
+    nmodule.RunExternalMethod(function() {
+        // Code
+    });
 
 
-        nmodule.RunExternalMethod(function(){
-    
-
-    
-
-
-
-
-        });
-    
-        
-            var nmoduleManager=window.NFramework.nmoduleManager;
-            nmoduleManager.ImportModule(nmodule);
-        
-            })();
-        
-                
-                
-                
+    var nmoduleManager = window.NFramework.nmoduleManager;
+    nmoduleManager.ImportModule(nmodule);
+})();

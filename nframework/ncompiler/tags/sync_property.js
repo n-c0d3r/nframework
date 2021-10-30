@@ -1,18 +1,17 @@
-var Tag=require('../tag/tag');
+const Tag   = require('../tag/tag');
+let tag     = new Tag();
 
-var tag=new Tag();
+tag.isAutoClose = true;
 
-tag.isAutoClose=true;
+tag.Compile = function(element, childsCode, code) {
+    let inputs = tag.GetInputs(element, childsCode, code);
 
-tag.Compile=function(element,childsCode,code){
-    var inputs=tag.GetInputs(element,childsCode,code);
-    
     return `
-    
+
     this.AddSyncProperty('${inputs[0]}');
-    
+
     `;
 }
 
 
-module.exports=tag;
+module.exports = tag;

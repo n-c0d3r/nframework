@@ -1,150 +1,86 @@
-var JSCLPath = "D:\\demonframework\\nframework/nmodules/console/console.nlc.client.js";module.exports=(manager)=>{
-                var exports=new Object();
-                    var nmodules=[];
-                    var pages=[];
-                    exports.customTypeDatas=[];
-                    exports.customTypeDatas.Add=function(key,value){
-                        exports.customTypeDatas.push({
-                            'key':key,
-                            'value':value
-                        });
-                    }
+const JSCLPath = "D:\\demonframework\\nframework/nmodules/console/console.nlc.client.js";
 
-                    
-                
-                    
+module.exports = (manager) => {
+    const fs = require('fs');
+    const clientVersion = JSCLPath;
 
-        var NModule=
-        function(){
+    const NModule = function() {
+        return require("D:\\demonframework\\nframework\\ncompiler\\tags/../../nmodule/nmodule");
+    }();
 
-            return require("D:\\demonframework\\nframework\\ncompiler\\tags/../../nmodule/nmodule");
+    var exports = new Object();
+    var nmodules = [];
+    var pages = [];
 
-        }()
-    
-    ;
-    
-        var nmodule=new NModule();
-
-        var This=nmodule;
-
-        nmodule.side='both';
-
-        nmodule.name='console';
-
-        nmodule.__TYPE='NMODULE';
-
-        nmodule.RunExternalMethod=function(callback){
-            callback.call(nmodule);
-        }
-
-
-        nmodule.RunExternalMethod(function(){
-    
-
-    
-
-        
-
-            if(manager.NFramework.console.enable){
-
-                const readline = require('readline');
-
-                const rl = readline.createInterface({ input: process.stdin , output: process.stdout });
-
-                const ReadLine = (function () {
-                    const getLineGen = (async function* () {
-                        for await (const line of rl) {
-                            yield line;
-                        }
-                    })();
-                    return async () => ((await getLineGen.next()).value);
-                })();
-
-                
-        this.AddMethod('log',(...args)=>{
-            var f=
-    
-                    function(...args) {
-                        console.log(...args);
-                    }
-                
-        
-    return f.call(this,...args); 
-
-}
-    
-    );
-    
-    
-
-                
-        this.AddMethod('clear',(...args)=>{
-            var f=
-    
-                    function() {
-                        console.clear();
-                    }
-                
-        
-    return f.call(this,...args); 
-
-}
-    
-    );
-    
-    
-
-                
-        this.AddMethod('readLine',async (...args)=>{
-                var f=async function() {
-                        return await ReadLine();
-                    }
-                
-                var f2=f.bind(this);
-                return await f2(...args);
-            }
-    
-        );
-    
-    
-
-            }
-
-        
-
-    
-
-
-
-
+    exports.customTypeDatas = [];
+    exports.customTypeDatas.Add = (key, value) => {
+        exports.customTypeDatas.push({
+            'key': key,
+            'value': value
         });
-    
-        
-    
-        var fs=require('fs');
+    };
 
-        var clientVersion=JSCLPath;
+    let nmodule = new NModule();
+    let This = nmodule;
 
-        nmodule.client_js_code=fs.readFileSync(clientVersion);
+    nmodule.side = 'both';
+    nmodule.name = 'console';
+    nmodule.__TYPE = 'NMODULE';
 
-        
-        
-        if(nmodule.side!='server'){
-            nmodule.Routing('/nmodules/console',(req,res)=>{
-                res.send(nmodule.client_js_code);
-            });
-        }
+    nmodule.RunExternalMethod = (callback) => callback.call(nmodule);
 
-        
+    nmodule.RunExternalMethod(function() {
+        if (!manager.NFramework.console.enable) return;
 
-            nmodules.push(nmodule);
-        
-        
-                
-                
-                    
-                    exports.nmodules=nmodules;
-                    exports.pages=pages;
-                    return exports;
+        const readline = require('readline');
+
+        const rl = readline.createInterface({
+            input: process.stdin,
+            output: process.stdout
+        });
+
+        const ReadLine = (function() {
+            const getLineGen = (async function*() {
+                for await (const line of rl) {
+                    yield line;
                 }
-                
+            })();
+
+            return async () => ((await getLineGen.next()).value);
+        })();
+
+        this.AddMethod('log', (...args) => {
+            let f = function(...args) {
+                console.log(...args);
+            }
+            return f.call(this, ...args);
+        });
+
+        this.AddMethod('clear', (...args) => {
+            let f = function() {
+                console.clear();
+            }
+            return f.call(this, ...args);
+        });
+
+        this.AddMethod('readLine', async (...args) => {
+            let f = async function() {
+                return await ReadLine();
+            }
+
+            let f2 = f.bind(this);
+            return await f2(...args);
+        });
+    });
+
+    nmodule.client_js_code = fs.readFileSync(clientVersion);
+
+    if (nmodule.side != 'server')
+        nmodule.Routing('/nmodules/console', (req, res) => res.send(nmodule.client_js_code));
+
+    nmodules.push(nmodule);
+
+    exports.nmodules = nmodules;
+    exports.pages = pages;
+    return exports;
+}

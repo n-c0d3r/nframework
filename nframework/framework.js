@@ -1,153 +1,122 @@
-var fs=require('fs');
+const fs                  = require('fs');
+const NCompiler           = require('./ncompiler/ncompiler');
+const NModuleManager      = require('./nmoduleManager/nmoduleManager');
+const ClientManager       = require('./clientManager/clientManager');
+const NModule             = require('./nmodule/nmodule');
+const IORouterManager     = require('./ioroutermanager/ioRouterManager');
 
-var NCompiler = require('./ncompiler/ncompiler');
+class NFramework {
+    constructor() {
+        this.framework_nmodules_src_dir = __dirname + '/nmodules';
 
-var NModuleManager = require('./nmoduleManager/nmoduleManager');
+        // N compiler
+        this.ncompiler = new NCompiler();
+        this.ncompiler.NFramework = this;
 
-var ClientManager=require('./clientManager/clientManager');
+        // N module manager
+        this.nmoduleManager = new NModuleManager();
+        this.nmoduleManager.NFramework = this;
 
-var NModule=require('./nmodule/nmodule');
+        // Client manager
+        this.clientManager = new ClientManager();
+        this.clientManager.NFramework = this;
 
-var IORouterManager=require('./ioroutermanager/ioRouterManager');
+        // IO router manager
+        this.ioRouterManager = new IORouterManager();
+        this.ioRouterManager.NFramework = this;
 
-var NFramework=class{
+        // Debug
+        this.debug = new Object();
+        this.debug.show_nlc_compiled_js = false;
 
-    constructor(){
-        this.ncompiler=new NCompiler();
-        this.ncompiler.NFramework=this;
+        // Server
+        this.server = new Object();
+        this.server.PORT = 7070;
 
-        this.nmoduleManager=new NModuleManager();
-        this.nmoduleManager.NFramework=this;
-
-        this.clientManager=new ClientManager();
-        this.clientManager.NFramework=this;
-
-        this.ioRouterManager=new IORouterManager();
-        this.ioRouterManager.NFramework=this;
-
-        this.framework_nmodules_src_dir=__dirname+'/nmodules';
-
-        this.debug=new Object();
-
-        this.debug.show_nlc_compiled_js=false;
-
-        this.server=new Object();
-
-        this.server.PORT=7070;
-
-        this.clejs=this.GetCLEJS();
+        this.clejs = this.GetCLEJS();
     }
 
-    Init(){
+    Init() {
         this.StartServer();
         this.SetupCLEJSRouters();
         this.nmoduleManager.SetupGetterAndSetterForSyncProps();
     }
 
-    Build(){
+    Build() {
         this.nmoduleManager.BuildModulePathsArray();
         if(this.recompile_when_startup)
             this.nmoduleManager.CompileModules();
         this.nmoduleManager.ImportModules();
     }
 
-    Run(){
+    Run() {
         this.nmoduleManager.Routing();
         this.nmoduleManager.Setup();
         this.nmoduleManager.Start();
     }
 
-    GetCLEJS(){
+    GetCLEJS() {
         return `
-
             <script src="/socket.io/socket.io.js"></script>
             <script src='/nframework'></script>
             <script src='/nmodule-manager'></script>
             <script src='/nmodule'></script>
-
         `;
     }
 
-    SetupCLEJSRouters(){
+    SetupCLEJSRouters() {
         //framework js
 
-        var frameworkCLJSFilePath=__dirname+'/cl/framework.js';
+        const frameworkCLJSFilePath     = __dirname + '/cl/framework.js';
+        const nmoduleCLJSFilePath       = __dirname + '/cl/nmodule.js';
+        const nmoduleMCLJSFilePath      = __dirname + '/cl/nmoduleManager.js';
+        const appCLJSFilePath           = __dirname + '/cl/app.js';
 
-        var frameworkCLJSCode=fs.readFileSync(frameworkCLJSFilePath).toString();
+        let frameworkCLJSCode = fs.readFileSync(frameworkCLJSFilePath).toString();
+        let nmoduleCLJSCode = fs.readFileSync(nmoduleCLJSFilePath).toString();
+        let nmoduleMCLJSCode = fs.readFileSync(nmoduleMCLJSFilePath).toString();
+        let appCLJSCode = fs.readFileSync(appCLJSFilePath).toString();
 
-        this.express_server.get('/nframework',(req,res)=>{
-            res.send(frameworkCLJSCode);
-        });
-
-
-
-        var nmoduleCLJSFilePath=__dirname+'/cl/nmodule.js';
-
-        var nmoduleCLJSCode=fs.readFileSync(nmoduleCLJSFilePath).toString();
-
-        this.express_server.get('/nmodule',(req,res)=>{
-            res.send(nmoduleCLJSCode);
-        });
-
-
-
-        var nmoduleMCLJSFilePath=__dirname+'/cl/nmoduleManager.js';
-
-        var nmoduleMCLJSCode=fs.readFileSync(nmoduleMCLJSFilePath).toString();
-
-        this.express_server.get('/nmodule-manager',(req,res)=>{
-            res.send(nmoduleMCLJSCode);
-        });
-
-
-
-        var appCLJSFilePath=__dirname+'/cl/app.js';
-
-        var appCLJSCode=fs.readFileSync(appCLJSFilePath).toString();
-
-        this.express_server.get('/appcl',(req,res)=>{
-            res.send(appCLJSCode);
-        });
-
-
+        this.express_server.get('/nframework', (req, res)       => res.send(frameworkCLJSCode));
+        this.express_server.get('/nmodule', (req, res)          => res.send(nmoduleCLJSCode));
+        this.express_server.get('/nmodule-manager', (req, res)  => res.send(nmoduleMCLJSCode));
+        this.express_server.get('/appcl', (req, res)            => res.send(appCLJSCode));
     }
 
-    LoadSetting(path){
-        var str=fs.readFileSync(path).toString();
-        var settingObj=JSON.parse(str);
-        var keys=Object.keys(settingObj);
-        for(var i=0;i<keys.length;i++){
-            this[keys[i]]=settingObj[keys[i]];
-        }
-        if(this.nmodules_src_dir[0]=='.'){
-            this.nmodules_src_dir=this.appDir+this.nmodules_src_dir.substring(1,this.nmodules_src_dir.length);
-        }
+    LoadSetting(path) {
+        let str         = fs.readFileSync(path).toString();
+        let settingObj  = JSON.parse(str);
+        let keys        = Object.keys(settingObj);
+
+        for(let i = 0; i < keys.length; i++)
+            this[keys[i]] = settingObj[keys[i]];
+
+        if(this.nmodules_src_dir[0] == '.')
+            this.nmodules_src_dir = this.appDir + this.nmodules_src_dir.substring(1,this.nmodules_src_dir.length);
     }
 
-    CompileModule(path){
+    CompileModule(path) {
         return this.ncompiler.CompileFile(path);
-        
     }
 
     StartServer(){
-        var express=require('express');
-        var express_server=express();
+        const express           = require('express');
+        const express_server    = express();
+        const socket_io         = require('socket.io');
+
         express_server.set('view engine','ejs');
         express_server.use(express.static("public"));
 
-        this.express_server=express_server;
+        this.express_server = express_server;
 
+        let server = express_server.listen(this.server.PORT);
+        this.httpServer = server;
 
+        let socket = socket_io(server);
+        this.socket = socket;
 
-        var server=express_server.listen(this.server.PORT);
-        this.httpServer=server;
+        let framework = this;
 
-        var socket_io=require('socket.io');
-        var socket=socket_io(server);
-        this.socket=socket;
-
-        var framework=this;
-        
         socket.on('connection', (csocket) => {
             framework.clientManager.PushClient(csocket);
             framework.ioRouterManager.SetupFor(csocket);
@@ -155,14 +124,10 @@ var NFramework=class{
                 framework.clientManager.RemoveClient(csocket);
             });
         });
-
     }
-
 }
 
 
-module.exports=()=>{
-
+module.exports = () => {
     return new NFramework();
-
 }

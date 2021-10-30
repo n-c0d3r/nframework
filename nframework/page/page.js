@@ -1,48 +1,42 @@
-var fs=require('fs');
+const fs = require('fs');
 
-var Page=class{
-    constructor(){
-        
-    }
+class Page {
+    constructor() {}
 
-    SetupGlobalObjectsRouter(){
-        var manager=this.manager;
+    SetupGlobalObjectsRouter() {
+        let manager = this.manager;
 
-        for(var globalObjName of this.customTypeDatas){
-            var info=manager.customTypeDataInfos[globalObjName];
-            if(!info.isSetupCLRouter){
-                
-                var express_server=manager.NFramework.express_server;
+        for (let globalObjName of this.customTypeDatas) {
+            let info = manager.customTypeDataInfos[globalObjName];
 
-                var url=`/global-objects/${globalObjName}`;
+            if(!info.isSetupCLRouter) {
+                let express_server = manager.NFramework.express_server;
 
-                var data=manager.jsCode[globalObjName];
+                let url = `/global-objects/${globalObjName}`;
 
-                data=`
+                let data = manager.jsCode[globalObjName];
+
+                data = `
                     window.NFramework.nmoduleManager.customTypeDatas['${globalObjName}']=${data}
                 `;
 
-                var compiler=manager.NFramework.ncompiler;
+                let compiler = manager.NFramework.ncompiler;
 
-                var compiledData=compiler.CompileNModuleFastGetterAndSetter(data);
+                let compiledData = compiler.CompileNModuleFastGetterAndSetter(data);
 
-                compiledData=compiledData.code;
+                compiledData = compiledData.code;
                 compiledData = compiler.CompileFastGet(compiledData);
-                
-                express_server.get(url,(req,res)=>{
 
-
-                    res.send(compiledData);
-                });
+                express_server.get(url, (req, res) => res.send(compiledData));
             }
         }
     }
 
-    AfterSetup(){
+    AfterSetup() {
         this.SetupGlobalObjectsRouter();
     }
 
 }
 
 
-module.exports=Page;
+module.exports = Page;

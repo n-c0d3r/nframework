@@ -1,25 +1,23 @@
-var Tag=require('../tag/tag');
+const Tag   = require('../tag/tag');
+let tag     = new Tag();
 
-var tag=new Tag();
+tag.isAutoClose = false;
 
-tag.isAutoClose=false;
+tag.Compile = function(element, childsCode, code) {
+    let contents = tag.GetContent(element, childsCode, code);
 
-tag.Compile=function(element,childsCode,code){
-    var contents=tag.GetContent(element,childsCode,code);
-    
-    var inputs=tag.GetInputs(element,childsCode,code);
+    let inputs = tag.GetInputs(element, childsCode, code);
 
-    var compiledCode=``;
-    
-    for(var i=0;i<contents.length;i++){
-        compiledCode+=contents[i].code;
-    }
+    let compiledCode = ``;
 
-    compiledCode=`
+    for (let i = 0; i < contents.length; i++)
+        compiledCode += contents[i].code;
+
+    compiledCode = `
     (()=>{
-        var styleE = document.createElement('style');
+        let styleE = document.createElement('style');
 
-        styleE.textContent = `+'`' +compiledCode + '`;'+`
+        styleE.textContent = ` + '`' + compiledCode + '`;' + `
 
         document.body.appendChild(styleE);
 
@@ -27,11 +25,10 @@ tag.Compile=function(element,childsCode,code){
     })()
     `;
 
-    if(element.forSV){
-        compiledCode='';
-    }
+    if (element.forSV)
+        compiledCode = '';
 
     return compiledCode;
 }
 
-module.exports=tag;
+module.exports = tag;
