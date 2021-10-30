@@ -1,26 +1,121 @@
-manager = window.NFramework.nmoduleManager;
+manager=window.NFramework.nmoduleManager;
+            
 
-(function() {
-    const NModule = () => {
-        return window.NFramework.NModule;
-    }();
+                    
+            (()=>{
+                
 
-    var nmodule = new NModule();
-    var This = nmodule;
+        var NModule=
+            function(){
 
-    nmodule.side = 'both';
+                return window.NFramework.NModule;
 
-    nmodule.name = 'console';
+            }()
 
-    nmodule.__TYPE = 'NMODULE';
+        ;
+    
+        var nmodule=new NModule();
 
-    nmodule.RunExternalMethod = (callback) => callback.call(nmodule);
+        var This=nmodule;
 
-    nmodule.RunExternalMethod(function() {
-        // Code
-    });
+        nmodule.side='both';
+
+        nmodule.name='console';
+
+        nmodule.__TYPE='NMODULE';
+
+        nmodule.RunExternalMethod=function(callback){
+            callback.call(nmodule);
+        }
 
 
-    var nmoduleManager = window.NFramework.nmoduleManager;
-    nmoduleManager.ImportModule(nmodule);
-})();
+        nmodule.RunExternalMethod(function(){
+    
+
+    
+
+        
+
+            if(manager.NFramework.console.enable){
+
+                const readline = require('readline');
+
+                const rl = readline.createInterface({ input: process.stdin , output: process.stdout });
+
+                const ReadLine = (function () {
+                    const getLineGen = (async function* () {
+                        for await (const line of rl) {
+                            yield line;
+                        }
+                    })();
+                    return async () => ((await getLineGen.next()).value);
+                })();
+
+                
+        this.AddMethod('log',(...args)=>{
+            var f=
+    
+                    function(...args) {
+                        console.log(...args);
+                    }
+                
+        
+    return f.call(this,...args); 
+
+}
+    
+    );
+    
+    
+
+                
+        this.AddMethod('clear',(...args)=>{
+            var f=
+    
+                    function() {
+                        console.clear();
+                    }
+                
+        
+    return f.call(this,...args); 
+
+}
+    
+    );
+    
+    
+
+                
+        this.AddMethod('readLine',async (...args)=>{
+                var f=async function() {
+                        return await ReadLine();
+                    }
+                
+                var f2=f.bind(this);
+                return await f2(...args);
+            }
+    
+        );
+    
+    
+
+            }
+
+        
+
+    
+
+
+
+
+        });
+    
+        
+            var nmoduleManager=window.NFramework.nmoduleManager;
+            nmoduleManager.ImportModule(nmodule);
+        
+            })();
+        
+
+                
+            

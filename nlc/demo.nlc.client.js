@@ -1,6 +1,6 @@
 manager=window.NFramework.nmoduleManager;
-                
-                
+            
+
                     
             (()=>{
                 
@@ -61,6 +61,6 @@ manager=window.NFramework.nmoduleManager;
         
             })();
         
+
                 
-                
-                
+            

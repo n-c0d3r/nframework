@@ -1,21 +1,20 @@
-var framework=window.NFramework;
+let framework = window.NFramework;
+let nmoduleManager = framework.nmoduleManager;
 
-var nmoduleManager=framework.nmoduleManager;
-
-framework.IOConnectToServer(()=>{
-    
+framework.IOConnectToServer(() => {
+    // Code
 });
 
-(async ()=>{
+(async () => {
 
     await nmoduleManager.GetDatasFromServer();
 
     nmoduleManager.AutoSetParentForModules();
-    
+
     nmoduleManager.AfterConnected();
-    
+
     nmoduleManager.Setup();
-        
+
     nmoduleManager.Start();
 
 })()

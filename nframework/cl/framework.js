@@ -1,15 +1,12 @@
-var NFramework=class{
-    constructor(){
-        
-    }
+class NFramework {
+    constructor() {}
 
-    IOConnectToServer(){
-        var socket = io();
+    IOConnectToServer() {
+        const socket = io();
         this.socket=socket;
     }
-
 }
 
-var app=new NFramework();
+let app = new NFramework();
 
-window.NFramework=app;
+window.NFramework = app;

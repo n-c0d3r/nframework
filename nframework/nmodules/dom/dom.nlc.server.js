@@ -1,47 +1,77 @@
-const JSCLPath = "D:\\demonframework\\nframework/nmodules/dom/dom.nlc.client.js";
+var JSCLPath = "/home/chrx/Desktop/nframework/nframework/nmodules/dom/dom.nlc.client.js";module.exports=(manager)=>{
+            var exports=new Object();
+                var nmodules=[];
+                var pages=[];
+                exports.customTypeDatas=[];
+                exports.customTypeDatas.Add=function(key,value){
+                    exports.customTypeDatas.push({
+                        'key':key,
+                        'value':value
+                    });
+                }
 
-module.exports = (manager) => {
-    const fs = require('fs');
-    const clientVersion = JSCLPath;
+                
 
-    const NModule = () => {
-        return require("D:\\demonframework\\nframework\\ncompiler\\tags/../../nmodule/nmodule");
-    }();
+                    
 
-    var exports = new Object();
-    var nmodules = [];
-    var pages = [];
+        var NModule=
+        function(){
 
-    exports.customTypeDatas = [];
-    exports.customTypeDatas.Add = (key, value) => {
-        exports.customTypeDatas.push({
-            'key': key,
-            'value': value
+            return require("/home/chrx/Desktop/nframework/nframework/ncompiler/tags/../../nmodule/nmodule");
+
+        }()
+    
+    ;
+    
+        var nmodule=new NModule();
+
+        var This=nmodule;
+
+        nmodule.side='both';
+
+        nmodule.name='dom';
+
+        nmodule.__TYPE='NMODULE';
+
+        nmodule.RunExternalMethod=function(callback){
+            callback.call(nmodule);
+        }
+
+
+        nmodule.RunExternalMethod(function(){
+    
+
+    
+
+
         });
-    }
+    
+        
+    
+        var fs=require('fs');
 
-    var nmodule = new NModule();
+        var clientVersion=JSCLPath;
 
-    var This = nmodule;
+        nmodule.client_js_code=fs.readFileSync(clientVersion);
 
-    nmodule.side = 'both';
-    nmodule.name = 'dom';
-    nmodule.__TYPE = 'NMODULE';
-    nmodule.RunExternalMethod = (callback) => callback.call(nmodule);
+        
+        
+        if(nmodule.side!='server'){
+            nmodule.Routing('/nmodules/dom',(req,res)=>{
+                res.send(nmodule.client_js_code);
+            });
+        }
 
-    nmodule.RunExternalMethod(function() {
-        // Code
-    });
+        
 
-    nmodule.client_js_code = fs.readFileSync(clientVersion);
+            nmodules.push(nmodule);
+        
+        
 
-    if (nmodule.side != 'server')
-        nmodule.Routing('/nmodules/dom', (req, res) => res.send(nmodule.client_js_code));
+                
 
-    nmodules.push(nmodule);
-
-    exports.nmodules = nmodules;
-    exports.pages = pages;
-
-    return exports;
-}
+                exports.nmodules=nmodules;
+                exports.pages=pages;
+                return exports;
+            }
+            

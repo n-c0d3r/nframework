@@ -72,10 +72,10 @@ class NFramework {
         const nmoduleMCLJSFilePath      = __dirname + '/cl/nmoduleManager.js';
         const appCLJSFilePath           = __dirname + '/cl/app.js';
 
-        let frameworkCLJSCode = fs.readFileSync(frameworkCLJSFilePath).toString();
-        let nmoduleCLJSCode = fs.readFileSync(nmoduleCLJSFilePath).toString();
-        let nmoduleMCLJSCode = fs.readFileSync(nmoduleMCLJSFilePath).toString();
-        let appCLJSCode = fs.readFileSync(appCLJSFilePath).toString();
+        let frameworkCLJSCode           = fs.readFileSync(frameworkCLJSFilePath).toString();
+        let nmoduleCLJSCode             = fs.readFileSync(nmoduleCLJSFilePath).toString();
+        let nmoduleMCLJSCode            = fs.readFileSync(nmoduleMCLJSFilePath).toString();
+        let appCLJSCode                 = fs.readFileSync(appCLJSFilePath).toString();
 
         this.express_server.get('/nframework', (req, res)       => res.send(frameworkCLJSCode));
         this.express_server.get('/nmodule', (req, res)          => res.send(nmoduleCLJSCode));
@@ -109,13 +109,13 @@ class NFramework {
 
         this.express_server = express_server;
 
-        let server = express_server.listen(this.server.PORT);
-        this.httpServer = server;
+        let server          = express_server.listen(this.server.PORT);
+        this.httpServer     = server;
 
-        let socket = socket_io(server);
-        this.socket = socket;
+        let socket          = socket_io(server);
+        this.socket         = socket;
 
-        let framework = this;
+        let framework       = this;
 
         socket.on('connection', (csocket) => {
             framework.clientManager.PushClient(csocket);

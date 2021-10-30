@@ -191,7 +191,7 @@ class NModuleManager {
 
             eps.manager = this;
             let modules = eps.nmodules;
-            for (let module of modules) {
+            for (let [i, module] of modules.entries()) {
                 let moduleName = module.name;
                 this.modules[moduleName] = module;
                 this.modules[moduleName].manager = this;
@@ -245,4 +245,4 @@ class NModuleManager {
     }
 }
 
-module.exports = new NModuleManager;
+module.exports = NModuleManager;

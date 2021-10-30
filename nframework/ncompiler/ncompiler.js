@@ -87,7 +87,7 @@ class NCompiler {
                 for (let base of this.useBases) {
                     let basePath = this.GetTagNameFromString(base.name);
                     let basePath2 = '';
-                    for (vletar i = 0; i < basePath.length; i++) {
+                    for (let i = 0; i < basePath.length; i++) {
                         let ch = '/'
                         if (basePath[i] != ':')
                             ch = basePath[i];
@@ -479,9 +479,9 @@ class NCompiler {
                 element.code = code;
             } else {
                 let childsCode = '';
-                for (let i = 0; i < elements.childs.length; i++) {
-                    let ei_code = this.CompileElement(elements.childs[i], codeinput, nlcPath);
-                    elements.childs[i].code = ei_code;
+                for (let i = 0; i < element.childs.length; i++) {
+                    let ei_code = this.CompileElement(element.childs[i], codeinput, nlcPath);
+                    element.childs[i].code = ei_code;
                     childsCode += `
 
                         ${ei_code}
@@ -577,7 +577,7 @@ class NCompiler {
         let result = '';
         let top = '';
 
-        let strC = code[i];
+        let strC = '';
 
         let isInStr = false;
 

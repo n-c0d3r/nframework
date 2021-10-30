@@ -85,7 +85,7 @@ class NCompiler {
                 for (let base of this.useBases) {
                     let basePath = this.GetTagNameFromString(base.name);
                     let basePath2 = '';
-                    for (var i = 0; i < basePath.length; i++) {
+                    for (let i = 0; i < basePath.length; i++) {
                         let ch = '/'
                         if (basePath[i] != ':') {
                             ch = basePath[i];

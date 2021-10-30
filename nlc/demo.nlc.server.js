@@ -1,23 +1,23 @@
-var JSCLPath = "D:\\demonframework/nlc/demo.nlc.client.js";module.exports=(manager)=>{
-                var exports=new Object();
-                    var nmodules=[];
-                    var pages=[];
-                    exports.customTypeDatas=[];
-                    exports.customTypeDatas.Add=function(key,value){
-                        exports.customTypeDatas.push({
-                            'key':key,
-                            'value':value
-                        });
-                    }
+var JSCLPath = "/home/chrx/Desktop/nframework/nlc/demo.nlc.client.js";module.exports=(manager)=>{
+            var exports=new Object();
+                var nmodules=[];
+                var pages=[];
+                exports.customTypeDatas=[];
+                exports.customTypeDatas.Add=function(key,value){
+                    exports.customTypeDatas.push({
+                        'key':key,
+                        'value':value
+                    });
+                }
 
-                    
                 
+
                     
 
         var NModule=
         function(){
 
-            return require("D:\\demonframework\\nframework\\ncompiler\\tags/../../nmodule/nmodule");
+            return require("/home/chrx/Desktop/nframework/nframework/ncompiler/tags/../../nmodule/nmodule");
 
         }()
     
@@ -85,11 +85,11 @@ var JSCLPath = "D:\\demonframework/nlc/demo.nlc.client.js";module.exports=(manag
             nmodules.push(nmodule);
         
         
+
                 
-                
-                    
-                    exports.nmodules=nmodules;
-                    exports.pages=pages;
-                    return exports;
-                }
-                
+
+                exports.nmodules=nmodules;
+                exports.pages=pages;
+                return exports;
+            }
+            
