@@ -110,12 +110,11 @@ class NFramework {
         this.express_server = express_server;
 
         let server          = express_server.listen(this.server.PORT);
-        this.httpServer     = server;
-
         let socket          = socket_io(server);
-        this.socket         = socket;
-
         let framework       = this;
+
+        this.httpServer     = server;
+        this.socket         = socket;
 
         socket.on('connection', (csocket) => {
             framework.clientManager.PushClient(csocket);

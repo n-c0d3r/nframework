@@ -1,5 +1,5 @@
-var Element = class{
-    constructor(){
+class Element {
+    constructor() {
         this.childs=[];
     }
 
@@ -10,4 +10,4 @@ var Element = class{
 
 }
 
-module.exports=Element;
+module.exports = Element;
