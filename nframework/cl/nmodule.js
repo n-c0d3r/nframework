@@ -67,48 +67,47 @@ class NModule {
     }
 
     async AsyncGetWithIsExist(name) {
-        GetWithIsExist(name) {
-            let result = null;
-            let isExist = false;
+        let result = null;
+        let isExist = false;
 
-            if (name in this.properties) {
-                result = this.properties[name];
-                isExist = true;
-            }
-            else if (name in this.methods) {
-                result = this.methods[name];
-                isExist = true;
-            }
-            else if (name in this.serverMethods) {
-                result = this.serverMethods[name];
-                isExist = true;
-            }
-            else if (name in this.clientMethods) {
-                result = this.clientMethods[name];
-                isExist = true;
-            }
-            else if (name in this.syncProperties) {
-                result = this.syncProperties[name];
-                isExist = true;
-            }
-            else {
-                for (let i = 0; i < this.baseModules.length; i++) {
-                    let baseModule = this.GetModule(this.baseModules[i]);
-                    let fBM = baseModule.GetWithIsExist(name);
-                    if (fBM.isExist) {
-                        result = fBM.data;
-                        isExist = true;
-                        break;
-                    }
+        if (name in this.properties) {
+            result = this.properties[name];
+            isExist = true;
+        }
+        else if (name in this.methods) {
+            result = this.methods[name];
+            isExist = true;
+        }
+        else if (name in this.serverMethods) {
+            result = this.serverMethods[name];
+            isExist = true;
+        }
+        else if (name in this.clientMethods) {
+            result = this.clientMethods[name];
+            isExist = true;
+        }
+        else if (name in this.syncProperties) {
+            result = this.syncProperties[name];
+            isExist = true;
+        }
+        else {
+            for (let i = 0; i < this.baseModules.length; i++) {
+                let baseModule = this.GetModule(this.baseModules[i]);
+                let fBM = baseModule.GetWithIsExist(name);
+                if (fBM.isExist) {
+                    result = fBM.data;
+                    isExist = true;
+                    break;
                 }
             }
-
-            return {
-                'data': result,
-                'isExist': isExist
-            };
         }
+
+        return {
+            'data': result,
+            'isExist': isExist
+        };
     }
+
 
 
     async AsyncGet(name) {
