@@ -1,0 +1,15 @@
+<use dom/>
+
+<page demoPage>
+
+    <src demo.ejs />
+    
+    <global-objects * />
+
+    <dom-modules/>
+
+    <modules  
+        demo
+    />
+
+</page>
