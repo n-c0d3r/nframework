@@ -3,7 +3,8 @@
     <method setup>
 
         function(){
-            console.log('running');
+            console.log('server started.');
+
         }
 
 
