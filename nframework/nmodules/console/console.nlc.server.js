@@ -1,31 +1,33 @@
-var JSCLPath = "/home/chrx/Desktop/nframework/nframework/nmodules/console/console.nlc.client.js";module.exports=(manager)=>{
-            var exports=new Object();
-                var nmodules=[];
-                var pages=[];
-                exports.customTypeDatas=[];
-                exports.customTypeDatas.Add=function(key,value){
-                    exports.customTypeDatas.push({
-                        'key':key,
-                        'value':value
-                    });
-                }
+const JSCLPath = "/home/chrx/Desktop/nframework/nframework/nmodules/console/console.nlc.client.js";
 
-                
+module.exports = (manager) => {
+    let exports     = new Object();
+    let nmodules    = [];
+    let pages       = [];
+    exports.customTypeDatas=[];
+    exports.customTypeDatas.Add=function(key,value){
+        exports.customTypeDatas.push({
+            'key':key,
+            'value':value
+        });
+    }
+
+    
 
                     
 
-        var NModule=
+        let NModule=
         function(){
 
             return require("/home/chrx/Desktop/nframework/nframework/ncompiler/tags/../../nmodule/nmodule");
 
         }()
-    
-    ;
-    
-        var nmodule=new NModule();
 
-        var This=nmodule;
+    ;
+
+        let nmodule=new NModule();
+
+        let This=nmodule;
 
         nmodule.side='both';
 
@@ -61,51 +63,51 @@ var JSCLPath = "/home/chrx/Desktop/nframework/nframework/nmodules/console/consol
                 })();
 
                 
-        this.AddMethod('log',(...args)=>{
-            var f=
+        this.AddMethod('log',(...args) => {
+            let f=
     
                     function(...args) {
                         console.log(...args);
                     }
                 
-        
-    return f.call(this,...args); 
+
+    return f.call(this,...args);
 
 }
-    
+
     );
-    
+
     
 
                 
-        this.AddMethod('clear',(...args)=>{
-            var f=
+        this.AddMethod('clear',(...args) => {
+            let f=
     
                     function() {
                         console.clear();
                     }
                 
-        
-    return f.call(this,...args); 
+
+    return f.call(this,...args);
 
 }
-    
+
     );
-    
+
     
 
                 
         this.AddMethod('readLine',async (...args)=>{
-                var f=async function() {
+                let f=async function() {
                         return await ReadLine();
                     }
                 
-                var f2=f.bind(this);
+                let f2=f.bind(this);
                 return await f2(...args);
             }
-    
+
         );
-    
+
     
 
             }
@@ -119,16 +121,16 @@ var JSCLPath = "/home/chrx/Desktop/nframework/nframework/nmodules/console/consol
 
         });
     
-        
-    
-        var fs=require('fs');
 
-        var clientVersion=JSCLPath;
+
+        let fs=require('fs');
+
+        let clientVersion=JSCLPath;
 
         nmodule.client_js_code=fs.readFileSync(clientVersion);
 
-        
-        
+
+
         if(nmodule.side!='server'){
             nmodule.Routing('/nmodules/console',(req,res)=>{
                 res.send(nmodule.client_js_code);
@@ -138,13 +140,12 @@ var JSCLPath = "/home/chrx/Desktop/nframework/nframework/nmodules/console/consol
         
 
             nmodules.push(nmodule);
-        
+
         
 
                 
 
-                exports.nmodules=nmodules;
-                exports.pages=pages;
-                return exports;
-            }
-            
+    exports.nmodules=nmodules;
+    exports.pages=pages;
+    return exports;
+}

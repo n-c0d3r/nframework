@@ -1,9 +1,9 @@
-var fs=require('fs-extra');
+const fs = require('fs-extra');
 
-var CreateNFrameworkFolder=function(target){
-    if(!fs.existsSync(target+'/nframework')){
-        fs.copy(__dirname+'/../', target+'/nframework', function (err) {
-            if (err){
+const CreateNFrameworkFolder = function(target){
+    if(!fs.existsSync(target + '/nframework')){
+        fs.copy(__dirname + '/../', target + '/nframework', (err) => {
+            if (err) {
                 console.log('An error occured while copying the nframework folder.')
                 return console.error(err)
             }
@@ -11,37 +11,37 @@ var CreateNFrameworkFolder=function(target){
     }
 }
 
-var CreateNLCFolder=function(target){
-    if(!fs.existsSync(`${target}/nlc`)){
+const CreateNLCFolder = function(target){
+    if(!fs.existsSync(`${target}/nlc`)) {
         fs.mkdirSync(`${target}/nlc`);
     }
 }
 
-var CreateSettingFile=function(target) {
-    if(!fs.existsSync(target+'/setting.json')){
-        fs.copyFileSync(__dirname+'/default_app/setting.json',target+'/setting.json');
+const CreateSettingFile = function(target) {
+    if(!fs.existsSync(target + '/setting.json')){
+        fs.copyFileSync(__dirname + '/default_app/setting.json', target + '/setting.json');
     }
 }
 
-var CreateAppFile=function(target) {
-    if(!fs.existsSync(target+'/app.js')){
-        fs.copyFileSync(__dirname+'/default_app/app.js',target+'/app.js');
+const CreateAppFile = function(target) {
+    if(!fs.existsSync(target + '/app.js')){
+        fs.copyFileSync(__dirname + '/default_app/app.js', target + '/app.js');
     }
 }
 
-var CreatePackageLockFile=function(target) {
-    if(!fs.existsSync(target+'/package-lock.json')){
-        fs.copyFileSync(__dirname+'/default_app/package-lock.json',target+'/package-lock.json');
+const CreatePackageLockFile = function(target) {
+    if(!fs.existsSync(target + '/package-lock.json')){
+        fs.copyFileSync(__dirname + '/default_app/package-lock.json' ,target + '/package-lock.json');
     }
 }
 
-var CreateViewsFolder=function(target){
+const CreateViewsFolder = function(target){
     if(!fs.existsSync(`${target}/views`)){
         fs.mkdirSync(`${target}/views`);
     }
 }
 
-var CreateNodeModulesFolder=function(target) {
+const CreateNodeModulesFolder = function(target) {
     if(!fs.existsSync(`${target}/node_modules`)){
         fs.copy(__dirname+'/../../node_modules', `${target}/node_modules`, function (err) {
             if (err){
@@ -52,10 +52,10 @@ var CreateNodeModulesFolder=function(target) {
     }
 }
 
-var CreateVSCodeFolder=function(target) {
+const CreateVSCodeFolder = function(target) {
     if(!fs.existsSync(`${target}/.vscode`)){
-        fs.copy(__dirname+'/default_app/.vscode', `${target}/.vscode`, function (err) {
-            if (err){
+        fs.copy(__dirname + '/default_app/.vscode', `${target}/.vscode`, function (err) {
+            if (err) {
                 console.log('An error occured while copying the .vscode folder.')
                 return console.error(err)
             }
@@ -64,9 +64,9 @@ var CreateVSCodeFolder=function(target) {
 }
 
 
-module.exports=(input)=>{
-    
-    var target=input.cwd;
+module.exports = (input) => {
+
+    const target = input.cwd;
 
     console.log(`Init new project in ${target}`);
 
@@ -79,12 +79,11 @@ module.exports=(input)=>{
     CreateViewsFolder(target);
 
     CreatePackageLockFile(target);
-    
+
     CreateAppFile(target);
 
     CreateNodeModulesFolder(target);
 
-    if(input.dow['use_vscode_setting']){
+    if(input.dow['use_vscode_setting'])
         CreateVSCodeFolder(target);
-    }
 }

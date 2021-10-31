@@ -18,15 +18,16 @@ class NModuleManager {
     }
 
     Routing() {
-        let manager = this;
-        let express_server = this.NFramework.express_server;
+        const express_server = this.NFramework.express_server;
+        const manager = this;
 
         express_server.get('/textContents', (req, res) => res.send(manager.textContents));
     }
 
     SetupGetterAndSetterForSyncProps() {
-        let express_server = this.NFramework.express_server;
-        let manager = this;
+        const express_server = this.NFramework.express_server;
+        const manager = this;
+
         express_server.get('/getSyncProp/:module/:name', (req, res) => {
             let moduleName = req.params.module;
             let syncPropName = req.params.name;
@@ -56,25 +57,22 @@ class NModuleManager {
     BuildModulePathsArray() {
         const src_path = this.NFramework.nmodules_src_dir;
         const framework_src_path = this.NFramework.framework_nmodules_src_dir;
-
-        let nmm = this;
+        const nmm = this;
 
         let buildmpa = function(file) {
             let parts = file.split('.');
             if (parts[parts.length - 1] == 'nlc') nmm.modulePaths.push(file);
-            else {
-                if (parts[parts.length - 1] == 'showjs') fs.unlinkSync(file);
-                else if (
-                    parts[parts.length - 3] == 'nlc' &&
-                    parts[parts.length - 1] == 'js' &&
-                    (parts[parts.length - 2] == 'server' || parts[parts.length - 2] == 'client')
-                ) {
-                    fs.unlinkSync(file);
-                }
+            else if (parts[parts.length - 1] == 'showjs') fs.unlinkSync(file);
+            else if (
+                parts[parts.length - 3] == 'nlc' &&
+                parts[parts.length - 1] == 'js' &&
+                (parts[parts.length - 2] == 'server' || parts[parts.length - 2] == 'client')
+            ) {
+                fs.unlinkSync(file);
             }
         };
 
-        let isDir = function(path) {
+        const isDir = function(path) {
             let isD = false;
             let stats = fs.statSync(path);
             isD = stats.isDirectory();
@@ -82,7 +80,7 @@ class NModuleManager {
             return isD;
         }
 
-        let DoWithAllFile = function(dirPath) {
+        const DoWithAllFile = function(dirPath) {
             fs.readdirSync(dirPath).forEach(file => {
 
                 const filePath = dirPath + '/' + file;
@@ -102,13 +100,13 @@ class NModuleManager {
     }
 
     CompileModules() {
+        const compiler = this.NFramework.ncompiler;
 
         for (let filePath of this.watches)
             fs.unwatchFile(filePath);
 
         this.watches = [];
 
-        let compiler = this.NFramework.ncompiler;
         for (let modulePath of this.modulePaths) {
             let cr = compiler.CompileFile(modulePath);
 
@@ -137,7 +135,7 @@ class NModuleManager {
             let nlcfilePath = cr.fileNLCPath;
 
             if (this.NFramework.debug.client_nlc) {
-                let manager = this;
+                const manager = this;
                 this.watches.push(nlcfilePath);
                 fs.watchFile(nlcfilePath, (curr, prev) => {
                     manager.CompileModules();
@@ -145,7 +143,6 @@ class NModuleManager {
                 });
             }
         }
-
     }
 
     ReRoutingModulesForClient() {
@@ -160,42 +157,43 @@ class NModuleManager {
         let nameParts = name.split('-');
         let newName = nameParts[nameParts.length - 1];
 
-        if (nameParts.length == 1) return 0;
-        else {
-            let parentName = '';
-            for (let i = 0; i < nameParts.length - 2; i++)
-                parentName += nameParts[i] + '-';
+        if (nameParts.length == 1) return 0;    // End
 
-            parentName += nameParts[nameParts.length - 2];
+        let parentName = '';
+        for (let i = 0; i < nameParts.length - 2; i++)
+            parentName += nameParts[i] + '-';
 
-            let parentModule = this.modules[parentName];
+        parentName += nameParts[nameParts.length - 2];
 
-            if (parentModule) {
-                parentModule.AddProperty(newName);
-                parentModule.Set(newName, this.modules[name]);
-            }
+        let parentModule = this.modules[parentName];
+
+        if (parentModule) {
+            parentModule.AddProperty(newName);
+            parentModule.Set(newName, this.modules[name]);
         }
     }
 
     ImportModules() {
         let useALlGlobalObjs_pages = [];
+
         for (let modulePath of this.svMJSPaths) {
             let eps = require(modulePath)(this);
 
             for (let ctData of eps.customTypeDatas) {
-                this.customTypeDatas[ctData.key] = ctData.value;
-                this.customTypeDataInfos[ctData.key] = new Object();
-                this.customTypeDataInfos[ctData.key].isSetupCLRouter = false;
-                this.customTypeDataInfos[ctData.key].path = this.clMJSPaths[i];
+                this.customTypeDatas[ctData.key]                        = ctData.value;
+                this.customTypeDataInfos[ctData.key]                    = new Object();
+                this.customTypeDataInfos[ctData.key].isSetupCLRouter    = false;
+                this.customTypeDataInfos[ctData.key].path               = this.clMJSPaths[i];
             }
 
             eps.manager = this;
             let modules = eps.nmodules;
-            for (let [i, module] of modules.entries()) {
+
+            for (let [i, module] of modules.entries()) {    // ESC6
                 let moduleName = module.name;
-                this.modules[moduleName] = module;
-                this.modules[moduleName].manager = this;
-                this.modules[moduleName].clMJSPath = this.clMJSPaths[i];
+                this.modules[moduleName]            = module;
+                this.modules[moduleName].manager    = this;
+                this.modules[moduleName].clMJSPath  = this.clMJSPaths[i];
                 this.modules[moduleName].AfterImported();
             }
 

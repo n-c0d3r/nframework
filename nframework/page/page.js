@@ -10,9 +10,8 @@ class Page {
             let info = manager.customTypeDataInfos[globalObjName];
 
             if(!info.isSetupCLRouter) {
-                let express_server = manager.NFramework.express_server;
-
-                let url = `/global-objects/${globalObjName}`;
+                const express_server    = manager.NFramework.express_server;
+                const url               = `/global-objects/${globalObjName}`;
 
                 let data = manager.jsCode[globalObjName];
 
@@ -35,7 +34,6 @@ class Page {
     AfterSetup() {
         this.SetupGlobalObjectsRouter();
     }
-
 }
 
 module.exports = Page;

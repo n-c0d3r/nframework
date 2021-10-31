@@ -1,11 +1,11 @@
-manager=window.NFramework.nmoduleManager;
-            
+manager = window.NFramework.nmoduleManager;
+
 
                     
             (()=>{
                 
 
-        var NModule=
+        let NModule=
             function(){
 
                 return window.NFramework.NModule;
@@ -13,10 +13,10 @@ manager=window.NFramework.nmoduleManager;
             }()
 
         ;
-    
-        var nmodule=new NModule();
 
-        var This=nmodule;
+        let nmodule=new NModule();
+
+        let This=nmodule;
 
         nmodule.side='both';
 
@@ -33,8 +33,8 @@ manager=window.NFramework.nmoduleManager;
     
 
     
-        this.AddMethod('setup',(...args)=>{
-            var f=
+        this.AddMethod('setup',(...args) => {
+            let f=
     
 
         function(){
@@ -43,24 +43,23 @@ manager=window.NFramework.nmoduleManager;
 
 
     
-        
-    return f.call(this,...args); 
+
+    return f.call(this,...args);
 
 }
-    
+
     );
-    
+
     
 
 
         });
     
-        
-            var nmoduleManager=window.NFramework.nmoduleManager;
+
+            let nmoduleManager=window.NFramework.nmoduleManager;
             nmoduleManager.ImportModule(nmodule);
         
             })();
         
 
                 
-            
