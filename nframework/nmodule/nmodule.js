@@ -1,3 +1,4 @@
+
 class NModule {
     constructor() {
         this.properties             = new Object();
@@ -132,6 +133,16 @@ class NModule {
         }
         if (!r)
             throw new Error(`Module ${this.name}: Not Found ${name} `);
+    }
+
+    async AsyncGet(name) {
+
+        return this.Get(name);
+    }
+    
+    async AsyncSet(name, data) {
+
+        this.Set(name, data);
     }
 
     Constructor(customizeFunc) {

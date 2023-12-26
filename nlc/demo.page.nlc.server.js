@@ -1,4 +1,4 @@
-var JSCLPath = "D:\\MyTechs\\nframework/nlc/demo.page.nlc.client.js";module.exports=(manager)=>{
+var JSCLPath = "/Users/macos/Documents/NCoder/nframework/nlc/demo.page.nlc.client.js";module.exports=(manager)=>{
             var exports=new Object();
                 var nmodules=[];
                 var pages=[];
@@ -16,7 +16,7 @@ var JSCLPath = "D:\\MyTechs\\nframework/nlc/demo.page.nlc.client.js";module.expo
 
     
     
-    var Page=require('D:\\MyTechs\\nframework\\nframework\\ncompiler\\tags/../../page/page');
+    var Page=require('/Users/macos/Documents/NCoder/nframework/nframework/ncompiler/tags/../../page/page');
     
     var page_demoPage=new Page();
     

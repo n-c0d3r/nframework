@@ -132,7 +132,7 @@ class NModule {
             r = true;
         }
         else if (name in this.syncProperties) {
-            result = await this.syncProperties[name];
+            result = await this.GetSyncProperty(name);
             r = true;
         }
         else {
@@ -211,7 +211,7 @@ class NModule {
             r = true;
         }
         else if (name in this.syncProperties) {
-            await this.SetSyncProperty(name, data);;
+            await this.SetSyncProperty(name, data);
             r = true;
         }
         else {

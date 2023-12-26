@@ -1,4 +1,7 @@
-var JSCLPath = "D:\\MyTechs\\nframework/nlc/demo.nlc.client.js";module.exports=(manager)=>{
+var JSCLPath = "/Users/macos/Documents/NCoder/nframework/nlc/demo.nlc.client.js";
+                            var a815f11f1_3579_46c5_8087_ac6b0d64c4cd_module;
+                        var a3452bdaf_de05_4cb1_88dc_82592ccea7d5_module;
+                        module.exports=(manager)=>{
             var exports=new Object();
                 var nmodules=[];
                 var pages=[];
@@ -17,7 +20,7 @@ var JSCLPath = "D:\\MyTechs\\nframework/nlc/demo.nlc.client.js";module.exports=(
         var NModule=
         function(){
 
-            return require("D:\\MyTechs\\nframework\\nframework\\ncompiler\\tags/../../nmodule/nmodule");
+            return require("/Users/macos/Documents/NCoder/nframework/nframework/ncompiler/tags/../../nmodule/nmodule");
 
         }()
     
@@ -42,23 +45,52 @@ var JSCLPath = "D:\\MyTechs\\nframework/nlc/demo.nlc.client.js";module.exports=(
     
 
     
-        this.AddMethod('setup',(...args)=>{
-            var f=
-    
 
-        function(){
-            console.log('running');
-        }
-
+    this.AddSyncProperty('content');
 
     
+
+    
+
         
-    return f.call(this,...args); 
+        this.AddMethod('setup',async (...args)=>{
+                var f=async function(){
 
-}
+                (manager.Get('console')).GetThisWithCallback((module)=>{
+                            return module.Get('log');
+                        })('server running');
+
+                this.AsyncGetThisWithCallback(async (module)=>{
+                            a815f11f1_3579_46c5_8087_ac6b0d64c4cd_module=module;
+                        })
+                        var getterObj815f11f1_3579_46c5_8087_ac6b0d64c4cd={
+                            set stter(value) {
+                                (async ()=>{
+                                    await a815f11f1_3579_46c5_8087_ac6b0d64c4cd_module.AsyncSet('content',value);
+                                })();
+                            }
+                        }
+                        getterObj815f11f1_3579_46c5_8087_ac6b0d64c4cd.stter= "Hello";
+                console.log(await this.AsyncGetThisWithCallback(async (module)=>{
+                            a3452bdaf_de05_4cb1_88dc_82592ccea7d5_module=module;
+                            return await a3452bdaf_de05_4cb1_88dc_82592ccea7d5_module.AsyncGet('content');
+                        })
+                        );
+
+            }
+
+
+        
+                var f2=f.bind(this);
+                return await f2(...args);
+            }
     
-    );
+        );
     
+    
+
+    
+
     
 
 

@@ -1,4 +1,4 @@
-var JSCLPath = "D:\\MyTechs\\nframework/nlc/demo.router.nlc.client.js";module.exports=(manager)=>{
+var JSCLPath = "/Users/macos/Documents/NCoder/nframework/nlc/demo.router.nlc.client.js";module.exports=(manager)=>{
             var exports=new Object();
                 var nmodules=[];
                 var pages=[];
@@ -17,7 +17,7 @@ var JSCLPath = "D:\\MyTechs\\nframework/nlc/demo.router.nlc.client.js";module.ex
         var NModule=
         function(){
 
-            return require("D:\\MyTechs\\nframework\\nframework\\ncompiler\\tags/../../nmodule/nmodule");
+            return require("/Users/macos/Documents/NCoder/nframework/nframework/ncompiler/tags/../../nmodule/nmodule");
 
         }()
     

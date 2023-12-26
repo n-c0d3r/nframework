@@ -1,12 +1,38 @@
 <module demo>
 
-    <method setup>
+    <sync-property content/>
 
-        function(){
-            console.log('running');
-        }
+    <server-only>
 
+        <async-method setup>
 
-    </method>
+            function(){
+
+                @console->log('server running');
+
+                this-->content = "Hello";
+                console.log(await this-->content);
+
+            }
+
+        </method>
+
+    </server-only>
+
+    <client-only>
+
+        <async-method setup>
+
+            function(){
+
+                console.log('client running');
+
+                console.log(await this-->content);
+
+            }
+
+        </method>
+
+    </client-only>
 
 </module>
